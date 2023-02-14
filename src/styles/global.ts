@@ -1,4 +1,5 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle} from "styled-components"
+import styled from "styled-components"
 
 export default createGlobalStyle`
   :root {
@@ -62,7 +63,96 @@ export default createGlobalStyle`
     background: var(--whiteFixed);
   }
 
+  header{
+    height: 5em;
+    width: 5vw;
+  }
+
+  /* banner de inicio do site */
+  .bannerHome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 160px 425px;
+    gap: 10px;
+    width: 0.05006257822277847em;
+    height:  0.13769363166953527em;
+    background: #5126EA;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+  }
+
+
   button {
     cursor: pointer;
   }
+`
+export const seassonTitle = styled.h1`
+  position: absolute;
+    width: 73px;
+    height: 30px;
+    left: 60px;
+    top: 100px;
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    color: var(--grey0);
+`
+// Card dos produtos
+export const previewImage = styled.div`
+
+/* Title */
+h3{
+position: absolute;
+width: 312px;
+height: 22px;
+left: 0px;
+top: 0px;
+font-family: 'Lexend';
+font-style: normal;
+font-weight: 600;
+font-size: 16px;
+line-height: 20px;
+color: var(--grey1)
+}
+/* Imagem */
+figure {
+  box-sizing: border-box;
+  position: absolute;
+  width: 312px;
+  height: 152px;
+  left: 0px;
+  top: 0px;
+  background: #E9ECEF;
+  border: 2px solid #E9ECEF;
+  }
+
+img {
+  position: absolute;
+  width: 262px;
+  height: 150.28px;
+  left: 25px;
+  top: 1px;
+  background: var(--grey7);
+/* Description */
+p{
+width: 312px;
+height: 48px;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+color: var(--grey2);
+flex: none;
+order: 2;
+flex-grow: 0;
+}
+Data Saller
+
+}
 `
