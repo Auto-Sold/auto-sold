@@ -78,7 +78,7 @@ export default createGlobalStyle`
     gap: 10px;
     width: 0.05006257822277847em;
     height:  0.13769363166953527em;
-    background: #5126EA;
+    background: var(--brand2);
     flex: none;
     order: 0;
     flex-grow: 0;
@@ -127,7 +127,7 @@ figure {
   height: 152px;
   left: 0px;
   top: 0px;
-  background: #E9ECEF;
+  background: var(--grey7);
   border: 2px solid #E9ECEF;
   }
 
@@ -152,7 +152,33 @@ flex: none;
 order: 2;
 flex-grow: 0;
 }
-Data Saller
+/* Contetn data sallers */
+.imgSaller {
+  width: 17px;
+  height: 0px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 0px;
+  color: var(--whiteFixed);
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 
+}
+.nameSaller {
+  width: 86px;
+  height: 24px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--grey2);
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
 }
 `
