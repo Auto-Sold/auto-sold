@@ -97,7 +97,7 @@ background: var(--brand2);
         order: 0;
         flex-grow: 0;
     }
-@media (max-width:400px) {
+@media (min-width:400px) {
 display: flex;
 flex-direction: column;
 justify-content: center;
