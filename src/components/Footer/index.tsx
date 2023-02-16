@@ -4,6 +4,9 @@ import LogoBranca from "../../assets/logoBranca.png";
 
 const Footer = () =>{
 
+
+
+    
     return(
         <FooterStyled>
             <img src={LogoBranca} alt = "Auto Sold"></img>
