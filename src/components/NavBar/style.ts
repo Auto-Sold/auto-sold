@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const navBar = styled.div`
+export const NavBarStyle = styled.div`
 position: absolute;
 width: 375px;
 height: 480px;
