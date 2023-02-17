@@ -6,6 +6,9 @@ width: 375px;
 height: 480px;
 left: 0px;
 top: 0px;
+
+background: var(--grey10);
+background: black;
 ul{
     display: flex;
     flex-direction: column;
@@ -86,7 +89,7 @@ ul{
     padding: 0px 60px;
     gap: 690px;
     position: absolute;
-    width: 1600px;
+    // width: 1600px;
     height: 80px;
     left: 0px;
     top: 0px;

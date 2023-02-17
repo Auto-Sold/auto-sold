@@ -2,12 +2,7 @@ import { HeaderStyle } from "./styles";
 
 
 const Header = () => {
-
-
-
-
-    
-    return(
+    return (
         <HeaderStyle>
             <div className="box">
                 <div>
@@ -15,10 +10,10 @@ const Header = () => {
                     <h2>Um ambiente feito para você explorar o seu melhor</h2>
                 </div>
                 <div className="divButton"><button>
-                    <p>carros</p>
-                    </button><button>
-                        <p>motos</p>
-                        </button></div>
+                    <p>Carros</p>
+                </button><button>
+                        <p>Motos</p>
+                    </button></div>
             </div>
         </HeaderStyle>
     )

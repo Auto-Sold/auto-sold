@@ -1,14 +1,12 @@
 import './App.css'
-
-import CarList from './components/ProductCard';
+import Dashboard from './pages/Dashboard';
 import Global from "./styles/global";
 
 function App() {
-
   return (
     <div className="App">
       <Global />
-      
+      <Dashboard />
     </div>
   )
 }
