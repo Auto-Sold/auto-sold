@@ -1,6 +1,5 @@
 import './App.css'
-import Leilao from './components/Leilao';
-import { Dashboard } from './pages/Dashboard';
+import CarList from './components/ProductCard';
 import Global from "./styles/global";
 
 function App() {
