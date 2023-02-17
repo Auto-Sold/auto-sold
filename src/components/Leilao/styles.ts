@@ -44,10 +44,16 @@ export const StyledCardsLeilao = styled.ul`
 
     margin: 0%;
     padding: 0%;
+
+    width: 100%;
+    overflow-x:scroll ;
+
+    
+    
     
     li{
         height: 27.1875em;
-        width: 20.5em;
+        min-width: 20.5em;
 
     }
 
@@ -57,6 +63,9 @@ export const StyledCardsLeilao = styled.ul`
             width:  45.9375em ;
             height: 20.375em;
         }
+        
+        overflow-x: scroll;
+        overflow-y: hidden;
     }
 
 `
