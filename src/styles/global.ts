@@ -2,6 +2,21 @@ import { createGlobalStyle } from "styled-components"
 import styled from "styled-components"
 
 export default createGlobalStyle`
+  ::-webkit-scrollbar {
+    width: 12px;               /* width of the entire scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+    border: none;      /* color of the tracking area */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: none;  /* creates padding around scroll thumb */
+  }
+
   :root {
     // Brand
     --brand1: #4529E6;
@@ -89,7 +104,7 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 `
-export const seassonTitle = styled.h1`
+export const SeassonTitle = styled.h1`
   position: absolute;
     width: 73px;
     height: 30px;
@@ -180,5 +195,6 @@ flex-grow: 0;
   order: 1;
   flex-grow: 0;
 }
+
 }
 `

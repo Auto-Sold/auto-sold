@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Main = styled.main`
-    color: black;
+    // color: black;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -46,7 +46,7 @@ const Main = styled.main`
         height: 496px;
     }
 
-    li{
+    .card{
         background-color: var(--grey4);
         font-size: 0;
         border-radius: 4px;
@@ -55,6 +55,10 @@ const Main = styled.main`
         margin:10px;
         min-width: 312px;
         height: 350px;
+    }
+
+    .title{
+        color: black;
     }
 `
 

@@ -1,5 +1,6 @@
 import Footer from "../../components/Footer"
 import Header from "../../components/Header"
+import Auction from "../../components/Leilao"
 import Main from "./styles"
 
 function Dashboard() {
@@ -8,24 +9,19 @@ function Dashboard() {
             <Header />
             <section>
                 <h3>Leilão</h3>
-                <ul className="auction">
-                    <li>Leilão 1</li>
-                    <li>Leilão 2</li>
-                    <li>Leilão 3</li>
-                </ul>
-
-                <h3>Carros</h3>
+                {/* <Auction /> */}
+                <h3 className="title">Carros</h3>
                 <ul>
-                    <li>Carro 1</li>
-                    <li>Carro 2</li>
-                    <li>Carro 3</li>
+                    <li className="card">Carro 1</li>
+                    <li className="card">Carro 2</li>
+                    <li className="card">Carro 3</li>
                 </ul>
 
                 <h3>Motos</h3>
                 <ul>
-                    <li>Moto 1</li>
-                    <li>Moto 2</li>
-                    <li>Moto 3</li>
+                    <li className="card">Moto 1</li>
+                    <li className="card">Moto 2</li>
+                    <li className="card">Moto 3</li>
                 </ul>
             </section>
             <Footer />
