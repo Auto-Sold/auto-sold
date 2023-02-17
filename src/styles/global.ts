@@ -89,7 +89,7 @@ export default createGlobalStyle`
     cursor: pointer;
   }
 `
-export const seassonTitle = styled.h1`
+export const SeassonTitle = styled.h1`
   position: absolute;
     width: 73px;
     height: 30px;
