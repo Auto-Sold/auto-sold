@@ -6,19 +6,7 @@ width: 375px;
 height: 480px;
 left: 0px;
 top: 0px;
-ul{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 44px;
-    position: absolute;
-    left: 0%;
-    right: 0.27%;
-    top: 16.67%;
-    bottom: 0%;
-}
+
 .menu{
     box-sizing: border-box;
     display: flex;
@@ -27,16 +15,76 @@ ul{
     align-items: center;
     padding: 0px 16px;
     gap: 690px;
-
+    
     position: absolute;
     left: 0%;
     right: 0%;
     top: 0%;
     bottom: 83.33%;
-
+    
     background: var(--grey10);
     border-bottom: 2px solid var(--grey6);
 }
+.menu ul{
+    /* display: none; se max width < 800, onCLick display flex */
+        display : ${(props:any) => props.display};
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 0px;
+        gap: 44px;
+        position: absolute;
+        left: 0%;
+        right: 0.27%;
+        top: 16.67%;
+        bottom: 0%;
+    }
+    .menu ul p {
+        width: 46px;
+        height: 28px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 28px;
+        color: var(--grey2);
+        flex: none;
+        order: 2;
+        flex-grow: 0;
+    }
+    .line {
+        width: 2px;
+        height: 79px;
+        background: var(--grey6);
+        flex: none;
+        order: 3;
+        flex-grow: 0;
+    }
+    .menu ul button {           
+            box-sizing: border-box;
+            display: flex;
+            flex: none;
+            order: 0;
+            flex-grow: 0;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0px 60px;
+            gap: 690px;
+            position: absolute;
+            width: 1600px;
+            height: 80px;
+            left: 0px;
+            top: 0px;
+            background: var(--grey10);
+            border-bottom: 2px solid var(--grey6);
+            font-family: 'Inter';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 0px;
+            color: var(--grey0);
+    }
     .menu img{
         width: 153.02px;
         height: 26.34px;
@@ -101,7 +149,8 @@ ul{
         flex-grow: 0;
     }
     .menu ul {
-        display: flex;
+        /* display: flex; */
+        display : ${(props:any) => props.display};
         flex-direction: row;
         align-items: center;
         padding: 0px;

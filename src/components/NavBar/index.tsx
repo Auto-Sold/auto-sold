@@ -14,6 +14,15 @@ const NavBar = () => {
             <div>
                 <div className="rectangle">
             <img src={bars} className = "bars"/>
+            <ul>
+                <p>Carros</p>
+                <p>Motos</p>
+                <p>Leilões</p>
+                <div className="line"></div>
+                <p>Fazer Login</p>
+                <button>Cadastrar</button>
+
+            </ul>
                 </div>
             </div>
             </div>
