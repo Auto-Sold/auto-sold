@@ -1,4 +1,4 @@
-import { createGlobalStyle} from "styled-components"
+import { createGlobalStyle } from "styled-components"
 import styled from "styled-components"
 
 export default createGlobalStyle`
@@ -64,7 +64,7 @@ export default createGlobalStyle`
   }
 
   * {
-     margin:0;
+    margin:0;
     padding: 0;
     outline:0;
     box-sizing: border-box;
@@ -72,7 +72,7 @@ export default createGlobalStyle`
   
   body,html {
     width: 100vw;
-    height: 100vh;
+    // height: 100vh;
     font-family: var(--input-font);
     overflow-x: hidden;
     background: var(--whiteFixed);

@@ -3,33 +3,29 @@ import styled from "styled-components";
 export const HeaderStyle = styled.header`
 display: flex;
 flex-direction: column;
-justify-content: center;
+justify-content: flex-start;
 align-items: center;
 padding: 188px 425px 160px;
 gap: 10px;
-position: absolute;
-width: 375px;
+width: 100vw;
 height: 703px;
-left: 0px;
-top: 0px;
 background: var(--brand2);
 
-    .box {
+.box {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         padding: 0px;
         gap: 52px;
-        width: 372px;
+        width: 100vw;
         height: 396px;
         flex: none;
         order: 0;
         flex-grow: 0;
     }
     h1{
-        width: 372px;
-        height: 119px;
+        width: 100vw;
         font-family: 'Lexend';
         font-style: normal;
         font-weight: 600;
@@ -40,10 +36,9 @@ background: var(--brand2);
         flex: none;
         order: 0;
         flex-grow: 0;
+        margin-bottom: 52px;
     }
     h2{
-        width: 340px;
-        height: 56px;
         font-family: 'Inter';
         font-style: normal;
         font-weight: 400;
@@ -58,16 +53,18 @@ background: var(--brand2);
     .divButton{
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         padding: 0px;
         gap: 21px;
-        width: 351px;
+        width: 95vw;
         height: 117px;
         flex: none;
         order: 2;
         flex-grow: 0;
     }
     button{
+        background: var(--brand2);
+
         box-sizing: border-box;
         display: flex;
         flex-direction: row;
@@ -75,7 +72,7 @@ background: var(--brand2);
         align-items: center;
         padding: 12px 28px;
         gap: 10px;
-        width: 351px;
+        width: 100%;
         height: 48px;
         border: 1.5px solid var(--grey10);
         border-radius: 4px;
@@ -97,14 +94,14 @@ background: var(--brand2);
         order: 0;
         flex-grow: 0;
     }
-@media (min-width:400px) {
+
+@media (min-width:800px) {
 display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 160px 425px;
 gap: 10px;
-width: 1598px;
 height: 581px;
 background: var(--brand2);
 flex: none;
@@ -118,18 +115,12 @@ flex-grow: 0;
         flex-grow: 0;
     }
     div {
-        position: absolute;
-        width: 748px;
-        height: 167px;
-        left: 425px;
-        top: 160px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     h1{
-        position: absolute;
-        width: 748px;
-        height: 119px;
-        left: 425px;
-        top: 160px;
         font-family: 'Lexend';
         font-style: normal;
         font-weight: 700;
@@ -139,11 +130,8 @@ flex-grow: 0;
         color: var(--grey10);
     }
     h2{
-        position: absolute;
         width: 388px;
         height: 28px;
-        left: 607px;
-        top: 299px;
         font-family: 'Inter';
         font-style: normal;
         font-weight: 400;
@@ -154,15 +142,14 @@ flex-grow: 0;
     .divButton{
         display: flex;
         flex-direction: row;
-        align-items: flex-start;
+        align-items: center;
+        justify-content: center;
+
         padding: 0px;
         gap: 21px;
 
-        position: absolute;
-        width: 381.04px;
+        width: 38px;
         height: 48px;
-        left: 607px;
-        top: 373px;
     }
     button{
         box-sizing: border-box;
@@ -173,6 +160,7 @@ flex-grow: 0;
         padding: 12px 28px;
         gap: 10px;
         width: 182.51px;
+        margin: 1px;
         height: 48px;
         border: 1.5px solid var(--grey10);
         border-radius: 4px;
@@ -193,6 +181,5 @@ flex-grow: 0;
         order: 0;
         flex-grow: 0;
     }
-
 }
 `
