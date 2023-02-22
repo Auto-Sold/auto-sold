@@ -1,12 +1,18 @@
+import { Route, Routes } from 'react-router-dom';
 import './App.css'
+import AnnounceProvider from './contexts/AnnounceContext';
 import Dashboard from './pages/Dashboard';
 import Global from "./styles/global";
 
 function App() {
   return (
     <div className="App">
-      <Global />
-      <Dashboard />
+      <AnnounceProvider>
+        <Global />
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+        </Routes>
+      </AnnounceProvider>
     </div>
   )
 }

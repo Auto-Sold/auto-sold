@@ -13,7 +13,10 @@ const Header = () => {
                     <p>Carros</p>
                 </button><button>
                         <p>Motos</p>
-                    </button></div>
+                    </button>
+                    <button>Criar anúncio</button>
+                </div>
+
             </div>
         </HeaderStyle>
     )
