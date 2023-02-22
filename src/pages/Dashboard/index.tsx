@@ -1,11 +1,13 @@
 import Footer from "../../components/Footer"
 import Header from "../../components/Header"
 import Auction from "../../components/Leilao"
+import NavBar from "../../components/NavBar"
 import Main from "./styles"
 
 function Dashboard() {
     return (
         <Main>
+            <NavBar/>
             <Header />
             <section>
                 <h3>Leilão</h3>
