@@ -2,17 +2,22 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 
-function EditModal({ product, onClose, onSave }) {
+function EditModal({ product }) {
   const { register, handleSubmit, setValue } = useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const onSubmit = (data) => {
-    onSave(data);
-    onClose();
+  const handleClose = () => {
+    setIsModalOpen(false);
   };
 
-  const onCancel = () => {
-    onClose();
+  const handleSave = (data:any) => {
+    console.log(data)
+    setIsModalOpen(false);
+  };
+
+  const handleSaveAndClose = (data:any) => {
+    handleSave(data);
+    handleClose();
   };
 
   const onOpen = () => {
@@ -27,13 +32,6 @@ function EditModal({ product, onClose, onSave }) {
     setIsModalOpen(true);
   };
 
-  const onCloseModal = () => {
-    setIsModalOpen(false);
-    setTimeout(() => {
-      onClose();
-    }, 300);
-  };
-
   return (
     <>
       <button onClick={onOpen}>Editar</button>
@@ -44,7 +42,7 @@ function EditModal({ product, onClose, onSave }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onCloseModal}
+            onClick={handleClose}
           >
             <motion.form
               className="modal"
@@ -52,7 +50,7 @@ function EditModal({ product, onClose, onSave }) {
               animate={{ y: 0 }}
               exit={{ y: -50 }}
               onClick={(e) => e.stopPropagation()}
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleSubmit(handleSaveAndClose)}
             >
               <h2>Editar Produto</h2>
               <label>
@@ -89,7 +87,7 @@ function EditModal({ product, onClose, onSave }) {
               </label>
               <div className="modal-buttons">
                 <button type="submit">Salvar</button>
-                <button type="button" onClick={onCancel}>
+                <button type="button" onClick={handleClose}>
                   Cancelar
                 </button>
               </div>
@@ -102,4 +100,3 @@ function EditModal({ product, onClose, onSave }) {
 }
 
 export default EditModal;
-
