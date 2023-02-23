@@ -8,11 +8,11 @@ import {
 } from "react";
 
 export interface IAnnounceAuth {
+    announceModal: boolean;
+    setAnnounceModal: Dispatch<SetStateAction<boolean>>;
     // editCard: string | null;
-    // createFriendCard: boolean;
     // friendIdState: string | undefined;
     // setEditCard: Dispatch<SetStateAction<string | null>>;
-    // setCreateFriendCard: Dispatch<SetStateAction<boolean>>;
     // setfriendIdState: Dispatch<SetStateAction<string | undefined>>;
     // addFriend: (email: string, name: string, phone: string) => void;
     // createFriend: (data: IAddFriendData) => void;
@@ -27,8 +27,10 @@ export interface IAnnounceProps {
 export const AnnounceContext = createContext<IAnnounceAuth>({} as IAnnounceAuth)
 
 function AnnounceProvider({ children }: IAnnounceProps) {
+    const [announceModal, setAnnounceModal] = useState<boolean>(false)
+
     return (
-        <AnnounceContext.Provider value={{}}>
+        <AnnounceContext.Provider value={{ announceModal, setAnnounceModal }}>
             {children}
         </AnnounceContext.Provider>
     )
