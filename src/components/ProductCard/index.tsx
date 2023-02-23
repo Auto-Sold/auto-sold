@@ -109,7 +109,7 @@ const CarList: React.FC = () => {
 
   return (
     <div>
-      <h2>Car List</h2>
+      <h2>Carros</h2>
       <CarListContainer>
         {cars.map((car: Car) => (
           <CarCard key={car.id}>
@@ -122,7 +122,7 @@ const CarList: React.FC = () => {
               <p>{car.year}</p>
               <p>Price: R${car.price}</p>
             </ContainerCarData>
-            <button>Comprar</button>
+            {/* <button>Comprar</button> */}
           </CarCard>
         ))}
       </CarListContainer>
