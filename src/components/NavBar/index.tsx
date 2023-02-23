@@ -1,30 +1,39 @@
 import { NavBarStyle } from "./styles"
-import LogoBranca from "../../assets/logoBranca.png";
+import LogoSemFundo from "../../assets/logoSemFundo.png";
 import bars from "../../assets/bars.png";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-
-
+// ===================================IMPORTS====================================
 
 const NavBar = () => {
+    
+    const [displayUl, setDisplayUl] = useState<string>("none")
+    
     return (
-        <NavBarStyle>
+        <NavBarStyle display={displayUl} >
             <div className="menu">
-
-                <img src={LogoBranca} alt="logo" />
-                <div>
-                    <div className="rectangle">
+                <img src={LogoSemFundo} alt="logo" />
+                
+                    <div onClick={(event) => {
+                        event.preventDefault();
+                        setDisplayUl("flex")}}
+                        className="rectangle">
                         <img src={bars} className="bars" />
-                        <ul>
+                    </div>
+                        <ul onClick={(event) => {
+                        event.preventDefault
+                        setDisplayUl("none")}}>
                             <p>Carros</p>
                             <p>Motos</p>
                             <p>Leilões</p>
-                            <div className="line"></div>
-                            <p>Fazer Login</p>
+                            
+                            <p className="line"></p>
+                            <p className="login">Fazer Login</p>
                             <button>Cadastrar</button>
 
                         </ul>
-                    </div>
-                </div>
+                
             </div>
 
         </NavBarStyle>

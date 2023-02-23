@@ -1,61 +1,43 @@
 import styled from "styled-components";
+interface NavBar {
+    display: string;
+}
+export const NavBarStyle = styled.div<NavBar>`
 
-export const NavBarStyle = styled.div`
-position: absolute;
-width: 375px;
-height: 480px;
+width:  100vw;
+height: fit-content;
 left: 0px;
 top: 0px;
 
 background: var(--grey10);
 background: black;
-ul{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0px;
-    gap: 44px;
-    position: absolute;
-    left: 0%;
-    right: 0.27%;
-    top: 16.67%;
-    bottom: 0%;
-}
+
 .menu{
     box-sizing: border-box;
+    position: absolute;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
     padding: 0px 16px;
-    gap: 690px;
-
-    position: absolute;
-    left: 0%;
-    right: 0%;
-    top: 0%;
-    bottom: 83.33%;
-
+    width: 100vw;
+    height: 8vh;
     background: var(--grey10);
     border-bottom: 2px solid var(--grey6);
 }
     .menu img{
-        width: 153.02px;
-        height: 26.34px;
         flex: none;
         order: 0;
         flex-grow: 0;
+
+        width: 100px;
+        height: auto;
+
+        padding-left: 16px;
+        
     }
-    .menu div {
-        width: 46px;
-        height: 46px;
-        flex: none;
-        order: 1;
-        flex-grow: 0;
-    }
-    .bars{
-        position: absolute;
+
+    .menu div .bars{
         left: 87.47%;
         right: 8.27%;
         top: 37.5%;
@@ -66,19 +48,63 @@ ul{
         font-size: 18px;
         line-height: 21px;
         color: #2C2C2C;
+        width: auto;
+        height: auto;
+    }
+    ul{
+    display: ${(props)=> props.display || 'none'};
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    gap: 0.5em;
+    padding: 0.5em;
+    background-color: var(--grey10);
+    z-index: 1000;
+    border-radius: 15px;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    overflow: none;
+
+    }
+    ul p {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 28px;    
+    }
+    ul .line {
+        background-color: #2C2C2C;
+        width: 100%;
+        height: 0.1em;
+        border-radius: 5px;
+        opacity: 25%;
     }
     .rectangle{
-        
-        position: absolute;
-        left: 83.47%;
-        right: 4.27%;
-        top: 21.25%;
-        bottom: 21.25%;
-
         background: var(--whiteFixed);
-        border-radius: 8px;
     }
-@media (min-width: 400px) {
+    ul button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 28px;
+        gap: 10px;
+
+        width: 50%;
+        height: 60%;
+
+        border: 1.5px solid var(--grey4);
+        border-radius: 4px;
+    }
+@media (min-width: 800px) {
 
     .menu{
     box-sizing: border-box;
@@ -86,7 +112,6 @@ ul{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 60px;
     gap: 690px;
     position: absolute;
     // width: 1600px;
@@ -96,9 +121,10 @@ ul{
     background: var(--grey10);
     border-bottom: 2px solid var(--grey6);
     }
+  
     .menu img{
-        width: 153.02px;
-        height: 26.34px;
+        width: 100px;
+        height: auto;
         flex: none;
         order: 0;
         flex-grow: 0;
@@ -107,13 +133,69 @@ ul{
         display: flex;
         flex-direction: row;
         align-items: center;
-        padding: 0px;
-        gap: 44px;
-        width: 592px;
-        height: 79px;
+        gap: 0.28754411188079987em;
+        width:40%;
+        height: auto;
         flex: none;
         order: 1;
         flex-grow: 0;
+        background-color: transparent;
+        box-shadow: none;
+        position: absolute;
+        top: 15%;
+        right: 2%;
+        overflow: hidden;
     }
+    ul p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 28px;
+    }
+    ul .login{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 28px;
+        width: 150%;
+    }
+    ul .line {
+        background-color: #2C2C2C;
+        width: 0.5em;
+        height: 3em;
+        border-right: 1px solid  #2C2C2C;
+        border-radius: 5px;
+        opacity: 25%;
+;
+    }
+    ul button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 28px;
+        gap: 10px;
+
+        width: 50%;
+        height: 60%;
+
+        border: 1.5px solid var(--grey4);
+        border-radius: 4px;
+    }
+    .rectangle{
+        display: none;
+    }
+    .bars{
+        display: none;
+    }
+    
 }
 `
