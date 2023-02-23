@@ -65,7 +65,8 @@ background: black;
     background-color: var(--grey10);
     z-index: 1000;
     border-radius: 15px;
-    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);;
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    overflow: none;
 
     }
     ul p {
@@ -143,6 +144,7 @@ background: black;
         position: absolute;
         top: 15%;
         right: 2%;
+        overflow: hidden;
     }
     ul p{
         display: flex;
