@@ -7,6 +7,7 @@ import NavBar from "../../components/NavBar"
 import { AnnounceContext } from "../../contexts/AnnounceContext"
 import Main from "./styles"
 import { AnimatePresence } from "framer-motion"
+import VehiclesList from "../../components/ProductCard"
 
 function Dashboard() {
     const { announceModal, setAnnounceModal } = useContext(AnnounceContext)
@@ -23,7 +24,10 @@ function Dashboard() {
             </AnimatePresence>
             <section>
                 <h3>Leilão</h3>
-                <h3 className="title">Carros</h3>
+                <VehiclesList/>
+                
+                
+                {/* <h3 className="title">Carros</h3>
                 <ul>
                     <li className="card">Carro 1</li>
                     <li className="card">Carro 2</li>
@@ -35,7 +39,7 @@ function Dashboard() {
                     <li className="card">Moto 1</li>
                     <li className="card">Moto 2</li>
                     <li className="card">Moto 3</li>
-                </ul>
+                </ul> */}
             </section>
             <Footer />
         </Main>
