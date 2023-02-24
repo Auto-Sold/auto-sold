@@ -8,9 +8,10 @@ import { AnnounceContext } from "../../contexts/AnnounceContext"
 import Main from "./styles"
 import { AnimatePresence } from "framer-motion"
 import VehiclesList from "../../components/ProductCard"
-import { ModalBase } from "../../components/Modals/ModalBase"
+import { ModalDeleteAd } from "../../components/Modals/ModalDeleteAd"
 import { StyledButtonCancel, StyledDeletdAd } from "../../components/Modals/StyleButtonModal/styles"
 import Leilao from "../../components/Leilao"
+
 
 function Dashboard() {
     const { announceModal, setAnnounceModal } = useContext(AnnounceContext)
@@ -26,13 +27,12 @@ function Dashboard() {
                 onExitComplete={() => null}>
                 {announceModal && <AnnounceModal />}
 
-
-                {modalDeleteAdOpen && <ModalBase titleHeader="Excluir Anúncio" paragraphBold="Tem certeza que deseja remover este Anúncio?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores.">
-
-                    <StyledButtonCancel onClick={() => (modalDeleteAdOpen == true ? close() : open())} >Cancelar</StyledButtonCancel>
-                    <StyledDeletdAd>Sim, excluir anúncio</StyledDeletdAd>
-
-                </ModalBase>}
+                
+                {modalDeleteAdOpen && <ModalDeleteAd titleHeader="Excluir Anúncio" paragraphBold="Tem certeza que deseja remover este Anúncio?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." />}
+         
+                   
+                    
+               
 
             </AnimatePresence>
 
