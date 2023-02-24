@@ -2,7 +2,7 @@ import styled from "styled-components";
 interface NavBar {
     display: string;
 }
-export const NavBarStyle = styled.div<NavBar>`
+const NavBarStyle = styled.div<NavBar>`
 
 width:  100vw;
 height: fit-content;
@@ -199,3 +199,5 @@ background: black;
     
 }
 `
+
+export default NavBarStyle
