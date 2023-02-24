@@ -8,12 +8,14 @@ import {
     useState
 } from "react";
 import { API } from "../api";
+import { IAnnounceData } from "../interfaces";
 import { Vehicle } from "../interface";
 
 
 export interface IAnnounceAuth {
     announceModal: boolean;
     setAnnounceModal: Dispatch<SetStateAction<boolean>>;
+    postAnnouncement: (data: IAnnounceData) => void;
 
     modalDeleteAdOpen: boolean;
     setModalDeleteAdOpen: Dispatch<SetStateAction<boolean>>;
@@ -21,17 +23,16 @@ export interface IAnnounceAuth {
     open: () => void;
     close: () => void;
 
-    vehicles:  Vehicle[]
+    vehicles: Vehicle[]
     handleVehiclesMotorcycles: (arr: Vehicle[]) => Vehicle[]
     handleVehiclesCars: (arr: Vehicle[]) => Vehicle[]
-    
+
 
     // editCard: string | null;
     // friendIdState: string | undefined;
     // setEditCard: Dispatch<SetStateAction<string | null>>;
     // setfriendIdState: Dispatch<SetStateAction<string | undefined>>;
     // addFriend: (email: string, name: string, phone: string) => void;
-    // createFriend: (data: IAddFriendData) => void;
     // removeFriend: (data: string) => void;
     // editPhone: (data: any) => void;
 }
@@ -45,65 +46,92 @@ export interface IAnnounceProps {
 export const AnnounceContext = createContext<IAnnounceAuth>({} as IAnnounceAuth)
 
 function AnnounceProvider({ children }: IAnnounceProps) {
-    const [announceModal, setAnnounceModal] = useState<boolean>(false)
-
     const [modalDeleteAdOpen, setModalDeleteAdOpen] = useState<boolean>(false)
-
+    const [announceModal, setAnnounceModal] = useState<boolean>(false)
     const [vehicles, setVehicles] = useState<Vehicle[]>([]); // Para o get
     const [uniqueVechicle, setUniqueVechicle] = useState<Vehicle>({} as Vehicle)
 
     const close = () => setModalDeleteAdOpen(false)
     const open = () => setModalDeleteAdOpen(true)
- 
- //Para o retrive
+
+    const postAnnouncement = (data: IAnnounceData) => {
+        if (data.announceType == "Leilão") {
+            return alert("Leilão não disponível")
+        }
+
+        const announce = {
+            announceType: data.announceType,
+            title: data.title,
+            year: data.year,
+            km: data.km,
+            price: data.price,
+            description: data.description,
+            vehicleType: data.vehicleType,
+            image: data.image,
+            galeryImage1: data.galeryImage1,
+            galeryImage2: data.galeryImage2,
+            galeryImage3: data.galeryImage3,
+            galeryImage4: data.galeryImage4,
+            galeryImage5: data.galeryImage5,
+            galeryImage6: data.galeryImage6,
+
+        }
+        console.log(data)
+        console.log(announce)
+        API.post(`/announce`, announce)
+            .then(res => { console.log(res) })
+            .catch(err => { console.log(err.response.data.message) })
+    }
+
+    //Para o retrive
 
     const handleVehiclesCars = (arr: Vehicle[]) => {
         // Tratativa para receber só carros e ativos
-        const result = arr.filter(function isActive(vehicle){
-            
+        const result = arr.filter(function isActive(vehicle) {
+
             return vehicle.isActive === true && vehicle.vehicleType === "Carro" && vehicle.announceType !== "Leilão"
         })
         console.log("Oraganizando carros");
         console.log(result);
         return result
-      }
+    }
     const handleVehiclesMotorcycles = (arr: Vehicle[]) => {
         // Tratativa para receber só motos e ativas
-        const result = arr.filter(function isActive(vehicle){
+        const result = arr.filter(function isActive(vehicle) {
             return vehicle.isActive === true && vehicle.vehicleType === "Moto" && vehicle.announceType !== "Leilão"
         })
         return result
     }
 
-// =========================CRUD==========ANNOUNCES=======================================
-    useEffect(()=>{
+    // =========================CRUD==========ANNOUNCES=======================================
+    useEffect(() => {
         // Get all Announces
-    async function getAnnounces() {
-        await API
-            .get("/announce")
-            .then((response) => {
-                setVehicles(response.data)
-            })
-            .catch((error) => {
-                alert("Ocorreu um erro, tente novamente")
-            })        
-    }
-    },[])    
+        async function getAnnounces() {
+            await API
+                .get("/announce")
+                .then((response) => {
+                    setVehicles(response.data)
+                })
+                .catch((error) => {
+                    alert("Ocorreu um erro, tente novamente")
+                })
+        }
+    }, [])
 
-        // Retrive um announce específico por ID
-    async function retrieveAnnounce(id:string) {
+    // Retrive um announce específico por ID
+    async function retrieveAnnounce(id: string) {
         await API
-            .get("/annouce"+id)
+            .get("/annouce" + id)
             .then((response) => {
                 setUniqueVechicle(response.data)
             })
     }
 
-// =========================CRUD==========COMMENTS=======================================
+    // =========================CRUD==========COMMENTS=======================================
 
 
     return (
-        <AnnounceContext.Provider value={{ announceModal, setAnnounceModal, vehicles, handleVehiclesMotorcycles, handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
+        <AnnounceContext.Provider value={{ postAnnouncement, announceModal, setAnnounceModal, vehicles, handleVehiclesMotorcycles, handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
 
             {children}
         </AnnounceContext.Provider>
