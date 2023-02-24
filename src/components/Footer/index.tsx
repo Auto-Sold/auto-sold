@@ -1,21 +1,21 @@
 import { FooterStyled, FooterButton } from "./styles";
 import LogoBranca from "../../assets/logoBranca.png";
- 
-
-const Footer = () =>{
 
 
+const Footer = () => {
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
 
-    
-    return(
+    return (
         <FooterStyled>
-            <img src={LogoBranca} alt = "Auto Sold"></img>
+            <img src={LogoBranca} alt="Auto Sold"></img>
             <p>
-            © 2023 - Todos os direitos reservados Auto Sold.
+                © 2023 - Todos os direitos reservados.
             </p>
             <FooterButton>
-            <button><p>^</p></button>
-
+                <button onClick={() => topFunction()}><p>^</p></button>
             </FooterButton>
         </FooterStyled>
     )

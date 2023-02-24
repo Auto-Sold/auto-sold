@@ -1,7 +1,22 @@
-import { createGlobalStyle} from "styled-components"
+import { createGlobalStyle } from "styled-components"
 import styled from "styled-components"
 
 export default createGlobalStyle`
+  ::-webkit-scrollbar {
+    width: -1px;               /* width of the entire scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+    border: none;      /* color of the tracking area */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+    border: none;  /* creates padding around scroll thumb */
+  }
+
   :root {
     // Brand
     --brand1: #4529E6;
@@ -49,7 +64,7 @@ export default createGlobalStyle`
   }
 
   * {
-     margin:0;
+    margin:0;
     padding: 0;
     outline:0;
     box-sizing: border-box;
@@ -57,7 +72,7 @@ export default createGlobalStyle`
   
   body,html {
     width: 100vw;
-    height: 100vh;
+    // height: 100vh;
     font-family: var(--input-font);
     overflow-x: hidden;
     background: var(--whiteFixed);
@@ -180,5 +195,6 @@ flex-grow: 0;
   order: 1;
   flex-grow: 0;
 }
+
 }
 `
