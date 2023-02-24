@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { AnnounceContext } from "../../contexts/AnnounceContext"
 import BackDrop from "../BackDrop"
 
-const dropIn = {
+export const dropIn = {
     hidden: {
         y: "-100vh",
         opacity: 0,
@@ -28,7 +28,7 @@ const AnnounceModal = () => {
     const { setAnnounceModal } = useContext(AnnounceContext)
 
     return (
-        <BackDrop>
+        <BackDrop setState={setAnnounceModal}>
             <motion.div
                 className="announce-modal"
                 onClick={(e) => e.stopPropagation()}

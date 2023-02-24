@@ -15,10 +15,17 @@ export interface IAnnounceAuth {
     announceModal: boolean;
     setAnnounceModal: Dispatch<SetStateAction<boolean>>;
 
+    modalDeleteAdOpen: boolean;
+    setModalDeleteAdOpen: Dispatch<SetStateAction<boolean>>;
+
+    open: () => void;
+    close: () => void;
+
     vehicles:  Vehicle[]
     handleVehiclesMotorcycles: (arr: Vehicle[]) => Vehicle[]
     handleVehiclesCars: (arr: Vehicle[]) => Vehicle[]
     
+
     // editCard: string | null;
     // friendIdState: string | undefined;
     // setEditCard: Dispatch<SetStateAction<string | null>>;
@@ -31,16 +38,24 @@ export interface IAnnounceAuth {
 
 export interface IAnnounceProps {
     children: ReactNode;
-}
 
+}
 
 
 export const AnnounceContext = createContext<IAnnounceAuth>({} as IAnnounceAuth)
 
 function AnnounceProvider({ children }: IAnnounceProps) {
     const [announceModal, setAnnounceModal] = useState<boolean>(false)
+
+    const [modalDeleteAdOpen, setModalDeleteAdOpen] = useState<boolean>(false)
+
     const [vehicles, setVehicles] = useState<Vehicle[]>([]); // Para o get
-    const [uniqueVechicle, setUniqueVechicle] = useState<Vehicle>({} as Vehicle) //Para o retrive
+    const [uniqueVechicle, setUniqueVechicle] = useState<Vehicle>({} as Vehicle)
+
+    const close = () => setModalDeleteAdOpen(false)
+    const open = () => setModalDeleteAdOpen(true)
+ 
+ //Para o retrive
 
     const handleVehiclesCars = (arr: Vehicle[]) => {
         // Tratativa para receber só carros e ativos
@@ -88,7 +103,8 @@ function AnnounceProvider({ children }: IAnnounceProps) {
 
 
     return (
-        <AnnounceContext.Provider value={{ announceModal, setAnnounceModal, vehicles, handleVehiclesMotorcycles, handleVehiclesCars }}>
+        <AnnounceContext.Provider value={{ announceModal, setAnnounceModal, vehicles, handleVehiclesMotorcycles, handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
+
             {children}
         </AnnounceContext.Provider>
     )

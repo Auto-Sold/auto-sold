@@ -1,13 +1,15 @@
 import { motion } from "framer-motion"
-import { useContext } from "react"
-import { AnnounceContext, IAnnounceProps } from "../../contexts/AnnounceContext"
+import { Dispatch, ReactNode, SetStateAction } from "react"
 
-const BackDrop = ({ children }: IAnnounceProps) => {
-    const { setAnnounceModal } = useContext(AnnounceContext)
+export interface IBackDrop {
+    children: ReactNode
+    setState: Dispatch<SetStateAction<boolean>>;
+}
 
+const BackDrop = ({ children, setState }: IBackDrop) => {
     return (
         <motion.div className="backdrop"
-            onClick={() => setAnnounceModal(false)}
+            onClick={() => setState(false)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
