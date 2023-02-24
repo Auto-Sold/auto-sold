@@ -32,8 +32,30 @@ function AnnounceProvider({ children }: IAnnounceProps) {
     const [announceModal, setAnnounceModal] = useState<boolean>(false)
 
     const postAnnouncement = (data: IAnnounceData) => {
+        if (data.announceType == "Leilão") {
+            return alert("Leilão não disponível")
+        }
+
+        const announce = {
+            announceType: data.announceType,
+            title: data.title,
+            year: data.year,
+            km: data.km,
+            price: data.price,
+            description: data.description,
+            vehicleType: data.vehicleType,
+            image: data.image,
+            galeryImage1: data.galeryImage1,
+            galeryImage2: data.galeryImage2,
+            galeryImage3: data.galeryImage3,
+            galeryImage4: data.galeryImage4,
+            galeryImage5: data.galeryImage5,
+            galeryImage6: data.galeryImage6,
+
+        }
         console.log(data)
-        API.post(`/announce`, data)
+        console.log(announce)
+        API.post(`/announce`, announce)
             .then(res => { console.log(res) })
             .catch(err => { console.log(err.response.data.message) })
     }

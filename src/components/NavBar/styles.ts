@@ -52,7 +52,7 @@ background: black;
         height: auto;
     }
     ul{
-    display: ${(props)=> props.display || 'none'};
+    display: ${(props) => props.display || 'none'};
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -63,7 +63,7 @@ background: black;
     gap: 0.5em;
     padding: 0.5em;
     background-color: var(--grey10);
-    z-index: 1000;
+    // z-index: 1000;
     border-radius: 15px;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     overflow: none;
