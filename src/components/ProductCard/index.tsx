@@ -1,133 +1,161 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useContext, useState } from "react";
+import { AnnounceContext } from "../../contexts/AnnounceContext";
+import { Vehicle } from "../../interface";
+import { CardVehicle } from "./styles";
 
-interface Car {
-  id: number;
-  model: string;
-  brand: string;
-  km: number;
-  year: number;
-  price: number;
-  description: string;
-}
 
-const CarListContainer = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: stretch;
-  overflow-x: auto;
-`;
 
-const CarCard = styled.li`
-  width: calc(33.33% - 20px);
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-`;
 
-const ContainerCarData = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const CarList: React.FC = () => {
-  const [cars, setCars] = useState<Car[]>([
+const VehiclesList: React.FC = () => {
+  const  {vehicles, handleVehiclesCars, handleVehiclesMotorcycles} = useContext(AnnounceContext)
+  const teste = [
     {
-      id: 1,
-      brand: "Toyota",
-      model: "Corolla",
+      id: "sasasasasasasD",
+      announceType: "Venda",
+      title: "Corolla",
       year: 2021,
-      price: 95000,
       km: 20000,
+      price: 95000,
       description:
         "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-    },
+      vehicleType: "Carro",
+      image: "https://www.agoramotor.com.br/wp-content/uploads/2020/09/toyota-corolla-2021.jpg",
+      isActive: true,
+      vehiclesImages: [],
+      user: {
+        id: "ashuashusah",
+        completeName: "Celso Ramos",
+        email: "celsinhoDaMassa@gmail.com",
+        telephone: "41 998741477",
+        cpf: "0688878922",
+        image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
+        vehicles: []
+      }
+      },
     {
-      id: 2,
-      brand: "Honda",
-      model: "Civic",
+      id: "asasasasaasasas",
+      announceType: "Venda",
+      title: "CG 120",
       year: 2022,
       price: 105000,
       km: 30000,
       description:
         "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-    },
+      vehicleType: "Moto",
+      image: "https://motos-motor.com.br/m/wp-content/uploads/16/precos-tabela-honda-cg-150-titan-ks-mix.jpg",
+      isActive: true,
+      vehiclesImages: [],
+      user: {
+        id: "ashuashusah",
+        completeName: "Celso Ramos",
+        email: "celsinhoDaMassa@gmail.com",
+        telephone: "41 998741477",
+        cpf: "0688878922",
+        image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
+        vehicles: []
+      }
+      },
     {
-      id: 3,
-      brand: "Ford",
-      model: "Mustang",
+      id: "asasassaa",
+      announceType: "Venda",
+      title: "Mustang",
       year: 2019,
-      price: 200000,
       km: 50000,
+      price: 200000,
       description:
         "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-    },
-    {
-      id: 4,
-      brand: "BMW",
-      model: "M5",
-      year: 2020,
-      price: 350000,
-      km: 10000,
-      description:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-    },
-    {
-      id: 5,
-      brand: "Chevrolet",
-      model: "Camaro",
-      year: 2018,
-      price: 150000,
-      km: 60000,
-      description:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-    },
-    {
-      id: 6,
-      brand: "Audi",
-      model: "RS7",
-      year: 2021,
-      price: 450000,
-      km: 5000,
-      description:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-    },
-    {
-      id: 7,
-      brand: "Porsche",
-      model: "911",
-      year: 2022,
-      price: 750000,
-      km: 2000,
-      description:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-    },
-  ]);
-
+      vehicleType: "Carro",
+      image: "https://www.agoramotor.com.br/wp-content/uploads/2020/09/toyota-corolla-2021.jpg",
+      isActive: true,
+      vehiclesImages: [],
+      user: {
+        id: "ashuashusah",
+        completeName: "Celso Ramos",
+        email: "celsinhoDaMassa@gmail.com",
+        telephone: "41 998741477",
+        cpf: "0688878922",
+        image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
+        vehicles: []
+      }
+    
+      }
+  ]
   return (
     <div>
-      <h2>Car List</h2>
-      <CarListContainer>
-        {cars.map((car: Car) => (
-          <CarCard key={car.id}>
-            <h3>
-              {car.model}-{car.brand}
+      <h3>Carros</h3>
+      <ul>
+        {handleVehiclesCars(teste).map((vehicle:Vehicle) =>  (
+          <CardVehicle id={vehicle.id} key={vehicle.id}>
+            <figure>
+            <img src={vehicle.image}/>
+            </figure>
+            <div className="textInformation">
+
+            <h3 className="title">
+              {vehicle.title}
             </h3>
-            <p>{car.description}</p>
-            <ContainerCarData>
-              <p>KM:{car.km}</p>
-              <p>{car.year}</p>
-              <p>Price: R${car.price}</p>
-            </ContainerCarData>
-            <button>Comprar</button>
-          </CarCard>
+            <p className="description">{vehicle.description}</p>
+            <div className="userData">
+              <figure className="userPhoto">
+                <img src={vehicle.user.image}/>
+              </figure>
+              <p className="userName">{vehicle.user.completeName}</p>
+            </div>
+            <div className="footerCard">
+              <p>KM:{vehicle.km}</p>
+              <p>{vehicle.year}</p>
+              <p>Price: R${vehicle.price}</p>
+            </div>
+            </div>
+          </CardVehicle>
         ))}
-      </CarListContainer>
+      </ul>
+      <h3>Motos</h3>
+      <ul>
+        {handleVehiclesMotorcycles(teste).map((vehicle:Vehicle) =>  (
+          <CardVehicle id={vehicle.id} key={vehicle.id}>
+            <figure>
+            <img src={vehicle.image}/>
+            </figure>
+            <div className="textInformation">
+
+            <h3 className="title">
+              {vehicle.title}
+            </h3>
+            <p className="description">{vehicle.description}</p>
+            <div className="userData">
+              <figure className="userPhoto">
+                <img src={vehicle.user.image}/>
+              </figure>
+              <p className="userName">{vehicle.user.completeName}</p>
+            </div>
+            <div className="footerCard">
+              <p>KM:{vehicle.km}</p>
+              <p>{vehicle.year}</p>
+              <p>Price: R${vehicle.price}</p>
+            </div>
+            </div>
+          </CardVehicle>
+        ))}
+      </ul>
     </div>
   );
 };
 
-export default CarList;
+export default VehiclesList;
+
+
+// {vehicles.map((vehicle: Vehicle) => (
+//   <VehicleCard key={vehicle.id}>
+//     <h3>
+//       {vehicle.model}-{vehicle.brand}
+//     </h3>
+//     <p>{vehicle.description}</p>
+//     <ContainerVehicleData>
+//       <p>KM:{vehicle.km}</p>
+//       <p>{vehicle.year}</p>
+//       <p>Price: R${vehicle.price}</p>
+//     </ContainerVehicleData>
+//     <button>Comprar</button>
+//   </VehicleCard>
+// ))}

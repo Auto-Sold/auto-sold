@@ -17,10 +17,10 @@ interface IModalBase {
 
 
 export const ModalBase = ({titleHeader,paragraphBold,paragraphNormal, children}:IModalBase) => {
-    const { setModalBaseOpen, modalBaseOpen, close, open } = useContext(AnnounceContext)
+    const { modalDeleteAdOpen, setModalDeleteAdOpen, close, open } = useContext(AnnounceContext)
     
     return (
-    <BackDrop setState={setModalBaseOpen}>
+    <BackDrop setState={setModalDeleteAdOpen}>
             <StyledModal
              as={motion.div}
              key="modalBase"
@@ -31,7 +31,7 @@ export const ModalBase = ({titleHeader,paragraphBold,paragraphNormal, children}:
              exit="exit">
                 <div className="headerModal">
                 <p>{titleHeader}</p>
-                <button onClick={() => ( modalBaseOpen == true ? close() : open())}>X</button>    
+                <button onClick={() => ( modalDeleteAdOpen == true ? close() : open())}>X</button>    
                 </div>
 
                 <div className="descriptionModal">
