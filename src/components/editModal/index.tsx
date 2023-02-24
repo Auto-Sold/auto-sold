@@ -1,42 +1,64 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useForm } from "react-hook-form";
+import { useForm} from "react-hook-form";
+import axios from "axios";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-function EditModal({ product }) {
-  const { register, handleSubmit, setValue } = useForm();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+interface FormData {
+  title: string;
+  year: number;
+  km: number;
+  price: number;
+  description: string;
+  coverImage: string;
+  galleryImage1: string;
+  galleryImage2: string;
+}
 
-  const handleClose = () => {
-    setIsModalOpen(false);
-  };
 
-  const handleSave = (data:any) => {
-    console.log(data)
-    setIsModalOpen(false);
-  };
+const schema = yup.object().shape({
+  title: yup.string().required(),
+  year: yup.number().positive().integer().required(),
+  km: yup.number().positive().integer().required(),
+  price: yup.number().positive().required(),
+  description: yup.string().required(),
+  coverImage: yup.string().required(),
+  galleryImage1: yup.string(),
+  galleryImage2: yup.string(),
+});
 
-  const handleSaveAndClose = (data:any) => {
-    handleSave(data);
-    handleClose();
-  };
+function EditModal() {
+  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    resolver: yupResolver(schema),
+  });
+  const [open, setOpen] = useState(false);
 
-  const onOpen = () => {
-    setValue("title", product.title);
-    setValue("year", product.year);
-    setValue("mileage", product.mileage);
-    setValue("price", product.price);
-    setValue("description", product.description);
-    setValue("coverImage", product.coverImage);
-    setValue("galleryImage1", product.galleryImage1);
-    setValue("galleryImage2", product.galleryImage2);
-    setIsModalOpen(true);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const onSubmitFunction = (data:FormData) => {
+    const editData = {
+      title: data.title,
+      year: data.year,
+      km: data.km,
+      price: data.price,
+      description: data.description,
+      coverImage: data.coverImage,
+      galleryImage1: data.galleryImage1,
+      galleryImage2: data.galleryImage2,
+    };
+
+    axios.patch("http://localhost:3000", editData);
+
+    console.log(data);
   };
 
   return (
     <>
-      <button onClick={onOpen}>Editar</button>
+      <button onClick={handleOpen}>Editar</button>
       <AnimatePresence>
-        {isModalOpen && (
+        {open && (
           <motion.div
             className="modal-overlay"
             initial={{ opacity: 0 }}
@@ -50,7 +72,7 @@ function EditModal({ product }) {
               animate={{ y: 0 }}
               exit={{ y: -50 }}
               onClick={(e) => e.stopPropagation()}
-              onSubmit={handleSubmit(handleSaveAndClose)}
+              onSubmit={handleSubmit(onSubmitFunction)}
             >
               <h2>Editar Produto</h2>
               <label>
@@ -63,7 +85,7 @@ function EditModal({ product }) {
               </label>
               <label>
                 Quilometragem:
-                <input type="number" {...register("mileage")} />
+                <input type="number" {...register("km")} />
               </label>
               <label>
                 Preço:
@@ -72,6 +94,7 @@ function EditModal({ product }) {
               <label>
                 Descrição:
                 <textarea {...register("description")} />
+
               </label>
               <label>
                 Imagem da capa:

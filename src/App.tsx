@@ -14,6 +14,7 @@ function App() {
           <Route path="/" element={<Dashboard />} />
         </Routes>
       </AnnounceProvider>
+      <EditModal/>
     </div>
   )
 }
