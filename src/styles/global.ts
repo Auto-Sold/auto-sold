@@ -75,7 +75,8 @@ export default createGlobalStyle`
     // height: 100vh;
     font-family: var(--input-font);
     overflow-x: hidden;
-    background: var(--whiteFixed);
+    background: var(--grey8);
+    z-index: 10;
   }
 
   header{

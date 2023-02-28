@@ -9,41 +9,26 @@ import Main from "./styles"
 import { AnimatePresence } from "framer-motion"
 import VehiclesList from "../../components/ProductCard"
 
-function Dashboard() {
+function ProductDash() {
     const { announceModal, setAnnounceModal } = useContext(AnnounceContext)
 
     return (
         <Main>
-            <NavBar/>
-            <Header />
-            <AnimatePresence
-                initial={false}
-                mode="wait"
-                onExitComplete={() => null}>
-                {announceModal && <AnnounceModal />}
-            </AnimatePresence>
-            <section>
-                <h3>Leilão</h3>
-                <VehiclesList/>
-                
-                
-                {/* <h3 className="title">Carros</h3>
-                <ul>
-                    <li className="card">Carro 1</li>
-                    <li className="card">Carro 2</li>
-                    <li className="card">Carro 3</li>
-                </ul>
-
-                <h3>Motos</h3>
-                <ul>
-                    <li className="card">Moto 1</li>
-                    <li className="card">Moto 2</li>
-                    <li className="card">Moto 3</li>
-                </ul> */}
-            </section>
-            <Footer />
-        </Main>
+        <NavBar/>
+        <Header />
+        <AnimatePresence
+            initial={false}
+            mode="wait"
+            onExitComplete={() => null}>
+            {announceModal && <AnnounceModal />}
+        </AnimatePresence>
+        <section>
+            <h3>Leilão</h3>
+            <VehiclesList/>
+        </section>
+        <Footer />
+    </Main>
     )
 }
 
-export default Dashboard
+export default ProductDash
