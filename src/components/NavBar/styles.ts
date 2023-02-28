@@ -10,7 +10,6 @@ left: 0px;
 top: 0px;
 
 background: var(--grey10);
-background: black;
 
 .menu{
     box-sizing: border-box;
@@ -95,11 +94,13 @@ background: black;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        padding: 12px 28px;
         gap: 10px;
+        padding: 1em;
+        width: fit-content;
+        height: fit-content;
 
-        width: 50%;
-        height: 60%;
+        max-width: 60%;
+        min-height:  fit-content;
 
         border: 1.5px solid var(--grey4);
         border-radius: 4px;

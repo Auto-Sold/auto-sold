@@ -17,13 +17,15 @@ export interface IAnnounceAuth {
     setAnnounceModal: Dispatch<SetStateAction<boolean>>;
     postAnnouncement: (data: IAnnounceData) => void;
 
+
+    vehicles:  Vehicle[]
+    uniqueVechicle: Vehicle
     modalDeleteAdOpen: boolean;
     setModalDeleteAdOpen: Dispatch<SetStateAction<boolean>>;
 
     open: () => void;
     close: () => void;
 
-    vehicles: Vehicle[]
     handleVehiclesMotorcycles: (arr: Vehicle[]) => Vehicle[]
     handleVehiclesCars: (arr: Vehicle[]) => Vehicle[]
 
@@ -91,8 +93,7 @@ function AnnounceProvider({ children }: IAnnounceProps) {
 
             return vehicle.isActive === true && vehicle.vehicleType === "Carro" && vehicle.announceType !== "Leilão"
         })
-        console.log("Oraganizando carros");
-        console.log(result);
+      
         return result
     }
     const handleVehiclesMotorcycles = (arr: Vehicle[]) => {
@@ -131,7 +132,9 @@ function AnnounceProvider({ children }: IAnnounceProps) {
 
 
     return (
-        <AnnounceContext.Provider value={{ postAnnouncement, announceModal, setAnnounceModal, vehicles, handleVehiclesMotorcycles, handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
+
+        <AnnounceContext.Provider value={{ postAnnouncement, announceModal, setAnnounceModal, vehicles, uniqueVechicle, handleVehiclesMotorcycles, handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
+
 
             {children}
         </AnnounceContext.Provider>

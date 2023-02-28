@@ -13,12 +13,13 @@ import { StyledButtonCancel, StyledDeletdAd } from "../../components/Modals/Styl
 import Leilao from "../../components/Leilao"
 
 
-function Dashboard() {
+function ProductDash() {
     const { announceModal, setAnnounceModal } = useContext(AnnounceContext)
     const { modalDeleteAdOpen, setModalDeleteAdOpen, close, open } = useContext(AnnounceContext)
 
     return (
         <Main>
+
             <NavBar />
             <Header />
             <AnimatePresence
@@ -56,7 +57,8 @@ function Dashboard() {
             </section>
             <Footer />
         </Main>
+
     )
 }
 
-export default Dashboard
+export default ProductDash

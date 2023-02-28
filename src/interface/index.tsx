@@ -21,4 +21,5 @@ export interface User {
     cpf: string;
     image: string;
     vehicles: Vehicle[]
+    bio: string;
 } 
