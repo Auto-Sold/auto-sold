@@ -14,23 +14,53 @@ const Main = styled.main`
         position: fixed;
         top: 0;
         left: 0;
-        height: 100vh;
+        height: 100%;
         width: 100vw;
-        background: #000000e1;
+        background:  rgba(0, 0, 0, 0.5);
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow-y: scroll;
+        overflow-x: hidden;
+       
+        ::-webkit-scrollbar {
+            width: 0px;
+          }
+    }
+
+    .head{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 18px;
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        color: #212529;
+
+        button{
+            background-color: var(--whiteFixed);
+            border: 1px solid var(--whiteFixed);
+            width: 24px;
+            height: 24px;
+            color: #ADB5BD;
+            font-size: 20px;
+        }
     }
 
     .announce-modal{
-        // width: clamp(50%, 700px, 90%);
-        // height: min(50%, 300px);
+        max-width: 346px;
+        // width: clamp(50%, 520px, 93%);
         margin: auto;
-        padding: 0 2rem;
-        border-radius: 12px;
+        border-radius: 8px;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        // justify-content: center;
+        // align-items: center;
+        padding: 0px 16px 31px;
+        gap: 37px;
         background-color: var(--whiteFixed);
     }
 

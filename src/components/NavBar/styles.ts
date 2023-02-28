@@ -2,7 +2,7 @@ import styled from "styled-components";
 interface NavBar {
     display: string;
 }
-export const NavBarStyle = styled.div<NavBar>`
+const NavBarStyle = styled.div<NavBar>`
 
 width:  100vw;
 height: fit-content;
@@ -51,7 +51,7 @@ background: var(--grey10);
         height: auto;
     }
     ul{
-    display: ${(props)=> props.display || 'none'};
+    display: ${(props) => props.display || 'none'};
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -62,7 +62,7 @@ background: var(--grey10);
     gap: 0.5em;
     padding: 0.5em;
     background-color: var(--grey10);
-    z-index: 1000;
+    // z-index: 1000;
     border-radius: 15px;
     box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     overflow: none;
@@ -200,3 +200,5 @@ background: var(--grey10);
     
 }
 `
+
+export default NavBarStyle
