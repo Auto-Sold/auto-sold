@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 export default createGlobalStyle`
   ::-webkit-scrollbar {
-    width: 12px;               /* width of the entire scrollbar */
+    width: 1px;               /* width of the entire scrollbar */
   }
 
   ::-webkit-scrollbar-track {

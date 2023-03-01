@@ -1,7 +1,11 @@
+import { useContext } from "react";
+import { AnnounceContext } from "../../contexts/AnnounceContext";
 import { HeaderStyle } from "./styles";
 
 
 const Header = () => {
+    const { announceModal, setAnnounceModal } = useContext(AnnounceContext)
+
     return (
         <HeaderStyle>
             <div className="box">
@@ -14,11 +18,18 @@ const Header = () => {
                 </button><button>
                         <p>Motos</p>
                     </button>
-                    <button>Criar anúncio</button>
+                    {/*⬇⬇⬇⬇BOTÃO PARA ANUNCIAR UM VEÍCULO⬇⬇⬇⬇⬇*/}
+                    <button onClick={() => (
+                        announceModal ?
+                            setAnnounceModal(false) : setAnnounceModal(true)
+                    )}>
+                        Criar anúncio
+                    </button>
+
                 </div>
 
             </div>
-        </HeaderStyle>
+        </HeaderStyle >
     )
 }
 export default Header

@@ -1,125 +1,214 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useForm} from "react-hook-form";
-import axios from "axios";
-import * as yup from "yup";
+import { motion } from "framer-motion";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import BackDrop from "../BackDrop";
+import * as yup from "yup";
+import AnnounceFormStyle from "./styles";
+import { useState } from "react";
+import { API } from "../../api";
 
+export const dropIn = {
+  hidden: {
+    y: "-100vh",
+    opacity: 0,
+  },
+  visible: {
+    y: "0",
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      type: "spring",
+      damping: 25,
+      stiffness: 500,
+    },
+  },
+  exit: {
+    y: "100vh",
+    opacity: 0,
+  },
+};
 interface FormData {
+  announceType: string;
   title: string;
   year: number;
   km: number;
   price: number;
   description: string;
-  coverImage: string;
+  vehicleType: string;
+  image: string;
   galleryImage1: string;
   galleryImage2: string;
 }
 
-
-const schema = yup.object().shape({
-  title: yup.string().required(),
-  year: yup.number().positive().integer().required(),
-  km: yup.number().positive().integer().required(),
-  price: yup.number().positive().required(),
-  description: yup.string().required(),
-  coverImage: yup.string().required(),
-  galleryImage1: yup.string(),
-  galleryImage2: yup.string(),
-});
-
-function EditModal() {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
-    resolver: yupResolver(schema),
-  });
+const editModal = () => {
   const [open, setOpen] = useState(false);
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const formSchema = yup.object().shape({
+    announceType: yup.string().required("Tipo de anúncio necessário"),
+    title: yup.string().required("Título necessário"),
+    year: yup.string().required("Ano necessário"),
+    km: yup.number().required("Quilometragem necessária"),
+    price: yup.number().required("Preço necessário"),
+    description: yup.string().required("Descrição necessária"),
+    vehicleType: yup.string().required("Tipo de veículo necessário"),
+    image: yup.string().required("Imagem necessária"),
+    galleryImage1: yup.string(),
+    galleryImage2: yup.string(),
+  });
 
-  const onSubmitFunction = (data:FormData) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(formSchema),
+  });
+
+  const onSubmitFunction = (data:any) => {
     const editData = {
+      announceType: data.announceType,
       title: data.title,
       year: data.year,
       km: data.km,
       price: data.price,
       description: data.description,
-      coverImage: data.coverImage,
+      vehicleType: data.vehicleType,
+      image: data.image,
       galleryImage1: data.galleryImage1,
       galleryImage2: data.galleryImage2,
     };
 
-    axios.patch("http://localhost:3000", editData);
+    API.patch("/editannounce", editData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
 
     console.log(data);
   };
 
   return (
     <>
-      <button onClick={handleOpen}>Editar</button>
-      <AnimatePresence>
-        {open && (
+      <button onClick={() => setOpen(true)}>Editar anúncio</button>
+      {open && (
+        <BackDrop setState={setOpen}>
           <motion.div
-            className="modal-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={handleClose}
+            className="announce-modal"
+            onClick={(e) => e.stopPropagation()}
+            variants={dropIn}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
           >
-            <motion.form
-              className="modal"
-              initial={{ y: -50 }}
-              animate={{ y: 0 }}
-              exit={{ y: -50 }}
-              onClick={(e) => e.stopPropagation()}
-              onSubmit={handleSubmit(onSubmitFunction)}
-            >
-              <h2>Editar Produto</h2>
-              <label>
-                Título:
-                <input type="text" {...register("title")} />
-              </label>
-              <label>
-                Ano:
-                <input type="number" {...register("year")} />
-              </label>
-              <label>
-                Quilometragem:
-                <input type="number" {...register("km")} />
-              </label>
-              <label>
-                Preço:
-                <input type="number" {...register("price")} />
-              </label>
-              <label>
-                Descrição:
-                <textarea {...register("description")} />
+            <div className="head">
+              <h4>Editar anúncio</h4>
+              <button onClick={() => setOpen(false)}>X</button>
+            </div>
 
-              </label>
-              <label>
-                Imagem da capa:
-                <input type="text" {...register("coverImage")} />
-              </label>
-              <label>
-                1 Imagem da galeria:
-                <input type="text" {...register("galleryImage1")} />
-              </label>
-              <label>
-                2 Imagem da galeria:
-                <input type="text" {...register("galleryImage2")} />
-              </label>
-              <div className="modal-buttons">
-                <button type="submit">Salvar</button>
-                <button type="button" onClick={handleClose}>
+            <AnnounceFormStyle onSubmit={handleSubmit(onSubmitFunction)}>
+              <label>Tipo de anuncio</label>
+
+              <div className="announce-type">
+                <label className="sale">
+                  <input
+                    id="sale-id"
+                    type="radio"
+                    value="Venda"
+                    {...register("announceType")}
+                  />
+                  <label htmlFor="sale-id">Venda</label>
+                </label>
+                <label className="auction">
+                  <input
+                    id="auction-id"
+                    type="radio"
+                    value="Leilão"
+                    {...register("announceType")}
+                  />
+                  <label htmlFor="auction-id">Leilão</label>
+                </label>
+              </div>
+
+              <h5>Informações do veículo</h5>
+              <div>
+                <label>Título</label>
+                <input placeholder="Digitar título" {...register("title")} />
+              </div>
+              <div>
+                <label>Ano</label>
+                <input placeholder="Digitar ano" {...register("year")} />
+                <label>Quilometragem</label>
+                <input placeholder="0" {...register("km")} />
+                <label>Preço</label>
+                <input placeholder="Digitar preço" {...register("price")} />
+              </div>
+              <div>
+                <label>Descrição</label>
+                <input
+                  placeholder="Digitar descrição"
+                  {...register("description")}
+                />
+              </div>
+              <label>Tipo de veículo</label>
+
+              <div className="announce-type">
+                <label className="car">
+                  <input
+                    id="car-id"
+                    type="radio"
+                    value="Carro"
+                    {...register("vehicleType")}
+                  />
+                  <label htmlFor="car-id">Carro</label>
+                </label>
+                <label className="bike">
+                  <input
+                    id="bike-id"
+                    type="radio"
+                    value="Moto"
+                    {...register("vehicleType")}
+                  />
+                  <label htmlFor="bike-id">Moto</label>
+                </label>
+              </div>
+
+              <div>
+                <label>Imagem da capa</label>
+                <input
+                  placeholder="Inserir URL da imagem"
+                  {...register("image")}
+                />
+              </div>
+              <div>
+                <label>1° Imagem da galeria</label>
+                <input
+                  placeholder="Inserir URL da imagem"
+                  {...register("galleryImage1")}
+                />
+                <label>2° Imagem da galeria</label>
+                <input
+                  placeholder="Inserir URL da imagem"
+                  {...register("galleryImage2")}
+                />
+                <button>Adicionar campo para imagem da galeria</button>
+              </div>
+              {/*<span>{errors.title?.message}</span>*/}
+              <div className="foot">
+                <button className="cancel" onClick={() => setOpen(false)}>
                   Cancelar
                 </button>
+                <button className="create" type="submit">
+                  Salvar alterações
+                </button>
               </div>
-            </motion.form>
+            </AnnounceFormStyle>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </BackDrop>
+      )}
     </>
   );
-}
+};
 
-export default EditModal;
+export default editModal;
