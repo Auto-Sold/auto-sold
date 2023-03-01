@@ -14,7 +14,7 @@ import Leilao from "../../components/Leilao"
 
 
 function ProductDash() {
-    const { announceModal, setAnnounceModal } = useContext(AnnounceContext)
+    const { announceModal, setAnnounceModal, vehicles } = useContext(AnnounceContext)
     const { modalDeleteAdOpen, setModalDeleteAdOpen, close, open } = useContext(AnnounceContext)
 
     return (
@@ -40,7 +40,7 @@ function ProductDash() {
             <button onClick={() => (modalDeleteAdOpen ? close() : open())}> fechar</button>
             <section>
                 <Leilao />
-                <VehiclesList />
+                <VehiclesList  vehicles ={vehicles}/>
                 {/* <h3 className="title">Carros</h3>
                 <ul>
                     <li className="card">Carro 1</li>

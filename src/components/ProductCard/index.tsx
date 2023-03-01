@@ -7,8 +7,8 @@ import arrowRight from "../../assets/arrowRight.png";
 
 
 
-const VehiclesList: React.FC = () => {
-  const  {vehicles, handleVehiclesCars, handleVehiclesMotorcycles} = useContext(AnnounceContext)
+const VehiclesList = (vehicles: any) => {
+  const  { handleVehiclesCars, handleVehiclesMotorcycles} = useContext(AnnounceContext)
   const carrouselCarros = useRef(null)
   const carrouselMotos = useRef(null)
   const teste = [
