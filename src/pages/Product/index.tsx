@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import Footer from "../../components/Footer"
 import NavBar from "../../components/NavBar"
 import { AnnounceContext } from "../../contexts/AnnounceContext"
-import  {Main, HeaderStyle, Content } from "./styles"
+import  {Main, HeaderStyle, Content, Content2 } from "./styles"
 
 function ProductDash() {
     const { uniqueVechicle} = useContext(AnnounceContext)
@@ -32,15 +32,19 @@ function ProductDash() {
         }
         }
 
-    return (
+    return (<>
+
+        <NavBar/>
         <Main>
-            <NavBar/>
-            <HeaderStyle>
-                <figure>
+            {/* <HeaderStyle>
+            </HeaderStyle> */}
+               
+            <section className="section">
+            <div className="row1">
+
+            <figure>
                     <img src={testVehicle.image} alt="Imagem do veículo" />
                 </figure>
-            </HeaderStyle>
-            <section className="section">
             <Content justify="space-between" align="flex-start" alignDescription="flex-start">
                  <p className="title">{testVehicle.title}</p>
                  <div className="footerCard">
@@ -54,21 +58,26 @@ function ProductDash() {
                 <p className="title">Descrição</p>
                 <p className="description">{testVehicle.description}</p>
             </Content>
-            <Content justify="flex-start" align="flex-start" alignDescription="flex-start">
+            </div>
+            <div className="row 2">
+
+            <Content2 justify="flex-start" align="flex-start" alignDescription="flex-start">
             <p className="title">Fotos</p>
             {testVehicle.vehiclesImages.map((image) => 
             <img src={image} alt="Imagem do veículo"/>)}
-            </Content>
-            <Content justify="flex-start" align="center" alignDescription="center">
+            </Content2>
+            <Content2 justify="flex-start" align="center" alignDescription="center">
                 <figure className="userPhoto">
                     <img className="userPhoto" src={testVehicle.user.image} alt=""/>
                 </figure>
                 <p className="description">{testVehicle.user.bio}</p>
                 <button className="userPerfil" id={testVehicle.user.id}>Ver todos anúncios</button>
-            </Content>
+            </Content2>
+            </div>
             </section> 
             <Footer />
         </Main>
+        </>
     )
 }
 

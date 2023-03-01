@@ -9,6 +9,7 @@ export const Main = styled.main`
     // width: 100vw;
     font-family: 'Lexend';
     font-style: normal;
+    padding-top: 100px;
 
     .backdrop{
         position: fixed;
@@ -79,20 +80,56 @@ export const Main = styled.main`
     .title{
         color: black;
     }
+    figure {
+    width: 20em;
+    min-width: none;
+    }
+
+    figure img {
+        width: 100%;
+        height: auto;
+    }
+    .section {
+            /* position: fixed;
+            top: 25%; */
+            display: flex;
+            flex-direction:column;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            height: 60%;
+            width: 80%;
+            gap: 20px;
+            // position: absolute;
+            // top: 700px; 
+            // background-color: blue;
+        }
     @media (min-width: 800px) {
         .section {
-        /* position: fixed;
-        top: 25%; */
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-items: center;
-        height: auto;
+            /* position: fixed;
+            top: 25%; */
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            justify-content: center;
+            height: 60%;
+            width: 100%;
+            gap: 20px;
+            // position: absolute;
+            // top: 700px; 
+            // background-color: blue;
+        }
+        .section figure {
+        width: 600px;
+        height: 100%;
+        }
+        .section figure img {
         width: 100%;
-        // position: absolute;
-        // top: 700px; 
-        // background-color: blue;
-    }
+        height: 100%;
+        }
+        
+        
     }
 `
 
@@ -109,27 +146,12 @@ height: fit-content;
 
 background: var(--brand2);
 
-figure {
-    width: 20em;
-    min-width: none;
-}
 
-figure img {
-    width: 100%;
-    height: auto;
-}
 @media (min-width: 800px) {
     
 height: 703px;
 
-figure {
-    width: 50em;
-    height: 100%;
-    }
-    figure img {
-    width: 100%;
-    height: auto;
-    }
+
     }
 `
 interface Content {
@@ -145,7 +167,7 @@ align-items:${(props)=> props.align || "flex-start"};
 padding: 28px;
 gap: 8px;
 
-width: 20em;
+width: 350px ;
 height: 326.91px;
 
 
@@ -299,10 +321,226 @@ margin-bottom: 3em;
       .footerCard{
         display: flex;
         align-items: center;
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin-top: 0.5em;
+        gap: 1em;
+        }
+        .footerCard .price {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: var(--grey1);
+        margin-left: 15em;
+
+    }
+        .userPhoto{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        width: 32px;
+        height: 32px;
+        background: var(--brand1);
+        border-radius: 150px; 
+    }
+    .userPhoto img {
+        display: block;
+        margin: 0 auto;
+        width: 32px;
+        height: 32px;
+        border-radius: 150px; 
+    }
+`
+
+export const Content2 = styled.div<Content>`
+display: flex;
+flex-direction: column;
+justify-content: ${(props)=> props.justify || "flex-start"};
+align-items:${(props)=> props.align || "flex-start"};
+padding: 28px;
+gap: 8px;
+
+width: 350px !important;
+height: 326.91px;
+
+
+background: var(--grey10);
+border-radius: 4px;
+margin-bottom: 3em;
+    .title {
+        width: 312px;
+        height: 22px;
+        
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        color: var(--grey1);
+        
+        margin: 0;
+        margin-bottom: 0.5em;
+      
+    }
+    .description {
+        width: 100%;
+        height: 6em;
+        max-height: 6em;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 24px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: ${(props)=> props.alignDescription || "flex-start"};
+        
+        color: var(--grey2);
+
+    }
+    .userData {
+        gap: 8px;
+        width: 100%;
+        height: 32px;
+        display: flex;
+    }
+    .userPhoto{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        width: 32px;
+        height: 32px;
+        background: var(--brand1);
+        border-radius: 150px; 
+    }
+    .userPhoto img {
+        display: block;
+        margin: 0 auto;
+        width: 32px ;
+        height: 32px ;
+        border-radius: 150px; 
+    }
+    .userName {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        color: var(--grey2);
+        margin-left: 10px;
+    }
+    .footerCard{
+        display: flex;
+        align-items: center;
+        width: 80%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 0.5em;
+        gap: 1em;
+    }
+    .footerCard p {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 4px 8px;
+        gap: 10px;
+
+        width: fit-content;
+        height: 32px;
+
+        margin: 0.2em;
+
+        
+        background: var(--brand4);
+        border-radius: 4px;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        color: var(--brand1);
+    }
+    .footerCard .price {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: var(--grey1);
+    }
+    button {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 20px;
+        gap: 10px;
+
+        width: 100px;
+        height: 38px;
+
+        background: var(--brand1);
+
+        border: 1.5px solid var(--brand1);
+        border-radius: 4px;
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 0px;
+
+        color: var(--whiteFixed);
+    }
+    .userPerfil {
+        width: 50%;
+        background-color: var(--grey0);
+    }
+    @media (min-width: 800px) {
+        width: 50em;
+        height: 326.91px;
+      }
+      .footerCard{
+        display: flex;
+        align-items: center;
         width: 30%;
         justify-content: space-between;
         flex-wrap: wrap;
         margin-top: 0.5em;
         gap: 1em;
         }
+        .userPhoto{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0px;
+        width: 100px !important;
+        height: 100px !important;
+        background: var(--brand1);
+        border-radius: 150px; 
+    }
+    .userPhoto img {
+        display: block;
+        margin: 0 auto;
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 150px; 
+    }
 `
