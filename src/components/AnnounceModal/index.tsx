@@ -55,6 +55,7 @@ const AnnounceModal = () => {
         })
 
     return (
+        
         <BackDrop setState={setAnnounceModal}>
             <motion.div
                 className="announce-modal"
