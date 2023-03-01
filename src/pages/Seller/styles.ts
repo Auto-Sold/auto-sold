@@ -109,28 +109,159 @@ height: fit-content;
 
 background: var(--brand2);
 
-figure {
-    width: 20em;
-    min-width: none;
+.userDiv {
+    background: var(--grey10);
+    border-radius: 4px;
+    height: 90%;
+    border-radius: 4px;
+    width: 30em;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2em;
+    padding: 2em;
+    height: fit-content;
+
+
+}
+.userPhoto {
+    width: 15em;
+    height: 15em;
+    border-radius: 100%;
+
 }
 
-figure img {
+.userPhoto img {
+    width: 15em;
+    height: 15em;
+    border-radius: 100%;
+}
+  
+.name{
     width: 100%;
-    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+.name .nameComplete {
+    width: 130px;
+    height: 25px;
+    color: var(--grey1);
+    margin: 0;
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    margin-right: 1em;
+    background: transparent;
+    border-radius: none
+}
+.name p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--brand1);
+    background: var(--brand4);
+    border-radius: 4px;
+    width: 92px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 @media (min-width: 800px) {
     
-height: 703px;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+align-items: center;
+padding: 188px 425px 40px;
+gap: 10px;
+width: 100vw;
+height: fit-content;
 
-figure {
-    width: 50em;
-    height: 100%;
-    }
-    figure img {
+background: var(--brand2);
+
+.userDiv {
+    background: var(--grey10);
+    border-radius: 4px;
+    height: 90%;
+    width: 1240px;
+    padding: 44px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2em;
+    height: fit-content;
+
+}
+.userPhoto {
+    width: 15em;
+    height: 15em;
+    border-radius: 100%;
+
+}
+
+.userPhoto img {
+    width: 15em;
+    height: 15em;
+    border-radius: 100%;
+}
+  
+.name{
     width: 100%;
-    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    
+}
+.name .nameComplete {
+    width: 130px;
+    height: 25px;
+    color: var(--grey1);
+    margin: 0;
+    font-family: 'Lexend';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    margin-right: 1em;
+    background: transparent;
+    border-radius: none
+}
+.name p {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--brand1);
+    background: var(--brand4);
+    border-radius: 4px;
+    width: 92px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.bio { 
+  
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 28px;
+        color: var(--grey2);
     }
-    }
+}
 `
 interface Content {
     justify: string;

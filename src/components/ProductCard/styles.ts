@@ -1,6 +1,41 @@
 import styled from "styled-components";
 
+export const VehiclesListStyle = styled.div`
+    ul {
+        overflow: auto;
+        scroll-behavior: smooth;
+        margin-bottom: 0;
+       
 
+    }
+    ul::-webkit-scrollbar{
+        display: none;
+    }
+    .buttonsCarrousel{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 0;
+    }
+    button {
+        background-color: transparent;
+        border: none;
+        height: 50px;
+        width: 50px;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 50px;
+    }
+    button :hover{
+        background-color: var(--grey6);
+        border-radius: 20px;
+    }
+    button img {
+        height: 50px;
+        width: 50px;
+    }
+`
 export const CardVehicle = styled.div`
     gap: 16px;
     
@@ -107,6 +142,7 @@ export const CardVehicle = styled.div`
 
         margin-top: 0.5em;
     }
+ 
     .footerCard p {
         display: flex;
         flex-direction: row;
@@ -128,5 +164,14 @@ export const CardVehicle = styled.div`
         font-size: 14px;
         line-height: 24px;
         color: var(--brand1);
+    }
+    .footerCard .price {
+        font-family: 'Lexend';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        color: var(--grey1);
+        background-color: transparent;
     }
 `

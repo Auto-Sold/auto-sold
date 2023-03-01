@@ -11,7 +11,8 @@ export const FooterStyled = styled.div`
     background: var(--grey0);
 
     img {
-        height: 180px;
+        height: 50px !important;
+        width: auto;
         margin-bottom: -30px;
     }
     p {

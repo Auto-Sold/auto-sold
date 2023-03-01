@@ -1,28 +1,33 @@
 import { motion } from "framer-motion"
-import { ReactNode, MouseEventHandler, useContext, Children } from "react"
+import { ReactNode, MouseEventHandler, useContext, Children, Dispatch, SetStateAction } from "react"
 import { AnnounceContext } from "../../../contexts/AnnounceContext"
 import { dropIn } from "../../AnnounceModal"
 import BackDrop from "../../BackDrop"
 import { StyledModal} from "./styles"
 
-interface IModalBase {
+export interface IModalBase {
     
     titleHeader: string;
     paragraphBold: string;
-    paragraphNormal: string;
-    children: any
+    paragraphNormal: string;  
     
+}
+
+export interface IModalBasePrimary extends IModalBase{
+    setState: Dispatch<SetStateAction<boolean>>;
+    children?: any
 }
 
 
 
-export const ModalBase = ({titleHeader,paragraphBold,paragraphNormal, children}:IModalBase) => {
-    const { modalDeleteAdOpen, setModalDeleteAdOpen, close, open } = useContext(AnnounceContext)
+export const ModalBase = ({titleHeader,paragraphBold,paragraphNormal, children, setState}:IModalBasePrimary) => {
+    const { modalDeleteAdOpen, setModalDeleteAdOpen } = useContext(AnnounceContext)
     
     return (
     <BackDrop setState={setModalDeleteAdOpen}>
             <StyledModal
-             as={motion.div}
+            as={motion.div}
+                
              key="modalBase"
              variants={dropIn}
              onClick={(e) => e.stopPropagation()}
@@ -31,7 +36,7 @@ export const ModalBase = ({titleHeader,paragraphBold,paragraphNormal, children}:
              exit="exit">
                 <div className="headerModal">
                 <p>{titleHeader}</p>
-                <button onClick={() => ( modalDeleteAdOpen == true ? close() : open())}>X</button>    
+                <button onClick={() =>setState(false) }>X</button>    
                 </div>
 
                 <div className="descriptionModal">
@@ -49,3 +54,4 @@ export const ModalBase = ({titleHeader,paragraphBold,paragraphNormal, children}:
     )
 }
 
+// ( modalDeleteAdOpen == true ? close() : open())
