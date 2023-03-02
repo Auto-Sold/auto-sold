@@ -10,10 +10,10 @@ export interface Vehicle {
     image: string;
     isActive: boolean;
     vehiclesImages: string[];
-    user:User
+    user:IUser
 } 
 
-export interface User {
+export interface IUser {
     id: string;
     completeName: string;
     email: string;
@@ -23,3 +23,13 @@ export interface User {
     vehicles: Vehicle[]
     bio: string;
 } 
+export interface IAnnounceData {
+    announceType: string;
+    title: string;
+    year: string;
+    km: number;
+    price: number;
+    description: string;
+    vehicleType: string;
+    image: string;
+}

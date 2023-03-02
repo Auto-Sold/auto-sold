@@ -158,6 +158,8 @@ background: var(--grey10);
         line-height: 28px;
     }
     ul .login{
+        border: none;
+        background-color: transparent;
         display: flex;
         justify-content: center;
         align-items: center;

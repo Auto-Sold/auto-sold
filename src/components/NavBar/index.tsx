@@ -3,12 +3,15 @@ import LogoSemFundo from "../../assets/logoSemFundo.png";
 import bars from "../../assets/bars.png";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Login } from "../../pages/Login";
+
 
 // ===================================IMPORTS====================================
 
 const NavBar = () => {
 
     const [displayUl, setDisplayUl] = useState<string>("none")
+    const navigate = useNavigate()
 
     return (
         <NavBarStyle display={displayUl} >
@@ -31,9 +34,8 @@ const NavBar = () => {
                     <p>Leilões</p>
 
                     <p className="line"></p>
-                    <p className="login">Fazer Login</p>
+                    <button className="login" onClick={()=>navigate("/login")}>Fazer Login</button>
                     <button>Cadastrar</button>
-
                 </ul>
 
             </div>
