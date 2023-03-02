@@ -5,17 +5,8 @@ import axios from "axios";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AnnounceContext } from "../../contexts/AnnounceContext";
+import { IAnnounceData } from "../../interfaces";
 
-interface FormData {
-  title: string;
-  year: number;
-  km: number;
-  price: number;
-  description: string;
-  image: string;
-  galleryImage1: string;
-  galleryImage2: string;
-}
 
 const schema = yup.object().shape({
   title: yup.string().required(),
@@ -28,8 +19,8 @@ const schema = yup.object().shape({
   galleryImage2: yup.string(),
 });
 
-function EditModal() {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+function EditModal(id:string) {
+  const { register, handleSubmit, formState: { errors } } = useForm<IAnnounceData>({
     resolver: yupResolver(schema),
   });
   const [open, setOpen] = useState(false);
@@ -37,7 +28,9 @@ function EditModal() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-
+  const onSubmitFunction = (data:IAnnounceData) => {
+    patchAnnounce(data, id)
+  };
 
   return (
     <>
@@ -57,9 +50,19 @@ function EditModal() {
               animate={{ y: 0 }}
               exit={{ y: -50 }}
               onClick={(e) => e.stopPropagation()}
-              onSubmit={handleSubmit(patchAnnounce)}
+              onSubmit={handleSubmit(onSubmitFunction)}
             >
               <h2>Editar Produto</h2>
+              <div className="announce-type">
+                        <label className="car">
+                            <input id="car-id" type="radio" value="Carro" {...register("vehicleType")} />
+                            <label htmlFor="car-id">Carro</label>
+                        </label>
+                        <label className="bike">
+                            <input id="bike-id" type="radio" value="Moto" {...register("vehicleType")} />
+                            <label htmlFor="bike-id">Moto</label>
+                        </label>
+                    </div>
               <label>
                 Título:
                 <input type="text" {...register("title")} />
