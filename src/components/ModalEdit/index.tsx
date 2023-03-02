@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm} from "react-hook-form";
 import axios from "axios";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { AnnounceContext } from "../../contexts/AnnounceContext";
 
 interface FormData {
   title: string;
@@ -11,7 +12,7 @@ interface FormData {
   km: number;
   price: number;
   description: string;
-  coverImage: string;
+  image: string;
   galleryImage1: string;
   galleryImage2: string;
 }
@@ -22,7 +23,7 @@ const schema = yup.object().shape({
   km: yup.number().positive().integer().required(),
   price: yup.number().positive().required(),
   description: yup.string().required(),
-  coverImage: yup.string().required(),
+  image: yup.string().required(),
   galleryImage1: yup.string(),
   galleryImage2: yup.string(),
 });
@@ -32,26 +33,11 @@ function EditModal() {
     resolver: yupResolver(schema),
   });
   const [open, setOpen] = useState(false);
-
+  const {patchAnnounce} = useContext(AnnounceContext)
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const onSubmitFunction = (data:FormData) => {
-    const editData = {
-      title: data.title,
-      year: data.year,
-      km: data.km,
-      price: data.price,
-      description: data.description,
-      coverImage: data.coverImage,
-      galleryImage1: data.galleryImage1,
-      galleryImage2: data.galleryImage2,
-    };
 
-    axios.patch("http://localhost:3000", editData);
-
-    console.log(data);
-  };
 
   return (
     <>
@@ -71,7 +57,7 @@ function EditModal() {
               animate={{ y: 0 }}
               exit={{ y: -50 }}
               onClick={(e) => e.stopPropagation()}
-              onSubmit={handleSubmit(onSubmitFunction)}
+              onSubmit={handleSubmit(patchAnnounce)}
             >
               <h2>Editar Produto</h2>
               <label>
@@ -98,16 +84,9 @@ function EditModal() {
               </label>
               <label>
                 Imagem da capa:
-                <input type="text" {...register("coverImage")} />
+                <input type="text" {...register("image")} />
               </label>
-              <label>
-                1 Imagem da galeria:
-                <input type="text" {...register("galleryImage1")} />
-              </label>
-              <label>
-                2 Imagem da galeria:
-                <input type="text" {...register("galleryImage2")} />
-              </label>
+
               <div className="modal-buttons">
                 <button type="submit">Salvar</button>
                 <button type="button" onClick={handleClose}>
