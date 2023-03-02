@@ -16,7 +16,7 @@ export interface IAnnounceAuth {
     announceModal: boolean;
     setAnnounceModal: Dispatch<SetStateAction<boolean>>;
     postAnnouncement: (data: IAnnounceData) => void;
-
+    patchAnnounce: (data: IAnnounceData, id: string) => void;
 
     vehicles:  Vehicle[]
     uniqueVechicle: Vehicle
@@ -70,13 +70,6 @@ function AnnounceProvider({ children }: IAnnounceProps) {
             description: data.description,
             vehicleType: data.vehicleType,
             image: data.image,
-            galeryImage1: data.galeryImage1,
-            galeryImage2: data.galeryImage2,
-            galeryImage3: data.galeryImage3,
-            galeryImage4: data.galeryImage4,
-            galeryImage5: data.galeryImage5,
-            galeryImage6: data.galeryImage6,
-
         }
         console.log(data)
         console.log(announce)
@@ -84,6 +77,21 @@ function AnnounceProvider({ children }: IAnnounceProps) {
             .then(res => { console.log(res) })
             .catch(err => { console.log(err.response.data.message) })
     }
+    const patchAnnounce = (data:IAnnounceData, id: string) => {
+        const editData = {
+          title: data.title,
+          year: data.year,
+          km: data.km,
+          price: data.price,
+          description: data.description,
+          image: data.image,
+
+        };
+    
+        API.patch(`/announce:${id}`, editData);
+    
+        console.log(data);
+      };
 
     //Para o retrive
 
@@ -133,7 +141,7 @@ function AnnounceProvider({ children }: IAnnounceProps) {
 
     return (
 
-        <AnnounceContext.Provider value={{ postAnnouncement, announceModal, setAnnounceModal, vehicles, uniqueVechicle, handleVehiclesMotorcycles, handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
+        <AnnounceContext.Provider value={{ postAnnouncement, patchAnnounce, announceModal, setAnnounceModal, vehicles, uniqueVechicle, handleVehiclesMotorcycles, handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
 
 
             {children}
