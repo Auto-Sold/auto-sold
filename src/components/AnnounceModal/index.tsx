@@ -41,12 +41,6 @@ const AnnounceModal = () => {
         description: yup.string().required("Descrição necessária"),
         vehicleType: yup.string().required("Tipo de veículo necessário"),
         image: yup.string().required("Imagem necessária"),
-        galeryImage1: yup.string(),
-        galeryImage2: yup.string(),
-        galeryImage3: yup.string(),
-        galeryImage4: yup.string(),
-        galeryImage5: yup.string(),
-        galeryImage6: yup.string()
     })
 
     const { register, handleSubmit, formState: { errors } } =
@@ -117,21 +111,6 @@ const AnnounceModal = () => {
                     <div>
                         <label>Imagem da capa</label>
                         <input placeholder="Inserir URL da imagem" {...register("image")} />
-                    </div>
-                    <div>
-                        <label>1° Imagem da galeria</label>
-                        <input placeholder="Inserir URL da imagem" {...register("galeryImage1")} />
-                        <label>2° Imagem da galeria</label>
-                        <input placeholder="Inserir URL da imagem" {...register("galeryImage2")} />
-                        <label>3° Imagem da galeria</label>
-                        <input placeholder="Inserir URL da imagem" {...register("galeryImage3")} />
-                        <label>4° Imagem da galeria</label>
-                        <input placeholder="Inserir URL da imagem" {...register("galeryImage4")} />
-                        <label>5° Imagem da galeria</label>
-                        <input placeholder="Inserir URL da imagem" {...register("galeryImage5")} />
-                        <label>6° Imagem da galeria</label>
-                        <input placeholder="Inserir URL da imagem" {...register("galeryImage6")} />
-                        {/* <button>Adicionar campo para imagem da galeria</button> */}
                     </div>
                     <span>{errors.title?.message}</span>
                     <div className="foot">
