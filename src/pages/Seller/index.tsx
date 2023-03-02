@@ -3,11 +3,14 @@ import Footer from "../../components/Footer"
 import NavBar from "../../components/NavBar"
 import VehiclesList from "../../components/ProductCard"
 import { AnnounceContext } from "../../contexts/AnnounceContext"
+import { userContext } from "../../contexts/userContext"
 import { Content, HeaderStyle, Main } from "./styles"
 
 
 function SellerDash() {
-    const {uniqueVechicle} = useContext(AnnounceContext)
+    const {uniqueVehicle} = useContext(AnnounceContext)
+    const {objUser, sellerData} = useContext(userContext)
+    
     const testUser ={
       
           id: "ashuashusah",
@@ -199,18 +202,18 @@ function SellerDash() {
           <HeaderStyle>
               <div className="userDiv">
               <figure className="userPhoto">
-                  <img src={testUser.image} alt=""/>
+                  <img src={sellerData.image} alt=""/>
               </figure>
               <div className="name">
-                  <p className="nameComplete">{testUser.completeName}</p>
+                  <p className="nameComplete">{sellerData.completeName}</p>
                   <p>Anunciante</p>
                   <button>Editar Perfil</button>
               </div>
-              <p className="bio">{testUser.bio}</p>
+              <p className="bio">{sellerData.bio}</p>
               </div>
               <button onClick={() => console.log("Abrir editar perfil")}>Editar Perfil</button>
           </HeaderStyle>
-          <VehiclesList vehicles={testUser.vehicles}/>
+          <VehiclesList vehicles={sellerData.vehicles}/>
           <Footer />
       </Main>
     )
@@ -221,16 +224,16 @@ function SellerDash() {
       <HeaderStyle>
           <div className="userDiv">
           <figure className="userPhoto">
-              <img src={testUser.image} alt=""/>
+              <img src={sellerData.image} alt=""/>
           </figure>
           <div className="name">
-              <p className="nameComplete">{testUser.completeName}</p>
+              <p className="nameComplete">{sellerData.completeName}</p>
               <p>Anunciante</p>
           </div>
-          <p className="bio">{testUser.bio}</p>
+          <p className="bio">{sellerData.bio}</p>
           </div>
       </HeaderStyle>
-      <VehiclesList vehicles={testUser.vehicles}/>
+      <VehiclesList vehicles={sellerData.vehicles}/>
       <Footer />
   </Main>
 )

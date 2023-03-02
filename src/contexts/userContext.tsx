@@ -8,6 +8,8 @@ import { IUser } from "../interface";
 export interface IUserAuth {
     objUser: object,
     setObjUser: React.Dispatch<React.SetStateAction<IUser>>
+    sellerData: IUser
+    retrieveUserSeller: (id:string) => void
 
 }
 export interface IUserProps{
@@ -16,13 +18,24 @@ export interface IUserProps{
 export const userContext = createContext<IUserAuth>({} as IUserAuth)
 
 export const AnnounceProvider = ({ children }: IUserProps) => {
+    const [sellerData, setSellerData] = useState<IUser>({} as IUser)
     const [objUser, setObjUser] = useState<IUser>({} as IUser)
+    const token = window.localStorage.getItem("@TOKEN" as string)
+    const userId = window.localStorage.getItem("@ID" as string)
     
-    
+    const retrieveUserSeller = async (userId: string) =>{
+        await API
+        .get(`users/seller/${userId}`)
+        .then((response) => {
+            setSellerData(response.data[0])
+        })
+        .catch((error) => {
+            alert("Ocorreu um erro, tente novamente")
+        })
+
+    }
     useEffect(() => {
         const loadUser = async () => {
-            const token = window.localStorage.getItem("@TOKEN" as string)
-            const userId = window.localStorage.getItem("@ID" as string)
 
             if (token) {
                 try {
@@ -44,7 +57,7 @@ export const AnnounceProvider = ({ children }: IUserProps) => {
 
     
     return (
-        <userContext.Provider value={{objUser, setObjUser}}>
+        <userContext.Provider value={{objUser, setObjUser, retrieveUserSeller, sellerData}}>
 
             {children}
 

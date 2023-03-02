@@ -15,181 +15,7 @@ const VehiclesList = (vehicles: any) => {
   const  { handleVehiclesCars, handleVehiclesMotorcycles, getAnnounces, retrieveAnnounce, load} = useContext(AnnounceContext)
   const carrouselCarros = useRef(null)
   const carrouselMotos = useRef(null)
-  const teste = [
-    {
-      id: "sasasasasasasD",
-      announceType: "Venda",
-      title: "Corolla",
-      year: 2021,
-      km: 20000,
-      price: 95000,
-      description:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-      vehicleType: "Carro",
-      image: "https://www.agoramotor.com.br/wp-content/uploads/2020/09/toyota-corolla-2021.jpg",
-      isActive: true,
-      vehiclesImages: [],
-      user: {
-        id: "ashuashusah",
-        completeName: "Celso Ramos",
-        email: "celsinhoDaMassa@gmail.com",
-        telephone: "41 998741477",
-        cpf: "0688878922",
-        image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
-        vehicles: [], 
-        bio: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,"
-      }
-      },
-    {
-      id: "asasasasaasasas",
-      announceType: "Venda",
-      title: "CG 120",
-      year: 2022,
-      price: 105000,
-      km: 30000,
-      description:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-      vehicleType: "Moto",
-      image: "https://motos-motor.com.br/m/wp-content/uploads/16/precos-tabela-honda-cg-150-titan-ks-mix.jpg",
-      isActive: true,
-      vehiclesImages: [],
-      user: {
-        id: "ashuashusah",
-        completeName: "Celso Ramos",
-        email: "celsinhoDaMassa@gmail.com",
-        telephone: "41 998741477",
-        cpf: "0688878922",
-        image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
-        vehicles: [], 
-        bio: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,"
-      }
-      },
-    {
-      id: "asasassaa",
-      announceType: "Venda",
-      title: "Mustang",
-      year: 2019,
-      km: 50000,
-      price: 200000,
-      description:
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-      vehicleType: "Carro",
-      image: "https://www.agoramotor.com.br/wp-content/uploads/2020/09/toyota-corolla-2021.jpg",
-      isActive: true,
-      vehiclesImages: [],
-      user: {
-        id: "ashuashusah",
-        completeName: "Celso Ramos",
-        email: "celsinhoDaMassa@gmail.com",
-        telephone: "41 998741477",
-        cpf: "0688878922",
-        image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
-        vehicles: [], 
-        bio: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,"
-      }
-    
-      },
-      {
-        id: "asasassaa",
-        announceType: "Venda",
-        title: "Mustang",
-        year: 2019,
-        km: 50000,
-        price: 200000,
-        description:
-          "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-        vehicleType: "Carro",
-        image: "https://www.agoramotor.com.br/wp-content/uploads/2020/09/toyota-corolla-2021.jpg",
-        isActive: true,
-        vehiclesImages: [],
-        user: {
-          id: "ashuashusah",
-          completeName: "Celso Ramos",
-          email: "celsinhoDaMassa@gmail.com",
-          telephone: "41 998741477",
-          cpf: "0688878922",
-          image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
-          vehicles: [], 
-          bio: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,"
-        }
-      
-        },
-        {
-          id: "asasassaa",
-          announceType: "Venda",
-          title: "Mustang",
-          year: 2019,
-          km: 50000,
-          price: 200000,
-          description:
-            "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-          vehicleType: "Carro",
-          image: "https://www.agoramotor.com.br/wp-content/uploads/2020/09/toyota-corolla-2021.jpg",
-          isActive: true,
-          vehiclesImages: [],
-          user: {
-            id: "ashuashusah",
-            completeName: "Celso Ramos",
-            email: "celsinhoDaMassa@gmail.com",
-            telephone: "41 998741477",
-            cpf: "0688878922",
-            image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
-            vehicles: [], 
-            bio: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,"
-          }
-        
-          },
-          {
-            id: "asasassaa",
-            announceType: "Venda",
-            title: "Mustang",
-            year: 2019,
-            km: 50000,
-            price: 200000,
-            description:
-              "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-            vehicleType: "Carro",
-            image: "https://www.agoramotor.com.br/wp-content/uploads/2020/09/toyota-corolla-2021.jpg",
-            isActive: true,
-            vehiclesImages: [],
-            user: {
-              id: "ashuashusah",
-              completeName: "Celso Ramos",
-              email: "celsinhoDaMassa@gmail.com",
-              telephone: "41 998741477",
-              cpf: "0688878922",
-              image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
-              vehicles: [], 
-              bio: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,"
-            }
-          
-            },
-            {
-              id: "asasassaa",
-              announceType: "Venda",
-              title: "Mustang",
-              year: 2019,
-              km: 50000,
-              price: 200000,
-              description:
-                "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit...",
-              vehicleType: "Carro",
-              image: "https://www.agoramotor.com.br/wp-content/uploads/2020/09/toyota-corolla-2021.jpg",
-              isActive: true,
-              vehiclesImages: [],
-              user: {
-                id: "ashuashusah",
-                completeName: "Celso Ramos",
-                email: "celsinhoDaMassa@gmail.com",
-                telephone: "41 998741477",
-                cpf: "0688878922",
-                image: "https://i0.wp.com/viciados.net/wp-content/uploads/2022/11/Naruto-Shippuden-Boruto-2023.webp?w=1920&ssl=1",
-                vehicles: [], 
-                bio: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,"
-              }
-            
-              }
-  ]
+  
   const handleLeftClick = (e:any, carrousel: any) =>{
     e.preventDefault();
     carrousel.current.scrollLeft -= carrousel.current.offsetWidth
@@ -207,7 +33,6 @@ const VehiclesList = (vehicles: any) => {
   if (load){
     return <div>Carregando Página</div>
   }
-  console.log(handleCar);
   if (user){
     return (
       <VehiclesListStyle>
@@ -215,9 +40,10 @@ const VehiclesList = (vehicles: any) => {
         
         <ul ref={carrouselCarros}>
           {handleCar.map((vehicle:Vehicle) =>  (
-            <CardVehicle id={vehicle.id} key={vehicle.id} onClick={()=>{
+            <CardVehicle id={vehicle.id} key={vehicle.id} onClick={async()=>{
+              await retrieveAnnounce(vehicle.id)
               nav("/announce")
-              retrieveAnnounce(vehicle.id)}}>
+              }}>
               <figure>
               <img src={vehicle.image}/>
               </figure>
@@ -249,8 +75,12 @@ const VehiclesList = (vehicles: any) => {
         <h3>Motos</h3>
         <ul ref={carrouselMotos}>
           {handleMoto.map((vehicle:Vehicle) =>  (
-            <CardVehicle id={vehicle.id} key={vehicle.id}>
-              <figure>
+            <CardVehicle id={vehicle.id} key={vehicle.id} onClick={()=>{
+              nav("/announce")
+              retrieveAnnounce(vehicle.id)}}>
+              <figure onClick={() =>{
+
+              }}>
               <img src={vehicle.image}/>
               </figure>
               <div className="textInformation">
@@ -289,7 +119,7 @@ const VehiclesList = (vehicles: any) => {
       <ul ref={carrouselCarros}>
         {handleVehiclesCars(vehicles).map((vehicle:Vehicle) =>  (
           <CardVehicle id={vehicle.id} key={vehicle.id} onClick={()=>{
-            nav("/seller")
+            nav("/announce")
             retrieveAnnounce(vehicle.id)}}>
             <figure>
             <img src={vehicle.image}/>
@@ -322,7 +152,9 @@ const VehiclesList = (vehicles: any) => {
       <h3>Motos</h3>
       <ul ref={carrouselMotos}>
         {handleVehiclesMotorcycles(vehicles).map((vehicle:Vehicle) =>  (
-          <CardVehicle id={vehicle.id} key={vehicle.id}>
+          <CardVehicle id={vehicle.id} key={vehicle.id} onClick={()=>{
+            nav("/announce")
+            retrieveAnnounce(vehicle.id)}}>
             <figure>
             <img src={vehicle.image}/>
             </figure>

@@ -19,7 +19,6 @@ function ProductDash() {
     const { modalDeleteAdOpen, setModalDeleteAdOpen, close, open, announceModal, setAnnounceModal, vehicles } = useContext(AnnounceContext)
     const { objUser  } = useContext(userContext)
 
-    console.log(objUser)
     return (
         <Main>
 
