@@ -11,12 +11,15 @@ import VehiclesList from "../../components/ProductCard"
 import { ModalDeleteAd } from "../../components/Modals/ModalDeleteAd"
 import { StyledButtonCancel, StyledDeletdAd } from "../../components/Modals/StyleButtonModal/styles"
 import Leilao from "../../components/Leilao"
+import { userContext } from "../../contexts/userContext"
 
 
 function ProductDash() {
-    const { announceModal, setAnnounceModal, vehicles } = useContext(AnnounceContext)
-    const { modalDeleteAdOpen, setModalDeleteAdOpen, close, open } = useContext(AnnounceContext)
+    
+    const { modalDeleteAdOpen, setModalDeleteAdOpen, close, open, announceModal, setAnnounceModal, vehicles } = useContext(AnnounceContext)
+    const { objUser  } = useContext(userContext)
 
+    console.log(objUser)
     return (
         <Main>
 
