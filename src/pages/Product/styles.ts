@@ -289,20 +289,24 @@ margin-bottom: 3em;
         color: var(--whiteFixed);
     }
     .userPerfil {
-        width: 50%;
+        width: 80%;
         background-color: var(--grey0);
     }
     @media (min-width: 800px) {
         width: 50em;
         height: 326.91px;
-      }
-      .footerCard{
-        display: flex;
-        align-items: center;
-        width: 30%;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        margin-top: 0.5em;
-        gap: 1em;
+        .footerCard{
+            display: flex;
+            align-items: center;
+            width: 30%;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 0.5em;
+            gap: 1em;
         }
+        .userPerfil {
+            width: 50%;
+            background-color: var(--grey0);
+        }
+    }
 `

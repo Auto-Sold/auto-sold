@@ -2,11 +2,12 @@ import { useContext } from "react"
 import Footer from "../../components/Footer"
 import NavBar from "../../components/NavBar"
 import VehiclesList from "../../components/ProductCard"
+import { AnnounceContext } from "../../contexts/AnnounceContext"
 import { Content, HeaderStyle, Main } from "./styles"
 
 
 function SellerDash() {
-
+    const {uniqueVechicle} = useContext(AnnounceContext)
     const testUser ={
       
           id: "ashuashusah",
@@ -190,26 +191,49 @@ function SellerDash() {
                     }], 
           bio: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, estou somente populando para fazer um teste, vamos popular esse texto, com a história de Celso Ramos, conhecido por vender ramos para tias da igreja, hj ele vende carros, e ai vai levar uma máquina do Celso Ramos?"
         }
-
-    return (
+    const user = true
+    if (user){
+      return (
         <Main>
-            <NavBar/>
-            <HeaderStyle>
-                <div className="userDiv">
-                <figure className="userPhoto">
-                    <img src={testUser.image} alt=""/>
-                </figure>
-                <div className="name">
-                    <p className="nameComplete">{testUser.completeName}</p>
-                    <p>Anunciante</p>
-                </div>
-                <p className="bio">{testUser.bio}</p>
-                </div>
-            </HeaderStyle>
-            <VehiclesList vehicles={testUser.vehicles}/>
-            <Footer />
-        </Main>
+          <NavBar/>
+          <HeaderStyle>
+              <div className="userDiv">
+              <figure className="userPhoto">
+                  <img src={testUser.image} alt=""/>
+              </figure>
+              <div className="name">
+                  <p className="nameComplete">{testUser.completeName}</p>
+                  <p>Anunciante</p>
+                  <button>Editar Perfil</button>
+              </div>
+              <p className="bio">{testUser.bio}</p>
+              </div>
+              <button onClick={() => console.log("Abrir editar perfil")}>Editar Perfil</button>
+          </HeaderStyle>
+          <VehiclesList vehicles={testUser.vehicles}/>
+          <Footer />
+      </Main>
     )
+    }
+    return (
+    <Main>
+      <NavBar/>
+      <HeaderStyle>
+          <div className="userDiv">
+          <figure className="userPhoto">
+              <img src={testUser.image} alt=""/>
+          </figure>
+          <div className="name">
+              <p className="nameComplete">{testUser.completeName}</p>
+              <p>Anunciante</p>
+          </div>
+          <p className="bio">{testUser.bio}</p>
+          </div>
+      </HeaderStyle>
+      <VehiclesList vehicles={testUser.vehicles}/>
+      <Footer />
+  </Main>
+)
 }
 
 export default SellerDash

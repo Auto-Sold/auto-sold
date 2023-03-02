@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm} from "react-hook-form";
-import axios from "axios";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AnnounceContext } from "../../contexts/AnnounceContext";

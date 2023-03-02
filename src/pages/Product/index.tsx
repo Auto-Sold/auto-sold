@@ -31,7 +31,49 @@ function ProductDash() {
           bio: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet,"
         }
         }
-
+    const user = true;
+    if (user){
+        return (
+            <Main>
+                <NavBar/>
+                <HeaderStyle>
+                    <figure>
+                        <img src={testVehicle.image} alt="Imagem do veículo" />
+                    </figure>
+                </HeaderStyle>
+                <section className="section">
+                <Content justify="space-between" align="flex-start" alignDescription="flex-start">
+                     <p className="title">{testVehicle.title}</p>
+                     <div className="footerCard">
+                        <p>{testVehicle.year}</p>
+                        <p>{testVehicle.km} KM</p>
+                        <p className="price">R$ {testVehicle.price}</p>
+                     </div>
+                     <button>Comprar</button>
+                </Content>
+                <Content justify="flex-start" align="flex-start" alignDescription="flex-start">
+                    <p className="title">Descrição</p>
+                    <p className="description">{testVehicle.description}</p>
+                </Content>
+                <Content justify="flex-start" align="flex-start" alignDescription="flex-start">
+                <p className="title">Fotos</p>
+                {testVehicle.vehiclesImages.map((image) => 
+                <img src={image} alt="Imagem do veículo"/>)}
+                </Content>
+                <Content justify="flex-start" align="center" alignDescription="center">
+                    <figure className="userPhoto">
+                        <img className="userPhoto" src={testVehicle.user.image} alt=""/>
+                    </figure>
+                    <p className="description">{testVehicle.user.bio}</p>
+                    <button className="userPerfil" id={testVehicle.user.id}>Ver todos anúncios</button>
+                    <button className="userPerfil"> Excluir anúncio</button>
+                    <button className="userPerfil"> Editar anúncio</button>
+                </Content>
+                </section> 
+                <Footer />
+            </Main>
+        )
+    }
     return (
         <Main>
             <NavBar/>

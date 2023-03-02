@@ -10,6 +10,7 @@ import {
 import { API } from "../api";
 import { IAnnounceData } from "../interfaces";
 import { Vehicle } from "../interface";
+import { object } from "yup";
 
 
 export interface IAnnounceAuth {
@@ -17,15 +18,17 @@ export interface IAnnounceAuth {
     setAnnounceModal: Dispatch<SetStateAction<boolean>>;
     postAnnouncement: (data: IAnnounceData) => void;
     patchAnnounce: (data: IAnnounceData, id: string) => void;
-
+    getAnnounces: () => void;
+    retrieveAnnounce: (id: string) => void;
     vehicles:  Vehicle[]
     uniqueVechicle: Vehicle
     modalDeleteAdOpen: boolean;
     setModalDeleteAdOpen: Dispatch<SetStateAction<boolean>>;
+    
 
     open: () => void;
     close: () => void;
-
+    load: boolean
     handleVehiclesMotorcycles: (arr: Vehicle[]) => Vehicle[]
     handleVehiclesCars: (arr: Vehicle[]) => Vehicle[]
 
@@ -44,7 +47,9 @@ export interface IAnnounceProps {
 
 }
 
-
+interface IArrPayLoad{
+    vehicles: Vehicle[]
+}
 export const AnnounceContext = createContext<IAnnounceAuth>({} as IAnnounceAuth)
 
 function AnnounceProvider({ children }: IAnnounceProps) {
@@ -52,6 +57,7 @@ function AnnounceProvider({ children }: IAnnounceProps) {
     const [announceModal, setAnnounceModal] = useState<boolean>(false)
     const [vehicles, setVehicles] = useState<Vehicle[]>([]); // Para o get
     const [uniqueVechicle, setUniqueVechicle] = useState<Vehicle>({} as Vehicle)
+    const [load, setLoad] = useState<boolean>(true)
 
     const close = () => setModalDeleteAdOpen(false)
     const open = () => setModalDeleteAdOpen(true)
@@ -95,37 +101,42 @@ function AnnounceProvider({ children }: IAnnounceProps) {
 
     //Para o retrive
 
-    const handleVehiclesCars = (arr: Vehicle[]) => {
+    const handleVehiclesCars = (arr: IArrPayLoad) => {
         // Tratativa para receber só carros e ativos
-        const result = arr.filter(function isActive(vehicle) {
-
-            return vehicle.isActive === true && vehicle.vehicleType === "Carro" && vehicle.announceType !== "Leilão"
-        })
       
+        
+        const result = arr.vehicles.filter(vehicle => vehicle.isActive === true && vehicle.vehicleType === "Carro" && vehicle.announceType !== "Leilão")
+        
+        console.log(result);
         return result
     }
-    const handleVehiclesMotorcycles = (arr: Vehicle[]) => {
+    const handleVehiclesMotorcycles = (arr: IArrPayLoad) => {
         // Tratativa para receber só motos e ativas
-        const result = arr.filter(function isActive(vehicle) {
-            return vehicle.isActive === true && vehicle.vehicleType === "Moto" && vehicle.announceType !== "Leilão"
-        })
+       
+        const result = arr.vehicles.filter(vehicle => vehicle.isActive === true && vehicle.vehicleType === "Moto" && vehicle.announceType !== "Leilão")
         return result
     }
 
     // =========================CRUD==========ANNOUNCES=======================================
+    
+    async function getAnnounces() {
+        await API
+            .get(`/announce`)
+            .then((response) => {
+                setVehicles(response.data)
+                
+                
+            }).then(()=>{
+                setLoad(false)
+            })
+            .catch((error) => {
+                alert("Ocorreu um erro, tente novamente")
+            })
+    }
+
     useEffect(() => {
-        // Get all Announces
-        async function getAnnounces() {
-            await API
-                .get("/announce")
-                .then((response) => {
-                    setVehicles(response.data)
-                })
-                .catch((error) => {
-                    alert("Ocorreu um erro, tente novamente")
-                })
-        }
-    }, [])
+        getAnnounces()
+      }, [])
 
     // Retrive um announce específico por ID
     async function retrieveAnnounce(id: string) {
@@ -138,10 +149,23 @@ function AnnounceProvider({ children }: IAnnounceProps) {
 
     // =========================CRUD==========COMMENTS=======================================
 
+    useEffect(() => {
+        async function getComments(id:string) {
+            await API
+                .get(`/comments/${id}`)
+                .then((response) => {
+                    setVehicles(response.data)
+                })
+                .catch((error) => {
+                    alert("Ocorreu um erro, tente novamente")
+                })
+        }
+    }, [])
+
 
     return (
 
-        <AnnounceContext.Provider value={{ postAnnouncement, patchAnnounce, announceModal, setAnnounceModal, vehicles, uniqueVechicle, handleVehiclesMotorcycles, handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
+        <AnnounceContext.Provider value={{ postAnnouncement, patchAnnounce,getAnnounces, load,retrieveAnnounce,announceModal, setAnnounceModal, vehicles, uniqueVechicle, handleVehiclesMotorcycles, handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
 
 
             {children}
