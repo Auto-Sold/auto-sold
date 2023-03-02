@@ -12,6 +12,10 @@ export interface Vehicle {
     vehiclesImages: string[];
     user:IUser
 } 
+export interface IVehicleImages {
+    id: string;
+    image: string;
+} 
 
 export interface IUser {
     id: string;
