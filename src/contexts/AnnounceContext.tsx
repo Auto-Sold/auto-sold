@@ -63,45 +63,9 @@ function AnnounceProvider({ children }: IAnnounceProps) {
     const close = () => setModalDeleteAdOpen(false)
     const open = () => setModalDeleteAdOpen(true)
 
-    const postAnnouncement = (data: IAnnounceData) => {
-        if (data.announceType == "Leilão") {
-            return alert("Leilão não disponível")
-        }
-
-        const announce = {
-            announceType: data.announceType,
-            title: data.title,
-            year: data.year,
-            km: data.km,
-            price: data.price,
-            description: data.description,
-            vehicleType: data.vehicleType,
-            image: data.image,
-        }
-        console.log(data)
-        console.log(announce)
-        API.post(`/announce`, announce)
-            .then(res => { console.log(res) })
-            .catch(err => { console.log(err.response.data.message) })
-    }
-    const patchAnnounce = (data:IAnnounceData, id: string) => {
-        const editData = {
-          title: data.title,
-          year: data.year,
-          km: data.km,
-          price: data.price,
-          description: data.description,
-          image: data.image,
-
-        };
     
-        API.patch(`/announce:${id}`, editData);
-    
-        console.log(data);
-      };
-
     //Para o retrive
-
+    
     const handleVehiclesCars = (arr: IArrPayLoad) => {
         // Tratativa para receber só carros e ativos
         const result = arr.vehicles.filter(vehicle => vehicle.isActive === true && vehicle.vehicleType === "Carro" && vehicle.announceType !== "Leilão")
@@ -112,13 +76,13 @@ function AnnounceProvider({ children }: IAnnounceProps) {
         const result = arr.vehicles.filter(vehicle => vehicle.isActive === true && vehicle.vehicleType === "Moto" && vehicle.announceType !== "Leilão")
         return result
     }
-
+    
     // =========================CRUD==========ANNOUNCES=======================================
     
     async function getAnnounces() {
         await API
-            .get(`/announce`)
-            .then((response) => {
+        .get(`/announce`)
+        .then((response) => {
                 setVehicles(response.data)
                 
                 
@@ -128,16 +92,16 @@ function AnnounceProvider({ children }: IAnnounceProps) {
             .catch((error) => {
                 alert("Ocorreu um erro, tente novamente")
             })
-    }
-
-    useEffect(() => {
-        getAnnounces()
-      }, [])
-
-    // Retrive um announce específico por ID
-    
-    async function retrieveAnnounce(id: string) {
-        await API
+        }
+        
+        useEffect(() => {
+            getAnnounces()
+        }, [])
+        
+        // Retrive um announce específico por ID
+        
+        async function retrieveAnnounce(id: string) {
+            await API
             .get("/announce/"+id)
             .then((response) => {
                 setUniqueVechicle(response.data[0])
@@ -151,11 +115,48 @@ function AnnounceProvider({ children }: IAnnounceProps) {
                 alert("Ocorreu um erro, tente novamente")
             })
             
-    }
+        }
 
-    // =========================CRUD==========COMMENTS=======================================
-
-    useEffect(() => {
+        const postAnnouncement = (data: IAnnounceData) => {
+            if (data.announceType == "Leilão") {
+                return alert("Leilão não disponível")
+            }
+    
+            const announce = {
+                announceType: data.announceType,
+                title: data.title,
+                year: data.year,
+                km: data.km,
+                price: data.price,
+                description: data.description,
+                vehicleType: data.vehicleType,
+                image: data.image,
+            }
+            console.log(data)
+            console.log(announce)
+            API.post(`/announce`, announce)
+                .then(res => { console.log(res) })
+                .catch(err => { console.log(err.response.data.message) })
+        }
+        const patchAnnounce = (data:IAnnounceData, id: string) => {
+            const editData = {
+              title: data.title,
+              year: data.year,
+              km: data.km,
+              price: data.price,
+              description: data.description,
+              image: data.image,
+    
+            };
+        
+            API.patch(`/announce:${id}`, editData);
+        
+            console.log(data);
+          };
+        
+        // =========================CRUD==========COMMENTS=======================================
+        
+        useEffect(() => {
         async function getComments(id:string) {
             await API
                 .get(`/comments/${id}`)
@@ -167,6 +168,10 @@ function AnnounceProvider({ children }: IAnnounceProps) {
                 })
         }
     }, [])
+
+    // =========================CRUD==========COMMENTS=======================================
+
+        
 
 
     return (
