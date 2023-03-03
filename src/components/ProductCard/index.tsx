@@ -12,7 +12,7 @@ const VehiclesList = (vehicles: any) => {
   const user = true
 
 
-  const  { handleVehiclesCars, handleVehiclesMotorcycles, getAnnounces, retrieveAnnounce, load} = useContext(AnnounceContext)
+  const  { handleVehiclesCars, handleVehiclesMotorcycles, getAnnounces,getComments, retrieveAnnounce, load} = useContext(AnnounceContext)
   const carrouselCarros = useRef(null)
   const carrouselMotos = useRef(null)
   
@@ -42,6 +42,8 @@ const VehiclesList = (vehicles: any) => {
           {handleCar.map((vehicle:Vehicle) =>  (
             <CardVehicle id={vehicle.id} key={vehicle.id} onClick={async()=>{
               await retrieveAnnounce(vehicle.id)
+              await getComments(vehicle.id)
+
               nav("/announce")
               }}>
               <figure>
@@ -75,12 +77,12 @@ const VehiclesList = (vehicles: any) => {
         <h3>Motos</h3>
         <ul ref={carrouselMotos}>
           {handleMoto.map((vehicle:Vehicle) =>  (
-            <CardVehicle id={vehicle.id} key={vehicle.id} onClick={()=>{
+            <CardVehicle id={vehicle.id} key={vehicle.id} onClick={async()=>{
+              await retrieveAnnounce(vehicle.id)
+              await getComments(vehicle.id)
               nav("/announce")
-              retrieveAnnounce(vehicle.id)}}>
-              <figure onClick={() =>{
-
               }}>
+              <figure>
               <img src={vehicle.image}/>
               </figure>
               <div className="textInformation">

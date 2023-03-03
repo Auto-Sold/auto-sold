@@ -8,7 +8,7 @@ import {
     useState
 } from "react";
 import { API } from "../api";
-import { IAnnounceData } from "../interface";
+import { IAnnounceData, IComments } from "../interface";
 import { Vehicle } from "../interface";
 import { object } from "yup";
 
@@ -20,7 +20,10 @@ export interface IAnnounceAuth {
     patchAnnounce: (data: IAnnounceData, id: string) => void;
     getAnnounces: () => void;
     retrieveAnnounce: (id: string) => void;
+    getComments: (id: string) => void;
+    postComments: (id: string) => void;
     vehicles:  Vehicle[]
+    comments: IComments[]
     uniqueVehicle: Vehicle
     modalDeleteAdOpen: boolean;
     setModalDeleteAdOpen: Dispatch<SetStateAction<boolean>>;
@@ -54,10 +57,13 @@ interface IArrPayLoad{
 export const AnnounceContext = createContext<IAnnounceAuth>({} as IAnnounceAuth)
 
 function AnnounceProvider({ children }: IAnnounceProps) {
+    const token = window.localStorage.getItem("@TOKEN" as string)
+    const userId = window.localStorage.getItem("@ID" as string)
     const [modalDeleteAdOpen, setModalDeleteAdOpen] = useState<boolean>(false)
     const [announceModal, setAnnounceModal] = useState<boolean>(false)
     const [vehicles, setVehicles] = useState<Vehicle[]>([]); // Para o get
     const [uniqueVehicle, setUniqueVechicle] = useState<Vehicle>({} as Vehicle)
+    const [comments, setComments] = useState<IComments[]>([])
     const [load, setLoad] = useState<boolean>(true)
     const [loadRetrieve, setLoadRetrieve] = useState<boolean>(true)
     const close = () => setModalDeleteAdOpen(false)
@@ -134,6 +140,7 @@ function AnnounceProvider({ children }: IAnnounceProps) {
             }
             console.log(data)
             console.log(announce)
+            API.defaults.headers.common.Authorization = `Bearer ${token}`;
             API.post(`/announce`, announce)
                 .then(res => { console.log(res) })
                 .catch(err => { console.log(err.response.data.message) })
@@ -156,17 +163,32 @@ function AnnounceProvider({ children }: IAnnounceProps) {
         
         // =========================CRUD==========COMMENTS=======================================
         
-        useEffect(() => {
+        
+        
         async function getComments(id:string) {
             await API
                 .get(`/comments/${id}`)
                 .then((response) => {
-                    setVehicles(response.data)
+                    setComments(response.data)
                 })
                 .catch((error) => {
                     alert("Ocorreu um erro, tente novamente")
                 })
         }
+        
+        async function postComments(id:string) {
+            API.defaults.headers.common.Authorization = `Bearer ${token}`;
+            await API
+                .post(`/comments/${id}`)
+                .then((response) => {
+                    getComments(id)
+                    setComments(response.data)
+                })
+                .catch((error) => {
+                    alert("Ocorreu um erro, tente novamente")
+                })
+        }
+        useEffect(() => {
     }, [])
 
     
@@ -178,8 +200,8 @@ function AnnounceProvider({ children }: IAnnounceProps) {
 
         <AnnounceContext.Provider value={{ 
             postAnnouncement, patchAnnounce,getAnnounces, 
-            load, loadRetrieve,retrieveAnnounce,announceModal, setAnnounceModal, 
-            vehicles, uniqueVehicle, handleVehiclesMotorcycles, 
+            load, loadRetrieve,retrieveAnnounce, getComments, postComments,announceModal, setAnnounceModal, 
+            vehicles, uniqueVehicle, comments, handleVehiclesMotorcycles, 
             handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
 
 
