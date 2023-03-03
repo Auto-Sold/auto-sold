@@ -55,3 +55,9 @@ export interface IAnnounceData {
     vehicleType: string;
     image: string;
 }
+
+
+export interface IFormComment {
+    //interface de campos do Formulário
+   text: string
+}
