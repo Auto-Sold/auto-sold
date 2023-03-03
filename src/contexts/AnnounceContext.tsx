@@ -8,7 +8,7 @@ import {
     useState
 } from "react";
 import { API } from "../api";
-import { IAnnounceData, IComments } from "../interface";
+import { IAnnounceData, IComments, IFormComment } from "../interface";
 import { Vehicle } from "../interface";
 import { object } from "yup";
 import {FieldValues} from "react-hook-form";
@@ -22,7 +22,7 @@ export interface IAnnounceAuth {
     getAnnounces: () => void;
     retrieveAnnounce: (id: string) => void;
     getComments: (id: string) => void;
-    postComments: (id: string) => void;
+    postComments: (id: string, data: IFormComment) => void;
     vehicles:  Vehicle[]
     comments: IComments[]
     uniqueVehicle: Vehicle
@@ -179,10 +179,10 @@ function AnnounceProvider({ children }: IAnnounceProps) {
                 })
         }
         
-        async function postComments(id:string) {
+        async function postComments(id:string, data: IFormComment) {
             API.defaults.headers.common.Authorization = `Bearer ${token}`;
             await API
-                .post(`/comments/${id}`)
+                .post(`/comments/${id}`, data)
                 .then((response) => {
                     getComments(id)
                     setComments(response.data)
