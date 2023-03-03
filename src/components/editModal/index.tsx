@@ -1,11 +1,13 @@
 import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
+import { useForm , FieldValues} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import BackDrop from "../BackDrop";
 import * as yup from "yup";
 import AnnounceFormStyle from "./styles";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { API } from "../../api";
+import { AnnounceContext } from "../../contexts/AnnounceContext";
+import { IAnnounceData } from "../../interface";
 
 export const dropIn = {
   hidden: {
@@ -36,12 +38,11 @@ interface FormData {
   description: string;
   vehicleType: string;
   image: string;
-  galleryImage1: string;
-  galleryImage2: string;
 }
 
-const editModal = () => {
+export const EditModal = (id:string) => {
   const [open, setOpen] = useState(false);
+  const {patchAnnounce} = useContext(AnnounceContext)
 
   const formSchema = yup.object().shape({
     announceType: yup.string().required("Tipo de anúncio necessário"),
@@ -52,8 +53,6 @@ const editModal = () => {
     description: yup.string().required("Descrição necessária"),
     vehicleType: yup.string().required("Tipo de veículo necessário"),
     image: yup.string().required("Imagem necessária"),
-    galleryImage1: yup.string(),
-    galleryImage2: yup.string(),
   });
 
   const {
@@ -64,7 +63,7 @@ const editModal = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmitFunction = (data:any) => {
+  const onSubmitFunction = (data: FieldValues) => {
     const editData = {
       announceType: data.announceType,
       title: data.title,
@@ -74,24 +73,17 @@ const editModal = () => {
       description: data.description,
       vehicleType: data.vehicleType,
       image: data.image,
-      galleryImage1: data.galleryImage1,
-      galleryImage2: data.galleryImage2,
     };
-
-    API.patch("/editannounce", editData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-      });
-
-    console.log(data);
+    const handleId = Object.values(id)[0];
+   
+   patchAnnounce(data, handleId)
+    
+   console.log(data);
   };
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>Editar anúncio</button>
+      <button onClick={() => setOpen(true)} className = "userPerfil">Editar anúncio</button>
       {open && (
         <BackDrop setState={setOpen}>
           <motion.div
@@ -181,19 +173,6 @@ const editModal = () => {
                   {...register("image")}
                 />
               </div>
-              <div>
-                <label>1° Imagem da galeria</label>
-                <input
-                  placeholder="Inserir URL da imagem"
-                  {...register("galleryImage1")}
-                />
-                <label>2° Imagem da galeria</label>
-                <input
-                  placeholder="Inserir URL da imagem"
-                  {...register("galleryImage2")}
-                />
-                <button>Adicionar campo para imagem da galeria</button>
-              </div>
               {/*<span>{errors.title?.message}</span>*/}
               <div className="foot">
                 <button className="cancel" onClick={() => setOpen(false)}>
@@ -210,5 +189,3 @@ const editModal = () => {
     </>
   );
 };
-
-export default editModal;

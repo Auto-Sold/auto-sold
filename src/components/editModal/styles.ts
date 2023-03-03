@@ -7,7 +7,7 @@ const AnnounceFormStyle = styled.form`
     align-items: flex-start;
     gap: 10px;
     // justify-content: flex-start;
-
+  
     div{
         display: flex;
         flex-direction: column;
@@ -183,7 +183,7 @@ const AnnounceFormStyle = styled.form`
             border: 1.5px solid #B0A6F0;
             border-radius: 4px;
         }
-    } 
+    }
 `
 
 export default AnnounceFormStyle
