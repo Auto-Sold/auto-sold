@@ -9,9 +9,18 @@ export interface Vehicle {
     vehicleType: string;
     image: string;
     isActive: boolean;
-    vehiclesImages: string[];
+    vehiclesImages: IVehicleImages[];
+    comments: IComments[];
     user:IUser
 } 
+
+export interface IComments {
+    id: string;
+    text: string;
+    vehicles: Vehicle[]
+    createdAt: string;
+    user: IUser
+}
 export interface IVehicleImages {
     id: string;
     image: string;
