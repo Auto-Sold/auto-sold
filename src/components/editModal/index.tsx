@@ -38,11 +38,9 @@ interface FormData {
   description: string;
   vehicleType: string;
   image: string;
-  galleryImage1: string;
-  galleryImage2: string;
 }
 
-const editModal = (id:string) => {
+export const EditModal = (id:any) => {
   const [open, setOpen] = useState(false);
   const {patchAnnounce} = useContext(AnnounceContext)
 
@@ -55,8 +53,6 @@ const editModal = (id:string) => {
     description: yup.string().required("Descrição necessária"),
     vehicleType: yup.string().required("Tipo de veículo necessário"),
     image: yup.string().required("Imagem necessária"),
-    galleryImage1: yup.string(),
-    galleryImage2: yup.string(),
   });
 
   const {
@@ -176,9 +172,6 @@ const editModal = (id:string) => {
                   {...register("image")}
                 />
               </div>
-              <div>
-                <button>Adicionar campo para imagem da galeria</button>
-              </div>
               {/*<span>{errors.title?.message}</span>*/}
               <div className="foot">
                 <button className="cancel" onClick={() => setOpen(false)}>
@@ -195,5 +188,3 @@ const editModal = (id:string) => {
     </>
   );
 };
-
-export default editModal;
