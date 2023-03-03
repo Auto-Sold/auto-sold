@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import CommentList from "../../components/Comments"
 import Footer from "../../components/Footer"
 import NavBar from "../../components/NavBar"
 import { AnnounceContext } from "../../contexts/AnnounceContext"
@@ -11,7 +12,8 @@ function ProductDash() {
     const { uniqueVehicle, retrieveAnnounce, load, loadRetrieve} = useContext(AnnounceContext)
     const {objUser, retrieveUserSeller} = useContext(userContext)
     const nav = useNavigate()
-
+    console.log(uniqueVehicle);
+    
   
     const user = true;
     
@@ -58,6 +60,9 @@ function ProductDash() {
                     <button className="userPerfil"> Excluir anúncio</button>
                     <button className="userPerfil"> Editar anúncio</button>
                 </Content>
+                
+                    <CommentList/>
+                
                 </section> 
            
                 <Footer />
