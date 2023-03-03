@@ -1,5 +1,6 @@
 import React,{ useContext } from "react";
 import { AnnounceContext } from "../../contexts/AnnounceContext";
+import CreateComment from "../CreateCommentForm";
 import { ContainerComment } from "./style";
 
 const handleDate = (str: string) => {
@@ -9,16 +10,18 @@ const handleDate = (str: string) => {
   const day = dayAndTime[0]
   const year = strSplit[0]
   const month = strSplit[1]
-
+  
   return day+"/"+month+"/"+year
 }
 
 const CommentList = () => {
+    const token = window.localStorage.getItem("@TOKEN" as string)
+    const userId = window.localStorage.getItem("@ID" as string)
     const user = true
     const {comments, uniqueVehicle, postComments} = useContext(AnnounceContext)
     // const comments = uniqueVehicle.comments
     console.log(comments);
-    
+    const vehicleID = uniqueVehicle.id;
     const handleComment = () =>{
     const result = comments.map(comment =>{
       if (user){
@@ -63,23 +66,18 @@ const CommentList = () => {
       )    
     })
     return result
-  }
-    
-    if(user){
+    }
 
+    if(token){
       return (
         <div>
         <h3>Comentários</h3>
-        <label>
-          Insira seu comentário
-          <input type="text" />
-          <button onClick={()=> postComments(uniqueVehicle.id)}>Comentar</button>
-        </label>
+        <CreateComment id={vehicleID}/>
         {handleComment()}
       </div> 
         )
-      }
-      return (
+    }
+    return (
         <div>
         <h3>Comentários</h3>
         {handleComment()}
