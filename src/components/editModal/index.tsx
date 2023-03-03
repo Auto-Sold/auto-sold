@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
+import { useForm , FieldValues} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import BackDrop from "../BackDrop";
 import * as yup from "yup";
@@ -40,7 +40,7 @@ interface FormData {
   image: string;
 }
 
-export const EditModal = (id:any) => {
+export const EditModal = (id:string) => {
   const [open, setOpen] = useState(false);
   const {patchAnnounce} = useContext(AnnounceContext)
 
@@ -63,7 +63,7 @@ export const EditModal = (id:any) => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmitFunction = (data: IAnnounceData) => {
+  const onSubmitFunction = (data: FieldValues) => {
     const editData = {
       announceType: data.announceType,
       title: data.title,
@@ -74,15 +74,16 @@ export const EditModal = (id:any) => {
       vehicleType: data.vehicleType,
       image: data.image,
     };
-
-   patchAnnounce(editData, id)
+    const handleId = Object.values(id)[0];
+   
+   patchAnnounce(data, handleId)
     
    console.log(data);
   };
 
   return (
     <>
-      <button onClick={() => setOpen(true)}>Editar anúncio</button>
+      <button onClick={() => setOpen(true)} className = "userPerfil">Editar anúncio</button>
       {open && (
         <BackDrop setState={setOpen}>
           <motion.div

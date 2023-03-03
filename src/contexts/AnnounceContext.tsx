@@ -11,13 +11,14 @@ import { API } from "../api";
 import { IAnnounceData, IComments } from "../interface";
 import { Vehicle } from "../interface";
 import { object } from "yup";
+import {FieldValues} from "react-hook-form";
 
 
 export interface IAnnounceAuth {
     announceModal: boolean;
     setAnnounceModal: Dispatch<SetStateAction<boolean>>;
     postAnnouncement: (data: IAnnounceData) => void;
-    patchAnnounce: (data: IAnnounceData, id: string) => void;
+    patchAnnounce: (data: FieldValues, id: string) => void;
     getAnnounces: () => void;
     retrieveAnnounce: (id: string) => void;
     getComments: (id: string) => void;
@@ -145,18 +146,20 @@ function AnnounceProvider({ children }: IAnnounceProps) {
                 .then(res => { console.log(res) })
                 .catch(err => { console.log(err.response.data.message) })
         }
-        const patchAnnounce = (data:IAnnounceData, id: string) => {
+        const patchAnnounce = (data:FieldValues, id: string) => {
             const editData = {
-              title: data.title,
-              year: data.year,
-              km: data.km,
-              price: data.price,
-              description: data.description,
-              image: data.image,
+                announceType: data.announceType,
+                title: data.title,
+                year: data.year,
+                km: data.km,
+                price: data.price,
+                description: data.description,
+                vehicleType: data.vehicleType,
+                image: data.image,
     
             };
         
-            API.patch(`/announce:${id}`, editData);
+            API.patch(`/announce/${id}`, editData);
         
             console.log(data);
           };

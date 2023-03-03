@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import BackDrop from "../BackDrop"
 import * as yup from "yup"
-import { IAnnounceData } from "../../interfaces"
+import { IAnnounceData } from "../../interface"
 import AnnounceFormStyle from "./styles"
 
 export const dropIn = {
