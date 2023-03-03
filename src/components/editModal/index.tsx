@@ -4,8 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import BackDrop from "../BackDrop";
 import * as yup from "yup";
 import AnnounceFormStyle from "./styles";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { API } from "../../api";
+import { AnnounceContext } from "../../contexts/AnnounceContext";
+import { IAnnounceData } from "../../interface";
 
 export const dropIn = {
   hidden: {
@@ -40,8 +42,9 @@ interface FormData {
   galleryImage2: string;
 }
 
-const editModal = () => {
+const editModal = (id:string) => {
   const [open, setOpen] = useState(false);
+  const {patchAnnounce} = useContext(AnnounceContext)
 
   const formSchema = yup.object().shape({
     announceType: yup.string().required("Tipo de anúncio necessário"),
@@ -64,7 +67,7 @@ const editModal = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmitFunction = (data:any) => {
+  const onSubmitFunction = (data: IAnnounceData) => {
     const editData = {
       announceType: data.announceType,
       title: data.title,
@@ -74,19 +77,11 @@ const editModal = () => {
       description: data.description,
       vehicleType: data.vehicleType,
       image: data.image,
-      galleryImage1: data.galleryImage1,
-      galleryImage2: data.galleryImage2,
     };
 
-    API.patch("/editannounce", editData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err.response.data.message);
-      });
-
-    console.log(data);
+   patchAnnounce(editData, id)
+    
+   console.log(data);
   };
 
   return (
@@ -182,16 +177,6 @@ const editModal = () => {
                 />
               </div>
               <div>
-                <label>1° Imagem da galeria</label>
-                <input
-                  placeholder="Inserir URL da imagem"
-                  {...register("galleryImage1")}
-                />
-                <label>2° Imagem da galeria</label>
-                <input
-                  placeholder="Inserir URL da imagem"
-                  {...register("galleryImage2")}
-                />
                 <button>Adicionar campo para imagem da galeria</button>
               </div>
               {/*<span>{errors.title?.message}</span>*/}
