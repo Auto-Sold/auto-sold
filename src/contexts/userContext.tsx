@@ -1,6 +1,6 @@
 import { createContext, Dispatch, ReactNode, useEffect, useState } from "react";
 import { API } from "../api";
-import { IUser } from "../interface";
+import { IAdressUser, IUser } from "../interface";
 
 
 
@@ -9,7 +9,9 @@ export interface IUserAuth {
     objUser: object,
     setObjUser: React.Dispatch<React.SetStateAction<IUser>>
     sellerData: IUser
-    retrieveUserSeller: (id:string) => void
+    retrieveUserSeller: (id: string) => void
+    registerUser:(data: object) => Promise<number>
+    
 
 }
 export interface IUserProps{
@@ -55,9 +57,17 @@ export const AnnounceProvider = ({ children }: IUserProps) => {
         loadUser()
     }, [])
 
+
+    async function registerUser(data: object) {
+        let statusCode = 0 
+        
+        await API.post("/users", data).then((res) => statusCode = res.status).catch((err) => console.log(err))
+        
+        return statusCode
+    } 
     
     return (
-        <userContext.Provider value={{objUser, setObjUser, retrieveUserSeller, sellerData}}>
+        <userContext.Provider value={{objUser, setObjUser, retrieveUserSeller, sellerData, registerUser}}>
 
             {children}
 

@@ -2,15 +2,17 @@
 import NavBar from "../../components/NavBar"
 import { useForm } from "react-hook-form"
 import * as yup from "yup";
+import { motion } from "framer-motion"
 
 import { StyledContainerButton, StyledContainerInput, StyledForm, StyledLogin, StyledMain, StyledRegisterUser } from "./styles"
-import { object } from "yup"
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { userContext } from "../../contexts/userContext";
 import { API } from "../../api";
 import {  useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import { dropIn } from "../../components/AnnounceModal";
 
 interface IOnSubmitFunctionProps {
     
@@ -61,7 +63,12 @@ export const Login = () => {
         <StyledMain>
             <NavBar />
             
-            <StyledLogin>
+            <StyledLogin
+                as={motion.form}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6 }}>
                 <h1>Login</h1>
                 <StyledForm onSubmit={handleSubmit(onSubmit)}>
                     <StyledContainerInput>

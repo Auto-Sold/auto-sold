@@ -18,14 +18,14 @@ export const StyledMain = styled.main`
 
 export const StyledLogin = styled.div`
     margin-top: 72px;
-    width: clamp( 21em, 21.4375em, 80%);
+    width: clamp( 21em, 25em, 80%);
     height: 33.875em;
    
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
-    padding: 2.75em 5%;
+    padding: 2.75em 2.6875em;
     
 
     background: var(--grey10);
@@ -35,8 +35,12 @@ export const StyledLogin = styled.div`
 
 `
 export const StyledForm = styled.form`
-
+    width: 100%;
     margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     
 `
 
@@ -44,13 +48,13 @@ export const StyledContainerInput = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     gap: 0.625em;
 
     input{
 
-        width: 17.875em;
+        width: 100%;
         height: 3em;
         font-family: 'Inter';
         font-style: normal;
@@ -63,7 +67,7 @@ export const StyledContainerInput = styled.div`
 `
 export const StyledContainerButton = styled.div`
     
-    width: 17.875em;
+    width: 100%;
     height: 5em;
     gap: 1.5em;
     margin-top: 0.3125em;
