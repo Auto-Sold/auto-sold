@@ -33,14 +33,14 @@ export const FormStyled = styled.form`
         width: 100%;
         
     }
-        input::placeholder { 
+        /* input::placeholder { 
             color: grey;
             opacity: 50%;
             font-size: smaller;
             display: flex;
             justify-content: flex-start;
             align-items: flex-start;
-            }
+            } */
     p{
         font-size: 0.7rem;
         margin: 0;

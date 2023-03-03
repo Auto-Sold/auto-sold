@@ -91,8 +91,8 @@ const {  retrieveUserSeller } = useContext(userContext)
             <button
               className="userPerfil"
               id={uniqueVehicle.user.id}
-              onClick={async () => {
-                await retrieveUserSeller(uniqueVehicle.user.id);
+              onClick={ () => {
+                retrieveUserSeller(uniqueVehicle.user.id);
                 nav("/seller");
               }}
             >

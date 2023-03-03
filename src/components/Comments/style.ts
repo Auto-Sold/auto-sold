@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const DivComment = styled.div`
+
+width: 50em;
+`
+
 export const ContainerComment = styled.div`
 display: flex;
 flex-direction: column;

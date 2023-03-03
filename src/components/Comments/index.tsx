@@ -1,7 +1,7 @@
 import React,{ useContext } from "react";
 import { AnnounceContext } from "../../contexts/AnnounceContext";
 import CreateComment from "../CreateCommentForm";
-import { ContainerComment } from "./style";
+import { ContainerComment, DivComment } from "./style";
 
 const handleDate = (str: string) => {
   const strSplit = str.split("-")
@@ -70,18 +70,18 @@ const CommentList = () => {
 
     if(token){
       return (
-        <div>
+        <DivComment>
         <h3>Comentários</h3>
         <CreateComment id={vehicleID}/>
         {handleComment()}
-      </div> 
+      </DivComment> 
         )
     }
     return (
-        <div>
+        <DivComment>
         <h3>Comentários</h3>
         {handleComment()}
-      </div> 
+      </DivComment> 
         )
   };
   

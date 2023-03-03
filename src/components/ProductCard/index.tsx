@@ -40,9 +40,9 @@ const VehiclesList = (vehicles: any) => {
         
         <ul ref={carrouselCarros}>
           {handleCar.map((vehicle:Vehicle) =>  (
-            <CardVehicle id={vehicle.id} key={vehicle.id} onClick={async()=>{
-              await retrieveAnnounce(vehicle.id)
-              await getComments(vehicle.id)
+            <CardVehicle id={vehicle.id} key={vehicle.id} onClick={()=>{
+              retrieveAnnounce(vehicle.id)
+              getComments(vehicle.id)
 
               nav("/announce")
               }}>

@@ -11,12 +11,12 @@ import { Login } from "../../pages/Login";
 const NavBar = () => {
 
     const [displayUl, setDisplayUl] = useState<string>("none")
-    const navigate = useNavigate()
+    const nav= useNavigate()
 
     return (
         <NavBarStyle display={displayUl} >
             <div className="menu">
-                <img src={LogoSemFundo} alt="logo" />
+                <img src={LogoSemFundo} alt="logo" onClick={()=>nav("/")}/>
 
                 <div onClick={(event) => {
                     event.preventDefault();
@@ -34,8 +34,8 @@ const NavBar = () => {
                     <p>Leilões</p>
 
                     <p className="line"></p>
-                    <button className="login" onClick={()=>navigate("/login")}>Fazer Login</button>
-                    <button onClick={()=>navigate("/register")}>Cadastrar</button>
+                    <button className="login" onClick={()=>nav("/login")}>Fazer Login</button>
+                    <button onClick={()=>nav("/register")}>Cadastrar</button>
                 </ul>
 
             </div>
