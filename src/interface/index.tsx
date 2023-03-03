@@ -36,6 +36,15 @@ export interface IUser {
     vehicles: Vehicle[]
     bio: string;
 } 
+export interface IAdressUser extends IUser{
+    cep: string,
+    city: string,
+    complement: string,
+    number: string,
+    state: string,
+    street: string,
+
+}
 export interface IAnnounceData {
     announceType: string;
     title: string;

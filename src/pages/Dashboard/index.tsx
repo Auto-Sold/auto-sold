@@ -28,18 +28,11 @@ function ProductDash() {
                 initial={false}
                 mode="wait"
                 onExitComplete={() => null}>
-                {announceModal && <AnnounceModal />}
-
-                
-                {modalDeleteAdOpen && <ModalDeleteAd titleHeader="Excluir Anúncio" paragraphBold="Tem certeza que deseja remover este Anúncio?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." />}
-         
-                   
-                    
-               
+                {announceModal && <AnnounceModal />}              
 
             </AnimatePresence>
 
-            <button onClick={() => (modalDeleteAdOpen ? close() : open())}> fechar</button>
+            
             <section>
                 <Leilao />
                 <VehiclesList  vehicles ={vehicles}/>

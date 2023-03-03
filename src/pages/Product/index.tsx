@@ -3,6 +3,7 @@ import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import CommentList from "../../components/Comments"
 import Footer from "../../components/Footer"
+import { ModalDeleteAd } from "../../components/Modals/ModalDeleteAd"
 import NavBar from "../../components/NavBar"
 import { AnnounceContext } from "../../contexts/AnnounceContext"
 import { userContext } from "../../contexts/userContext"
@@ -11,11 +12,18 @@ import  {Main, HeaderStyle, Content } from "./styles"
 import  { EditModal }  from "../../components/editModal"
 
 function ProductDash() {
+
+
+    
+const {  retrieveUserSeller } = useContext(userContext)
+
   const token = window.localStorage.getItem("@TOKEN" as string)
   const userId = window.localStorage.getItem("@ID" as string)
+
   const [showModal, setShowModal] = useState(false);
-  const { uniqueVehicle, retrieveAnnounce, load, loadRetrieve} = useContext(AnnounceContext)
-    const {objUser, retrieveUserSeller} = useContext(userContext)
+  const { uniqueVehicle, retrieveAnnounce, load, loadRetrieve,  modalDeleteAdOpen, setModalDeleteAdOpen, close, open, announceModal, setAnnounceModal, vehicles} = useContext(AnnounceContext)
+   
+
     const nav = useNavigate()
     const vehicleID = uniqueVehicle.id;
 
@@ -90,7 +98,8 @@ function ProductDash() {
             >
               Ver todos anúncios
             </button>
-            <button className="userPerfil"> Excluir anúncio</button>
+            {modalDeleteAdOpen && <ModalDeleteAd titleHeader="Excluir Anúncio" paragraphBold="Tem certeza que deseja remover este Anúncio?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." />}
+            <button className="userPerfil" onClick={() => (modalDeleteAdOpen ? close() : open())}> Excluir anúncio</button>
            
             {<EditModal id={vehicleID}/>}
           </Content>

@@ -35,7 +35,7 @@ const NavBar = () => {
 
                     <p className="line"></p>
                     <button className="login" onClick={()=>navigate("/login")}>Fazer Login</button>
-                    <button>Cadastrar</button>
+                    <button onClick={()=>navigate("/register")}>Cadastrar</button>
                 </ul>
 
             </div>

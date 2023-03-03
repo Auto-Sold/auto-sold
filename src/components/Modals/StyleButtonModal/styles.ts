@@ -33,4 +33,6 @@ export const StyledDeletdAd = styled.button`
     font-size: 1em;
 
     color: var(--alert1);
+
+    
 `
