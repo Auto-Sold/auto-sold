@@ -1,10 +1,25 @@
 import styled from "styled-components";
 
+export const Header = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h4 {
+        font-size: 1.5em;
+    }
+    .button {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    
+    }
+`
 const AnnounceFormStyle = styled.form`
     border-radius: 12px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
     // justify-content: flex-start;
   
@@ -32,6 +47,7 @@ const AnnounceFormStyle = styled.form`
         flex-direction: row;
         gap: 8px;
         min-width: 50vw;
+        justify-content: center;
 
         .sale{
             input{
@@ -182,6 +198,10 @@ const AnnounceFormStyle = styled.form`
             background-color: #B0A6F0;
             border: 1.5px solid #B0A6F0;
             border-radius: 4px;
+        }
+        .create:hover{
+            background-color: var(--brand1);
+            border: 1.5px solid var(--brand1);
         }
     }
 `

@@ -16,7 +16,7 @@ const NavBar = () => {
     return (
         <NavBarStyle display={displayUl} >
             <div className="menu">
-                <img src={LogoSemFundo} alt="logo" onClick={()=>nav("/")}/>
+                <img src={LogoSemFundo} alt="logo" className="logo" onClick={()=>nav("/")}/>
 
                 <div onClick={(event) => {
                     event.preventDefault();

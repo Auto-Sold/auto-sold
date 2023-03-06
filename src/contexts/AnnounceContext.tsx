@@ -146,7 +146,7 @@ function AnnounceProvider({ children }: IAnnounceProps) {
                 .then(res => { console.log(res) })
                 .catch(err => { console.log(err.response.data.message) })
         }
-        const patchAnnounce = (data:FieldValues, id: string) => {
+        async function patchAnnounce (data:FieldValues, id: string){
             const editData = {
                 announceType: data.announceType,
                 title: data.title,
@@ -158,10 +158,14 @@ function AnnounceProvider({ children }: IAnnounceProps) {
                 image: data.image,
     
             };
-        
-            API.patch(`/announce/${id}`, editData);
-        
-            console.log(data);
+            API.defaults.headers.common.Authorization = `Bearer ${token}`;
+             await API
+             .patch(`/announce/${id}`, editData)
+             .then(res=>{
+                console.log(res.data);
+                
+             })
+             .catch(err => console.log(err)); 
           };
         
         // =========================CRUD==========COMMENTS=======================================
