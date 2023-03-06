@@ -80,7 +80,7 @@ export const Login = () => {
 
                     <StyledContainerInput>
                         <label htmlFor="password">Senha</label>
-                        <input type="text" placeholder="Digitar senha" {...register("password")} />
+                        <input type="password" placeholder="Digitar senha" {...register("password")} />
                         <span>{ errors.password?.message }</span>
                     </StyledContainerInput>
 
