@@ -33,10 +33,12 @@ const {  retrieveUserSeller } = useContext(userContext)
   
     const user = true;
     
+
     if (loadRetrieve){
         return <div>Carregando Página</div>
       }
     if (user){
+
     return (
       <Main>
         <NavBar />
@@ -97,8 +99,9 @@ const {  retrieveUserSeller } = useContext(userContext)
               }}
             >
               Ver todos anúncios
-            </button>
-            {modalDeleteAdOpen && <ModalDeleteAd titleHeader="Excluir Anúncio" paragraphBold="Tem certeza que deseja remover este Anúncio?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." />}
+                </button>
+                    
+            {modalDeleteAdOpen && <ModalDeleteAd titleHeader="Excluir Anúncio" paragraphBold="Tem certeza que deseja remover este Anúncio?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." id={vehicleId} />}
             <button className="userPerfil" onClick={() => (modalDeleteAdOpen ? close() : open())}> Excluir anúncio</button>
            
             {<EditModal id={vehicleID}/>}
