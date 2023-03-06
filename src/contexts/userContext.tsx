@@ -19,7 +19,7 @@ export interface IUserProps{
 }
 export const userContext = createContext<IUserAuth>({} as IUserAuth)
 
-export const AnnounceProvider = ({ children }: IUserProps) => {
+export const UserProvider = ({ children }: IUserProps) => {
     const [sellerData, setSellerData] = useState<IUser>({} as IUser)
     const [objUser, setObjUser] = useState<IUser>({} as IUser)
     const token = window.localStorage.getItem("@TOKEN" as string)
