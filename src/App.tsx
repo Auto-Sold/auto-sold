@@ -16,17 +16,17 @@ function App() {
 
         <Global />
         <UserProvider>
-        <AnnounceProvider> 
+          <AnnounceProvider> 
 
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/login" element={<Login/>}/>
-            <Route path="/announce" element={<ProductDash/>} />
-            <Route path="/seller" element={<SellerDash/>} />
-            <Route path="/register" element={<Register/>} />
-          </Routes>
-          
-        </AnnounceProvider>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/login" element={<Login/>}/>
+              <Route path="/announce" element={<ProductDash/>} />
+              <Route path="/seller" element={<SellerDash/>} />
+              <Route path="/register" element={<Register/>} />
+            </Routes>
+            
+          </AnnounceProvider>
         </UserProvider>
       
 

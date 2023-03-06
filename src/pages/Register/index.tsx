@@ -126,7 +126,7 @@ export const Register = () => {
                 
                     </div>
                         
-                        <button className="buttonRegister" type="submit">Cadastrar</button>
+                        <button className="buttonRegister" type="submit" >Cadastrar</button>
                         
              </StyledForm>
         </StyledMain>

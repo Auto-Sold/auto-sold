@@ -12,8 +12,7 @@ import { userContext } from "../../contexts/userContext";
 import { API } from "../../api";
 import {  useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
-import { dropIn } from "../../components/AnnounceModal";
-
+import {Register} from "../Register"
 interface IOnSubmitFunctionProps {
     
     email?: string;
@@ -35,14 +34,15 @@ export const Login = () => {
         resolver: yupResolver(loginSchema)
     })
     
-    const onSubmit = (data: object) => { 
-        API.post("/login", data).then( (res) => {
+    const onSubmit = async (data: object) => { 
+        
+        await API.post("/login", data).then((res) => {
+            
            
             window.localStorage.clear()
             window.localStorage.setItem("@TOKEN", res.data.token)
 
             const token = window.localStorage.getItem("@TOKEN")
-            API.defaults.headers.common.Authorization = `Bearer ${token}`
 
             const decoded = jwtDecode(token!)
             const { id }: any = decoded
@@ -91,7 +91,7 @@ export const Login = () => {
 
                     <StyledRegisterUser>
                         <p>Ainda não possui conta?</p>
-                        <button>Cadastrar</button>
+                        <button onClick={()=>navigate("/register")}>Cadastrar</button>
                    </StyledRegisterUser>
                     
 
