@@ -8,21 +8,28 @@ import Global from "./styles/global";
 import SellerDash from './pages/Seller';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
+import { UserProvider } from './contexts/userContext';
 ProductDash
 function App() {
   return (
     <div className="App">
-      
-        <Global />
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/announce" element={<ProductDash/>} />
-          <Route path="/seller" element={<SellerDash/>} />
-          <Route path="/register" element={<Register/>} />
 
-        </Routes>
+        <Global />
+        <UserProvider>
+        <AnnounceProvider> 
+
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/announce" element={<ProductDash/>} />
+            <Route path="/seller" element={<SellerDash/>} />
+            <Route path="/register" element={<Register/>} />
+          </Routes>
+          
+        </AnnounceProvider>
+        </UserProvider>
       
+
     </div>
   )
 }
