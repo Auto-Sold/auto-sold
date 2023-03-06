@@ -35,6 +35,9 @@ background: var(--grey10);
         padding-left: 16px;
         
     }
+    .menu .logo:hover{
+        cursor: pointer;
+    }
 
     .menu div .bars{
         left: 87.47%;

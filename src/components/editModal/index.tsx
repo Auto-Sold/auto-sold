@@ -3,11 +3,12 @@ import { useForm , FieldValues} from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import BackDrop from "../BackDrop";
 import * as yup from "yup";
-import AnnounceFormStyle from "./styles";
+import AnnounceFormStyle, { Header } from "./styles";
 import { useContext, useState } from "react";
 import { API } from "../../api";
 import { AnnounceContext } from "../../contexts/AnnounceContext";
 import { IAnnounceData } from "../../interface";
+import { useNavigate } from "react-router-dom";
 
 export const dropIn = {
   hidden: {
@@ -43,7 +44,7 @@ interface FormData {
 export const EditModal = (id:string) => {
   const [open, setOpen] = useState(false);
   const {patchAnnounce} = useContext(AnnounceContext)
-
+  const nav = useNavigate()
   const formSchema = yup.object().shape({
     announceType: yup.string(),
     title: yup.string(),
@@ -63,6 +64,8 @@ export const EditModal = (id:string) => {
     resolver: yupResolver(formSchema),
   });
 
+  const token = window.localStorage.getItem("@TOKEN" as string)
+
   const onSubmitFunction = (data: FieldValues) => {
     const editData = {
       announceType: data.announceType,
@@ -75,9 +78,10 @@ export const EditModal = (id:string) => {
       image: data.image,
     };
     const handleId = Object.values(id)[0];
-   
-   patchAnnounce(data, handleId)
+    console.log(token);
     
+   patchAnnounce(data, handleId)
+    nav("/announce")
    console.log(data);
   };
 
@@ -94,10 +98,12 @@ export const EditModal = (id:string) => {
             animate="visible"
             exit="exit"
           >
-            <div className="head">
+            <Header className="head">
               <h4>Editar anúncio</h4>
+              <div className="button">
               <button onClick={() => setOpen(false)}>X</button>
-            </div>
+              </div>
+            </Header>
 
             <AnnounceFormStyle onSubmit={handleSubmit(onSubmitFunction)}>
               <label>Tipo de anuncio</label>
@@ -179,7 +185,7 @@ export const EditModal = (id:string) => {
                   Cancelar
                 </button>
                 <button className="create" type="submit">
-                  Salvar alterações
+                  Salvar
                 </button>
               </div>
             </AnnounceFormStyle>

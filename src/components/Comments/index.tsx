@@ -20,7 +20,6 @@ const CommentList = () => {
     const user = true
     const {comments, uniqueVehicle, postComments} = useContext(AnnounceContext)
     // const comments = uniqueVehicle.comments
-    console.log(comments);
     const vehicleID = uniqueVehicle.id;
     const handleComment = () =>{
     const result = comments.map(comment =>{
