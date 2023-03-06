@@ -42,18 +42,18 @@ interface FormData {
 }
 
 export const EditModal = (id:string) => {
-  const [open, setOpen] = useState(false);
-  const {patchAnnounce} = useContext(AnnounceContext)
+  // const [open, setOpenEditModal] = useState(false);
+  const {patchAnnounce,openEditModal, setOpenEditModal, uniqueVehicle} = useContext(AnnounceContext)
   const nav = useNavigate()
   const formSchema = yup.object().shape({
-    announceType: yup.string(),
-    title: yup.string(),
-    year: yup.string(),
-    km: yup.number(),
-    price: yup.number(),
-    description: yup.string(),
-    vehicleType: yup.string(),
-    image: yup.string(),
+    announceType: yup.string().notRequired(),
+    title: yup.string().notRequired(),
+    year: yup.string().notRequired(),
+    km: yup.number().notRequired(),
+    price: yup.number().notRequired(),
+    description: yup.string().notRequired(),
+    vehicleType: yup.string().notRequired(),
+    image: yup.string().notRequired(),
   });
 
   const {
@@ -62,34 +62,30 @@ export const EditModal = (id:string) => {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(formSchema),
+    defaultValues: {
+      announceType: uniqueVehicle.announceType,
+      title: uniqueVehicle.title,
+      year: uniqueVehicle.year,
+      km: uniqueVehicle.km,
+      price: uniqueVehicle.price,
+      description: uniqueVehicle.description,
+      vehicleType: uniqueVehicle.vehicleType,
+      image: uniqueVehicle.image,
+    }
   });
 
   const token = window.localStorage.getItem("@TOKEN" as string)
+  const handleId = Object.values(id)[0];
 
   const onSubmitFunction = (data: FieldValues) => {
-    // const editData = {
-    //   announceType: data.announceType,
-    //   title: data.title,
-    //   year: data.year,
-    //   km: data.km,
-    //   price: data.price,
-    //   description: data.description,
-    //   vehicleType: data.vehicleType,
-    //   image: data.image,
-    // };
-    const handleId = Object.values(id)[0];
-    
     patchAnnounce(data, handleId)
-    nav("/announce")
-    console.log(token);
-   console.log(data);
   };
 
   return (
     <>
-      <button onClick={() => setOpen(true)} className = "userPerfil">Editar anúncio</button>
-      {open && (
-        <BackDrop setState={setOpen}>
+      <button onClick={() => setOpenEditModal(true)} className = "userPerfil">Editar anúncio</button>
+      {openEditModal && (
+        <BackDrop setState={setOpenEditModal}>
           <motion.div
             className="announce-modal"
             onClick={(e) => e.stopPropagation()}
@@ -101,11 +97,11 @@ export const EditModal = (id:string) => {
             <Header className="head">
               <h4>Editar anúncio</h4>
               <div className="button">
-              <button onClick={() => setOpen(false)}>X</button>
+              <button onClick={() => setOpenEditModal(false)}>X</button>
               </div>
             </Header>
 
-            <AnnounceFormStyle onSubmit={handleSubmit(onSubmitFunction)}>
+            <AnnounceFormStyle onSubmit={handleSubmit((data)=>patchAnnounce(data, handleId))}>
               <label>Tipo de anuncio</label>
 
               <div className="announce-type">
@@ -181,7 +177,7 @@ export const EditModal = (id:string) => {
               </div>
               {/*<span>{errors.title?.message}</span>*/}
               <div className="foot">
-                <button className="cancel" onClick={() => setOpen(false)}>
+                <button className="cancel" onClick={() => setOpenEditModal(false)}>
                   Cancelar
                 </button>
                 <button className="create" type="submit">

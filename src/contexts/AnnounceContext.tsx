@@ -12,6 +12,7 @@ import { IAnnounceData, IComments, IFormComment } from "../interface";
 import { Vehicle } from "../interface";
 import { object } from "yup";
 import {FieldValues} from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 
 export interface IAnnounceAuth {
@@ -27,6 +28,8 @@ export interface IAnnounceAuth {
     comments: IComments[]
     uniqueVehicle: Vehicle
     modalDeleteAdOpen: boolean;
+    setOpenEditModal: Dispatch<SetStateAction<boolean>>;
+    openEditModal: boolean;
     setModalDeleteAdOpen: Dispatch<SetStateAction<boolean>>;
     
 
@@ -69,7 +72,8 @@ function AnnounceProvider({ children }: IAnnounceProps) {
     const [loadRetrieve, setLoadRetrieve] = useState<boolean>(true)
     const close = () => setModalDeleteAdOpen(false)
     const open = () => setModalDeleteAdOpen(true)
-
+    const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+    const nav = useNavigate()
     
     //Para o retrive
     
@@ -151,22 +155,16 @@ function AnnounceProvider({ children }: IAnnounceProps) {
                 .catch(err => { console.log(err.response.data.message) })
         }
         async function patchAnnounce (data:FieldValues, id: string){
-            const editData = {
-                announceType: data.announceType,
-                title: data.title,
-                year: data.year,
-                km: data.km,
-                price: data.price,
-                description: data.description,
-                vehicleType: data.vehicleType,
-                image: data.image,
-    
-            };
+            console.log(data);
+            
+            const handleId = Object.values(id)[0];
             API.defaults.headers.common.Authorization = `Bearer ${token}`;
              await API
-             .patch(`/announce/${id}`, editData)
+             .patch(`/announce/${id}`, data)
              .then(res=>{
                 console.log(res.data);
+                setOpenEditModal(false)
+                nav("/announce")
                 
              })
              .catch(err => console.log(err)); 
@@ -213,7 +211,9 @@ function AnnounceProvider({ children }: IAnnounceProps) {
             postAnnouncement, patchAnnounce,getAnnounces, 
             load, loadRetrieve,retrieveAnnounce, getComments, postComments,announceModal, setAnnounceModal, 
             vehicles, uniqueVehicle, comments, handleVehiclesMotorcycles, 
-            handleVehiclesCars, setModalDeleteAdOpen, modalDeleteAdOpen, open, close }}>
+            handleVehiclesCars, setModalDeleteAdOpen, 
+            modalDeleteAdOpen, open, close,openEditModal,
+            setOpenEditModal }}>
 
 
             {children}
