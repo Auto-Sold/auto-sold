@@ -21,7 +21,7 @@ interface IOnSubmitFunctionProps {
   }
 export const Login = () => {
 
-    const { setObjUser, objUser } = useContext(userContext)
+    const { setObjUser, objUser, login } = useContext(userContext)
     const navigate = useNavigate();
     
     
@@ -34,30 +34,7 @@ export const Login = () => {
         resolver: yupResolver(loginSchema)
     })
     
-    const onSubmit = async (data: object) => { 
-        
-        await API.post("/login", data).then((res) => {
-            
-           
-            window.localStorage.clear()
-            window.localStorage.setItem("@TOKEN", res.data.token)
-
-            const token = window.localStorage.getItem("@TOKEN")
-
-            const decoded = jwtDecode(token!)
-            const { id }: any = decoded
-            window.localStorage.setItem("@ID", id)
-
-
-            if (res.status == 200) {
-                navigate("/")
-           }
-
-            
-        }).catch((err) => {
-            console.log(err);
-        })
-    }
+   
     return (<>
         
         <StyledMain>
@@ -70,7 +47,7 @@ export const Login = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 0.6 }}>
                 <h1>Login</h1>
-                <StyledForm onSubmit={handleSubmit(onSubmit)}>
+                <StyledForm onSubmit={handleSubmit(login)}>
                     <StyledContainerInput>
                         <label htmlFor="user">Email</label>
                         <input type="text" placeholder="Digitar email" {...register("email")} />

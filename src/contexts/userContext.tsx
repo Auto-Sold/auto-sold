@@ -2,7 +2,8 @@ import { createContext, Dispatch, ReactNode, useEffect, useState } from "react";
 import { API } from "../api";
 import { IAdressUser, IUser } from "../interface";
 
-
+import {  useNavigate } from "react-router-dom";
+import jwtDecode from "jwt-decode";
 
 
 export interface IUserAuth {
@@ -11,6 +12,7 @@ export interface IUserAuth {
     sellerData: IUser
     retrieveUserSeller: (id: string) => void
     registerUser:(data: object) => Promise<number>
+    login:(data: object) => void
     
 
 }
@@ -24,7 +26,8 @@ export const UserProvider = ({ children }: IUserProps) => {
     const [objUser, setObjUser] = useState<IUser>({} as IUser)
     const token = window.localStorage.getItem("@TOKEN" as string)
     const userId = window.localStorage.getItem("@ID" as string)
-    
+    const navigate = useNavigate()
+
     const retrieveUserSeller = async (userId: string) =>{
         await API
         .get(`users/seller/${userId}`)
@@ -35,6 +38,32 @@ export const UserProvider = ({ children }: IUserProps) => {
             alert("Ocorreu um erro, tente novamente")
         })
 
+    }
+
+    const login = async (data: object) => { 
+        
+        await API.post("/login", data)
+        .then((res) => {
+            
+            
+            window.localStorage.clear()
+            window.localStorage.setItem("@TOKEN", res.data.token)
+
+            const token = window.localStorage.getItem("@TOKEN")
+
+            const decoded = jwtDecode(token!)
+            const { id }: any = decoded
+            window.localStorage.setItem("@ID", id)
+
+
+            if (res.status == 200) {
+                navigate("/")
+           }
+
+            
+        }).catch((err) => {
+            console.log(err);
+        })
     }
     useEffect(() => {
         const loadUser = async () => {
@@ -67,7 +96,7 @@ export const UserProvider = ({ children }: IUserProps) => {
     } 
     
     return (
-        <userContext.Provider value={{objUser, setObjUser, retrieveUserSeller, sellerData, registerUser}}>
+        <userContext.Provider value={{objUser, setObjUser, retrieveUserSeller, sellerData,login ,registerUser}}>
 
             {children}
 
