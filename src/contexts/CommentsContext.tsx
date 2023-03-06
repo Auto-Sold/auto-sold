@@ -8,7 +8,7 @@ import {
     useState
 } from "react";
 import { API } from "../api";
-import { IAnnounceData } from "../interfaces";
+import { IAnnounceData } from "../interface";
 import { Vehicle } from "../interface";
 
 
