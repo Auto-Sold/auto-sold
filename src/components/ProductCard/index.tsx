@@ -18,11 +18,11 @@ const VehiclesList = (vehicles: any) => {
   
   const handleLeftClick = (e:any, carrousel: any) =>{
     e.preventDefault();
-    carrousel.current.scrollLeft -= carrousel.current.offsetWidth
+    carrousel.current.scrollLeft -= carrousel.current.offsetWidth-500
   }
   const handleRightClick = (e:any, carrousel: any) =>{
     e.preventDefault();
-    carrousel.current.scrollLeft += carrousel.current.offsetWidth
+    carrousel.current.scrollLeft += carrousel.current.offsetWidth-500
 
   }
   const nav = useNavigate()

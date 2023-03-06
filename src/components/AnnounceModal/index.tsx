@@ -7,6 +7,7 @@ import BackDrop from "../BackDrop"
 import * as yup from "yup"
 import { IAnnounceData } from "../../interface"
 import AnnounceFormStyle from "./styles"
+import { FieldValues } from "react-hook-form/dist/types"
 
 export const dropIn = {
     hidden: {
@@ -47,6 +48,7 @@ const AnnounceModal = () => {
         useForm<IAnnounceData>({
             resolver: yupResolver(formSchema)
         })
+
 
     return (
         

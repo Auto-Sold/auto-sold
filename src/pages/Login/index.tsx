@@ -41,7 +41,7 @@ export const Login = () => {
             <NavBar />
             
             <StyledLogin
-                as={motion.form}
+                as={motion.main}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -49,14 +49,14 @@ export const Login = () => {
                 <h1>Login</h1>
                 <StyledForm onSubmit={handleSubmit(login)}>
                     <StyledContainerInput>
-                        <label htmlFor="user">Email</label>
+                        <label >Email</label>
                         <input type="text" placeholder="Digitar email" {...register("email")} />
                         <span>{ errors.email?.message }</span>
                        
                     </StyledContainerInput>
 
                     <StyledContainerInput>
-                        <label htmlFor="password">Senha</label>
+                        <label >Senha</label>
                         <input type="password" placeholder="Digitar senha" {...register("password")} />
                         <span>{ errors.password?.message }</span>
                     </StyledContainerInput>

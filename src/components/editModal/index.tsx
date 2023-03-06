@@ -67,21 +67,21 @@ export const EditModal = (id:string) => {
   const token = window.localStorage.getItem("@TOKEN" as string)
 
   const onSubmitFunction = (data: FieldValues) => {
-    const editData = {
-      announceType: data.announceType,
-      title: data.title,
-      year: data.year,
-      km: data.km,
-      price: data.price,
-      description: data.description,
-      vehicleType: data.vehicleType,
-      image: data.image,
-    };
+    // const editData = {
+    //   announceType: data.announceType,
+    //   title: data.title,
+    //   year: data.year,
+    //   km: data.km,
+    //   price: data.price,
+    //   description: data.description,
+    //   vehicleType: data.vehicleType,
+    //   image: data.image,
+    // };
     const handleId = Object.values(id)[0];
-    console.log(token);
     
-   patchAnnounce(data, handleId)
+    patchAnnounce(data, handleId)
     nav("/announce")
+    console.log(token);
    console.log(data);
   };
 

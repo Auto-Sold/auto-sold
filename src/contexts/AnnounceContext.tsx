@@ -143,7 +143,11 @@ function AnnounceProvider({ children }: IAnnounceProps) {
             console.log(announce)
             API.defaults.headers.common.Authorization = `Bearer ${token}`;
             API.post(`/announce`, announce)
-                .then(res => { console.log(res) })
+                .then(res => { 
+                    console.log(res)
+                    getAnnounces()
+                    setAnnounceModal(false)
+                })
                 .catch(err => { console.log(err.response.data.message) })
         }
         async function patchAnnounce (data:FieldValues, id: string){
