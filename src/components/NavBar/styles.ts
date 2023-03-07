@@ -146,7 +146,6 @@ background: var(--grey10);
         background-color: transparent;
         box-shadow: none;
         position: absolute;
-        top: 15%;
         right: 2%;
         overflow: hidden;
     }
@@ -163,7 +162,7 @@ background: var(--grey10);
     ul .login{
         border: none;
         background-color: transparent;
-        display: flex;
+        padding: 0;
         justify-content: center;
         align-items: center;
         font-family: 'Inter';
@@ -171,7 +170,7 @@ background: var(--grey10);
         font-weight: 600;
         font-size: 16px;
         line-height: 28px;
-        width: 150%;
+        width: 700px !important;
     }
     ul .line {
         background-color: #2C2C2C;
@@ -190,11 +189,12 @@ background: var(--grey10);
         padding: 12px 28px;
         gap: 10px;
 
-        width: 50%;
+        width: 600px;
         height: 60%;
 
         border: 1.5px solid var(--grey4);
         border-radius: 4px;
+        
     }
     .rectangle{
         display: none;

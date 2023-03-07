@@ -1,8 +1,14 @@
 import styled from "styled-components";
 
 export const DivComment = styled.div`
-
 width: 50em;
+display: flex;
+flex-direction: column;
+align-items: center;
+h3 {
+    display:  flex;
+    justify-content: center;
+}
 `
 
 export const ContainerComment = styled.div`

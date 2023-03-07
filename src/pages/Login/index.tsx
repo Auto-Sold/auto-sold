@@ -62,7 +62,7 @@ export const Login = () => {
                     </StyledContainerInput>
 
                     <StyledContainerButton>
-                        <button className="buttonForgotPassword"> esquecir minha senha</button>
+                        <button className="buttonForgotPassword" onClick={()=> navigate("/sendReset")}> Esqueci minha senha</button>
                         <button className="buttonOpen" type="submit" >Entrar</button>
                     </StyledContainerButton>
 

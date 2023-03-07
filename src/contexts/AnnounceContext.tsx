@@ -13,6 +13,7 @@ import { Vehicle } from "../interface";
 import { object } from "yup";
 import {FieldValues} from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { userContext } from "./userContext";
 
 
 export interface IAnnounceAuth {
@@ -21,7 +22,8 @@ export interface IAnnounceAuth {
     postAnnouncement: (data: IAnnounceData) => void;
     patchAnnounce: (data: FieldValues, id: string) => void;
     getAnnounces: () => void;
-    retrieveAnnounce: (id: string) => void;
+    getAnnouncesSeller:(id: string|undefined) => void;
+    retrieveAnnounce: (id: string | undefined) => void;
     getComments: (id: string) => void;
     postComments: (id: string, data: IFormComment) => void;
     vehicles:  Vehicle[]
@@ -74,11 +76,17 @@ function AnnounceProvider({ children }: IAnnounceProps) {
     const open = () => setModalDeleteAdOpen(true)
     const [openEditModal, setOpenEditModal] = useState<boolean>(false);
     const nav = useNavigate()
-    
     //Para o retrive
     
     const handleVehiclesCars = (arr: IArrPayLoad) => {
         // Tratativa para receber só carros e ativos
+        console.log("HandleCar");
+        
+        console.log(arr);
+        console.log(arr.vehicles);
+        
+
+        
         const result = arr.vehicles.filter(vehicle => vehicle.isActive === true && vehicle.vehicleType === "Carro" && vehicle.announceType !== "Leilão")
         return result
     }
@@ -109,9 +117,26 @@ function AnnounceProvider({ children }: IAnnounceProps) {
             getAnnounces()
         }, [])
         
+
+        async function getAnnouncesSeller(id: string|undefined) {
+            await API
+            .get(`/announce?user=${id}`)
+            .then((response) => {
+                    console.log(response.data);
+                    
+                    setVehicles(response.data)
+                    
+                    
+                }).then(()=>{
+                    setLoad(false)
+                })
+                .catch((error) => {
+                    alert("Ocorreu um erro, tente novamente")
+                })
+            }
         // Retrive um announce específico por ID
         
-        async function retrieveAnnounce(id: string) {
+        async function retrieveAnnounce(id: string | undefined) {
             await API
             .get("/announce/"+id)
             .then((response) => {
@@ -151,6 +176,7 @@ function AnnounceProvider({ children }: IAnnounceProps) {
                     console.log(res)
                     getAnnounces()
                     setAnnounceModal(false)
+                
                 })
                 .catch(err => { console.log(err.response.data.message) })
         }
@@ -164,7 +190,8 @@ function AnnounceProvider({ children }: IAnnounceProps) {
              .then(res=>{
                 console.log(res.data);
                 setOpenEditModal(false)
-                nav("/announce")
+                retrieveAnnounce(id);
+                nav( `/announce/${id}`)
                 
              })
              .catch(err => console.log(err)); 
@@ -207,7 +234,7 @@ function AnnounceProvider({ children }: IAnnounceProps) {
 
     return (
 
-        <AnnounceContext.Provider value={{ 
+        <AnnounceContext.Provider value={{ getAnnouncesSeller,
             postAnnouncement, patchAnnounce,getAnnounces, 
             load, loadRetrieve,retrieveAnnounce, getComments, postComments,announceModal, setAnnounceModal, 
             vehicles, uniqueVehicle, comments, handleVehiclesMotorcycles, 

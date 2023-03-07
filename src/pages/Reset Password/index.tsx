@@ -10,20 +10,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { userContext } from "../../contexts/userContext";
 import { API } from "../../api";
-import {  useNavigate } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import {Register} from "../Register"
-interface IOnSubmitFunctionProps {
+export interface IResetPassword {
     
-    email?: string;
-    password?: string;
-    
+    password: string;
+    passwordConfirm: string;
   }
 export const ResetPassword = () => {
 
-    const { setObjUser, objUser, login } = useContext(userContext)
+    const { setObjUser, objUser, login, resetPassword } = useContext(userContext)
     const navigate = useNavigate();
-    
+    const {token} = useParams()
+    console.log(token);
     
     const loginSchema = yup.object().shape({
         password: yup
@@ -35,13 +35,11 @@ export const ResetPassword = () => {
         .oneOf([yup.ref("password")], "A senhas não são iguais"),
         });
 
-    const { register, handleSubmit, formState: { errors } } = useForm<IOnSubmitFunctionProps>({
+    const { register, handleSubmit, formState: { errors } } = useForm<IResetPassword>({
         resolver: yupResolver(loginSchema)
     })
     
-    const resetPassworda = async () => {
-       
-    }
+  
     return (<>
         
         <StyledMain>
@@ -53,31 +51,24 @@ export const ResetPassword = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.6 }}>
-                <h1>Login</h1>
-                <StyledForm onSubmit={handleSubmit()}>
+                <h1>Defina uma nova senha</h1>
+                <StyledForm onSubmit={handleSubmit((data)=>resetPassword(data, token))}>
 
                     <StyledContainerInput>
-                        <label >Senha</label>
+                        <label >Nova Senha</label>
                         <input type="password" placeholder="Digitar senha" {...register("password")} />
                         <span>{ errors.password?.message }</span>
                     </StyledContainerInput>
 
                     <StyledContainerInput>
-                        <label >Senha</label>
-                        <input type="passwordConfirm" placeholder="Confirme a senha" {...register("password")} />
-                        <span>{ errors.password?.message }</span>
+                        <label >Confirme Nova Senha</label>
+                        <input type="password" placeholder="Confirme a senha" {...register("passwordConfirm")} />
+                        <span>{ errors.passwordConfirm?.message }</span>
                     </StyledContainerInput>
 
                     <StyledContainerButton>
-                        <button className="buttonForgotPassword"> esquecir minha senha</button>
-                        <button className="buttonOpen" type="submit" >Entrar</button>
-                    </StyledContainerButton>
-
-                    <StyledRegisterUser>
-                        <p>Ainda não possui conta?</p>
-                        <button onClick={()=>navigate("/register")}>Cadastrar</button>
-                   </StyledRegisterUser>
-                    
+                        <button className="buttonOpen" type="submit" >Muda Senha</button>
+                    </StyledContainerButton>                    
 
                 </StyledForm>
            </StyledLogin>

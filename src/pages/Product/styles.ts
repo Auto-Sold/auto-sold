@@ -9,7 +9,16 @@ export const Main = styled.main`
     // width: 100vw;
     font-family: 'Lexend';
     font-style: normal;
-
+    .section {
+        /* position: fixed;
+        top: 25%; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        height: auto;
+        width: 100%;
+    }
     .backdrop{
         position: fixed;
         top: 0;
