@@ -4,13 +4,14 @@ import { Vehicle } from "../../interface";
 import { CardVehicle, VehiclesListStyle } from "./styles";
 import arrowLeft from "../../assets/arrowLeft.png";
 import arrowRight from "../../assets/arrowRight.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 
 const VehiclesList = (vehicles: any) => {
   const user = true
-
+  
+  
 
   const  { handleVehiclesCars, handleVehiclesMotorcycles, getAnnounces,getComments, retrieveAnnounce, load} = useContext(AnnounceContext)
   const carrouselCarros = useRef(null)
@@ -29,6 +30,10 @@ const VehiclesList = (vehicles: any) => {
   const handleCar = handleVehiclesCars(vehicles)
   
   const handleMoto = handleVehiclesMotorcycles(vehicles)
+
+  
+  
+  
   
   if (load){
     return <div>Carregando Página</div>
@@ -43,8 +48,8 @@ const VehiclesList = (vehicles: any) => {
             <CardVehicle id={vehicle.id} key={vehicle.id} onClick={()=>{
               retrieveAnnounce(vehicle.id)
               getComments(vehicle.id)
-
-              nav("/announce")
+              
+              nav( `/announce/${vehicle.id}` )
               }}>
               <figure>
               <img src={vehicle.image}/>
@@ -80,7 +85,7 @@ const VehiclesList = (vehicles: any) => {
             <CardVehicle id={vehicle.id} key={vehicle.id} onClick={async()=>{
               await retrieveAnnounce(vehicle.id)
               await getComments(vehicle.id)
-              nav("/announce")
+              nav( `/announce/${vehicle.id}`)
               }}>
               <figure>
               <img src={vehicle.image}/>
@@ -121,8 +126,14 @@ const VehiclesList = (vehicles: any) => {
       <ul ref={carrouselCarros}>
         {handleVehiclesCars(vehicles).map((vehicle:Vehicle) =>  (
           <CardVehicle id={vehicle.id} key={vehicle.id} onClick={()=>{
-            nav("/announce")
-            retrieveAnnounce(vehicle.id)}}>
+          
+
+            
+            
+            nav( `/announce/${vehicle.id}`)
+         
+            }}>
+            
             <figure>
             <img src={vehicle.image}/>
             </figure>
@@ -155,7 +166,7 @@ const VehiclesList = (vehicles: any) => {
       <ul ref={carrouselMotos}>
         {handleVehiclesMotorcycles(vehicles).map((vehicle:Vehicle) =>  (
           <CardVehicle id={vehicle.id} key={vehicle.id} onClick={()=>{
-            nav("/announce")
+            nav( `/announce/${vehicle.id}`)
             retrieveAnnounce(vehicle.id)}}>
             <figure>
             <img src={vehicle.image}/>

@@ -11,10 +11,8 @@ export const StyledMain = styled.main`
     height: 100vh;
     font-family: 'Lexend';
     font-style: normal;
-    margin: 10vh;
 
     background: var(--grey8);
-
 
 `
 
@@ -33,9 +31,7 @@ export const StyledLogin = styled.div`
     background: var(--grey10);
     border-radius: 4px;
     // justify-content: flex-start;
-    h1 {
-        text-align: center;
-    }
+
 
 `
 export const StyledForm = styled.form`

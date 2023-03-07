@@ -79,6 +79,7 @@ export const Main = styled.main`
     .title{
         color: black;
     }
+
     @media (min-width: 800px) {
         .section {
         /* position: fixed;
@@ -104,7 +105,7 @@ justify-content: flex-start;
 align-items: center;
 padding: 188px 425px 40px;
 gap: 10px;
-width: 100vw;
+width: 70%;
 height: fit-content;
 
 background: var(--brand2);
@@ -143,10 +144,12 @@ background: var(--brand2);
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    gap: 50px;
     
 }
 .name .nameComplete {
-    width: 130px;
+    display: block;
+    width: fit-content;
     height: 25px;
     color: var(--grey1);
     margin: 0;
@@ -174,6 +177,19 @@ background: var(--brand2);
     align-items: center;
     justify-content: center;
 
+}
+.name button {
+    width: fit-content;
+    height: fit-content;
+    padding: 0.3em;
+    font-weight: 600;
+    font-size: 16px;
+    font-family: 'Inter';
+    font-style: normal;
+    color: #EDEAFD;
+    border-radius: 4px;
+    background-color: var(--brand1);
+    border: 1.5px solid var(--brand1);
 }
 @media (min-width: 800px) {
     
@@ -223,7 +239,8 @@ background: var(--brand2);
     
 }
 .name .nameComplete {
-    width: 130px;
+    display: block;
+    width: fit-content;
     height: 25px;
     color: var(--grey1);
     margin: 0;
