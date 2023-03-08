@@ -9,10 +9,9 @@ import { StyledContainerButton, StyledContainerInput, StyledForm, StyledLogin, S
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { userContext } from "../../contexts/userContext";
-import { API } from "../../api";
+
 import {  useNavigate } from "react-router-dom";
-import jwtDecode from "jwt-decode";
-import {Register} from "../Register"
+
 interface IOnSubmitFunctionProps {
     
     email?: string;

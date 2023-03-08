@@ -10,12 +10,15 @@ import { userContext } from "../../contexts/userContext"
 import { IVehicleImages } from "../../interface"
 import  {Main, HeaderStyle, Content } from "./styles"
 import  { EditModal }  from "../../components/editModal"
+import { ModalDeleteUser } from "../../components/Modals/ModalDeleteUser"
 
 function ProductDash() {
 
 
     
-const {  retrieveUserSeller, objUser } = useContext(userContext)
+
+const {  retrieveUserSeller, modalDeleteUserOpen, setModalDeleteUserOpen, objUser } = useContext(userContext)
+
 
   const token = window.localStorage.getItem("@TOKEN" as string)
   const userId = window.localStorage.getItem("@ID" as string)
@@ -101,10 +104,14 @@ const {  retrieveUserSeller, objUser } = useContext(userContext)
               Ver todos anúncios
                 </button>
                     
-            {modalDeleteAdOpen && <ModalDeleteAd titleHeader="Excluir Anúncio" paragraphBold="Tem certeza que deseja remover este Anúncio?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." id={vehicleId} />}
+            {modalDeleteAdOpen && <ModalDeleteAd titleHeader="Excluir Anúncio" paragraphBold="Tem certeza que deseja remover este Anúncio?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." id={vehicleID} />}
             <button className="userPerfil" onClick={() => (modalDeleteAdOpen ? close() : open())}> Excluir anúncio</button>
            
-            {<EditModal id={vehicleID}/>}
+            {<EditModal id={vehicleID} />}
+            
+            {modalDeleteUserOpen && <ModalDeleteUser titleHeader="Excluir Usuário" paragraphBold="Tem certeza que deseja remover sua conta?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." id={vehicleID} />}
+           
+            
           </Content>
           <CommentList/>
         </section>

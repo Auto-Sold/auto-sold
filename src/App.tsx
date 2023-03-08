@@ -19,7 +19,7 @@ function App() {
 
         <Global />
         <UserProvider>
-          <AnnounceProvider> 
+        <AnnounceProvider> 
 
             <Routes>
               <Route path="/" element={<Dashboard />} />
@@ -32,7 +32,7 @@ function App() {
 
             </Routes>
             
-          </AnnounceProvider>
+        </AnnounceProvider>
         </UserProvider>
       
 
