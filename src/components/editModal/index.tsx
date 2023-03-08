@@ -45,14 +45,14 @@ export const EditModal = (id:string) => {
   const {patchAnnounce} = useContext(AnnounceContext)
 
   const formSchema = yup.object().shape({
-    announceType: yup.string().required("Tipo de anúncio necessário"),
-    title: yup.string().required("Título necessário"),
-    year: yup.string().required("Ano necessário"),
-    km: yup.number().required("Quilometragem necessária"),
-    price: yup.number().required("Preço necessário"),
-    description: yup.string().required("Descrição necessária"),
-    vehicleType: yup.string().required("Tipo de veículo necessário"),
-    image: yup.string().required("Imagem necessária"),
+    announceType: yup.string(),
+    title: yup.string(),
+    year: yup.string(),
+    km: yup.number(),
+    price: yup.number(),
+    description: yup.string(),
+    vehicleType: yup.string(),
+    image: yup.string()
   });
 
   const {
