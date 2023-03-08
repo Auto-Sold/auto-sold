@@ -1,18 +1,27 @@
-import { createContext, Dispatch, ReactNode, useEffect, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { API } from "../api";
 import { IAdressUser, IUser } from "../interface";
 
 import {  useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
+import { IOnSubmitFunction } from "../pages/Register";
 
 
 export interface IUserAuth {
-    objUser: object,
-    setObjUser: React.Dispatch<React.SetStateAction<IUser>>
+    objUser: IOnSubmitFunction,
+    setObjUser: React.Dispatch<React.SetStateAction<IOnSubmitFunction>>
     sellerData: IUser
     retrieveUserSeller: (id: string) => void
-    registerUser:(data: object) => Promise<number>
-    login:(data: object) => void
+    registerUser:(data: IOnSubmitFunction) => Promise<number>
+    login: (data: object) => void
+    modalDeleteUserOpen: boolean
+    setModalDeleteUserOpen: Dispatch<SetStateAction<boolean>>
+    modalUpdateUser: boolean
+    setModalUpdateUser: Dispatch<SetStateAction<boolean>>
+    deleteUserId: (id: string) => Promise<number>
+    updateUser:(data: IOnSubmitFunction, id:string) => Promise<number>
+    open: () => void
+    close: () => void
     
 
 }
@@ -23,10 +32,15 @@ export const userContext = createContext<IUserAuth>({} as IUserAuth)
 
 export const UserProvider = ({ children }: IUserProps) => {
     const [sellerData, setSellerData] = useState<IUser>({} as IUser)
-    const [objUser, setObjUser] = useState<IUser>({} as IUser)
+    const [objUser, setObjUser] = useState<IOnSubmitFunction>({} as IOnSubmitFunction)
+    const [modalDeleteUserOpen, setModalDeleteUserOpen] = useState<boolean>(false)
+    const [modalUpdateUser,setModalUpdateUser ] = useState<boolean>(false)
     const token = window.localStorage.getItem("@TOKEN" as string)
     const userId = window.localStorage.getItem("@ID" as string)
     const navigate = useNavigate()
+
+    const close = () => setModalDeleteUserOpen(false)
+    const open = () => setModalDeleteUserOpen(true)
 
     const retrieveUserSeller = async (userId: string) =>{
         await API
@@ -87,16 +101,35 @@ export const UserProvider = ({ children }: IUserProps) => {
     }, [])
 
 
-    async function registerUser(data: object) {
+    async function registerUser(data: IOnSubmitFunction) {
         let statusCode = 0 
-        
+        console.log(data)
+         
+
         await API.post("/users", data).then((res) => statusCode = res.status).catch((err) => console.log(err))
         
         return statusCode
     } 
     
+
+    const deleteUserId = async (id: string) => {
+        let statusCode = 0 
+        const deleteUser = await API.delete(`/users/:${id}`).then((res)=> statusCode = res.status)
+        
+        return statusCode
+    }
+
+    async function updateUser(data: IOnSubmitFunction , id: string) {
+        let statusCode = 0
+
+        await API.patch(`/users/${id}`, data).then((res) => statusCode = res.status)
+        
+        return statusCode
+    }
+
+    
     return (
-        <userContext.Provider value={{objUser, setObjUser, retrieveUserSeller, sellerData,login ,registerUser}}>
+        <userContext.Provider value={{objUser, setObjUser, retrieveUserSeller, sellerData,login ,registerUser, setModalDeleteUserOpen, modalDeleteUserOpen, close, open, deleteUserId, modalUpdateUser,setModalUpdateUser, updateUser}}>
 
             {children}
 

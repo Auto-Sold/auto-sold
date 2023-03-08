@@ -16,7 +16,7 @@ function App() {
 
         <Global />
         <UserProvider>
-          <AnnounceProvider> 
+        <AnnounceProvider> 
 
             <Routes>
               <Route path="/" element={<Dashboard />} />
@@ -26,7 +26,7 @@ function App() {
               <Route path="/register" element={<Register/>} />
             </Routes>
             
-          </AnnounceProvider>
+        </AnnounceProvider>
         </UserProvider>
       
 

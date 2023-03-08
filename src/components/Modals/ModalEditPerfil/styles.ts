@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledMain = styled.main`
+export const StyledMainUser = styled.main`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -10,12 +10,13 @@ export const StyledMain = styled.main`
     font-family: 'Lexend';
     font-style: normal;
 
-    background: var(--grey8);
+    
 `
-export const StyledForm = styled.form`
+
+export const StyledFormUpdateUser  = styled.form`
     margin-top: 72px;
     width: clamp( 25.6875em, 21.4375em, 80%);
-    height: 90.875em;
+    height : 111.875em ;
    
     display: flex;
     flex-direction: column;
@@ -85,7 +86,7 @@ export const StyledForm = styled.form`
     .buttonRegister{
         width: 100%;
         height: 48px;
-        font-family: 'Inter'; 
+        font-family: 'Inter';
         font-style: normal;
         font-weight: 400;
         font-size: 1em;
@@ -96,6 +97,21 @@ export const StyledForm = styled.form`
         margin-top: 1em;;
         color: white;
         background-color: var(--brand1);
+    }
+    .buttonDeleteUser{
+        width: 100%;
+        height: 48px;
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1em;
+        padding: 0em 1em;
+        border: 1.5px solid #E9ECEF;
+        border-radius: 4px;
+
+        margin-top: 1em;;
+        color: white;
+        background-color: var(--alert1);
     }
     .containerEstate_StyledForm{
         display: flex;
@@ -113,6 +129,8 @@ export const StyledForm = styled.form`
         
     }
 
-    
+    @media screen {
+        
+    }
 
 `
