@@ -48,20 +48,20 @@ export const Login = () => {
                 <h1>Login</h1>
                 <StyledForm onSubmit={handleSubmit(login)}>
                     <StyledContainerInput>
-                        <label htmlFor="user">Email</label>
+                        <label >Email</label>
                         <input type="text" placeholder="Digitar email" {...register("email")} />
                         <span>{ errors.email?.message }</span>
                        
                     </StyledContainerInput>
 
                     <StyledContainerInput>
-                        <label htmlFor="password">Senha</label>
+                        <label >Senha</label>
                         <input type="password" placeholder="Digitar senha" {...register("password")} />
                         <span>{ errors.password?.message }</span>
                     </StyledContainerInput>
 
                     <StyledContainerButton>
-                        <button className="buttonForgotPassword"> esquecir minha senha</button>
+                        <button className="buttonForgotPassword" onClick={()=> navigate("/sendReset")}> Esqueci minha senha</button>
                         <button className="buttonOpen" type="submit" >Entrar</button>
                     </StyledContainerButton>
 

@@ -63,10 +63,11 @@ export const CardVehicle = styled.div`
         align-items: flex-start;
         padding: 0.5em;
         height: 60%;
+        width: 100%;
 
     }
     .title {
-        width: 312px;
+        width: 100%;
         height: 22px;
         
         font-family: 'Lexend';
@@ -78,6 +79,7 @@ export const CardVehicle = styled.div`
         
         margin: 0;
         margin-bottom: 0.5em;
+        max-width: 312px;
       
     }
     .description {

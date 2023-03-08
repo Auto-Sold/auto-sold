@@ -11,7 +11,7 @@ export interface Vehicle {
     isActive: boolean;
     vehiclesImages: IVehicleImages[];
     comments: IComments[];
-    user:IUser
+    user: IUser
 } 
 
 export interface IComments {
@@ -35,6 +35,7 @@ export interface IUser {
     image: string;
     vehicles: Vehicle[]
     bio: string;
+    
 } 
 export interface IAdressUser extends IUser{
     cep: string,
