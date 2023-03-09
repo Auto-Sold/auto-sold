@@ -17,9 +17,17 @@ export interface Vehicle {
 export interface IComments {
     id: string;
     text: string;
-    vehicles: Vehicle[]
+    vehicles: Vehicle;
+    createdAt: string;
+    user: IUser;
+    answers: IAnswer[];
+}
+export interface IAnswer {
+    id: string;
+    text: string;
     createdAt: string;
     user: IUser
+    comments: IComments
 }
 export interface IVehicleImages {
     id: string;

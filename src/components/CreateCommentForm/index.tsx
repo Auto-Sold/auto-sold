@@ -1,48 +1,47 @@
 
  import {useForm} from "react-hook-form";
  import * as yup from "yup"
-import { FormStyled } from "./style";
+import { FormStyled, ContainerComment} from "./style";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useContext } from "react";
 import { AnnounceContext } from "../../contexts/AnnounceContext";
 import { IFormComment } from "../../interface";
+import { useParams } from "react-router-dom";
 
 
-const CreateComment = (id: string) => {
+const CreateComment = () => {
+    const {idAnnounce} = useParams()
+    
     const {postComments} = useContext(AnnounceContext)
     const formSchema = yup.object().shape({
-        textComent: yup
-          .string()
-          .typeError("Insira um número válido")
-          .required("Insira um comentário")
-          .length(500),
-      });
+        text: yup
+        .string()
+        .typeError("Insira um número válido")
+        .required("Insira um comentário")
+        .max(500),
+    });
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<IFormComment>({
         resolver: yupResolver(formSchema),
+        defaultValues: {
+            text: ""
+        }
     });
-    const onSubmitFunction = (data: IFormComment) => {
-       
-       const handleId = Object.values(id)[0];
-       
-       postComments(handleId, data )
-        
-       console.log(data);
-      };
+
     return(
         <div>
-    <FormStyled onSubmit={handleSubmit(onSubmitFunction)}>
+    <ContainerComment onSubmit={handleSubmit((data) =>postComments(idAnnounce, data))}>
         <label>
             <input type="text" placeholder={"Insira um comentário"}
             {...register("text")} />
-            <span style={{ color: "red"}}>{(errors.text?.message)}</span>
+            <span>{(errors.text?.message)}</span>
         </label>
       
         <button type="submit">Postar</button>
-    </FormStyled>
+    </ContainerComment>
      
 </div>
     );

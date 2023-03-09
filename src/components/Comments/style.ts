@@ -23,6 +23,7 @@ width: 20em;
 height: fit-content;
 
 
+
 background: var(--grey10);
 border-radius: 4px;
 margin-bottom: 3em;
@@ -60,12 +61,21 @@ margin-bottom: 3em;
         line-height: 24px;
         color: var(--grey3);
     }
-    .edit{
+    .text {
+    width: fit-content;
+ 
+    display: flex;
+    text-align: left;
+    overflow-x: auto;
+    overflow-y: auto;
+    text-overflow:    ellipsis;
+}
+.edit{
         display: flex;
         justify-content: flex-end;
         width: 100%;
     }
-    .edit button {
+.edit button {
         background: var(--grey10);
 
         border: none;
@@ -79,7 +89,7 @@ margin-bottom: 3em;
         color: var(--grey6);
         padding: 10px 5px;
     }
-    .edit button:hover {
+.edit button:hover {
         background: var(--brand1);
         color: var(--whiteFixed);
         border: 1.5px solid var(--brand1);
