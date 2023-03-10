@@ -12,22 +12,21 @@ import { motion } from "framer-motion";
 
 
 export interface IOnSubmitFunction{
-    
+        id?:string,
         completeName: string,
         email: string,
         cpf: string,
         telephone: string,
         dateBirth: string,
         bio: string,
-        address?: {
-            zipCode: string,
-            state: string,
-            city: string,
-            street: string,
-            number: number,
-            complement: string,
-        }
-        typeCount:string,
+        zipCode: string,
+        state: string,
+        city: string,
+        street: string,
+        number: number,
+        complement: string,
+        typeCount: string,
+        isSeller: boolean,
         password: string,
         passwordConfirmation:string
         
@@ -51,30 +50,32 @@ export const Register = () => {
         dateBirth: yup.string().required("Data de aniversário necessária"),
         cpf: yup.string().required("Cpf necessária"),
         bio: yup.string().required("Bio necessária"),
-        address: yup.object().shape({
-            complement: yup.string().required("Complement necessária"),
-            zipCode: yup.string().required("Cep necessária"), 
-            number: yup.number().required("Numero necessária"),
-            city: yup.string().required("Cidade necessária"),
-            state: yup.string().required("Estado necessária"),
-            street: yup.string().required("Rua necessária"),
-        }),
+        complement: yup.string().required("Complement necessária"),
+        zipCode: yup.string().required("Cep necessária"), 
+        number: yup.number().required("Numero necessária"),
+        city: yup.string().required("Cidade necessária"),
+        state: yup.string().required("Estado necessária"),
+        street: yup.string().required("Rua necessária"),
         password: yup.string().required('Password is required'),
         passwordConfirmation: yup.string().required().oneOf([yup.ref('password')], 'Passwords must match'),
     })
            
         
 
-    const { register, handleSubmit, formState: { errors } } = useForm<IOnSubmitFunction>({resolver: yupResolver(formSchema)})
+    const { register, handleSubmit, formState: { errors } } = useForm<IOnSubmitFunction>({
+        resolver: yupResolver(formSchema), defaultValues: {
+        complement:"",
+    }})
     const onSubmit = async (data: IOnSubmitFunction) => {
         data['typeCount'] = typeCount
+        if (typeCount === "anunciante") {
+            data['isSeller'] = true
+        }
         const objUser = { ...data }       
         
-        const statusCode = await registerUser(objUser)
-        console.log(201)
-        if (statusCode === 201) {
-            setStatusCode201(statusCode)
-        }
+        registerUser(objUser)
+     
+        
     }
     
     return (
@@ -119,33 +120,33 @@ export const Register = () => {
                     <h5 className="subtitle_StyledForm">Informações de endereço</h5>
                     <div>
                         <label htmlFor="cep">Cep</label>
-                        <input type="text" placeholder="00000.000" {...register("address.zipCode")} />
-                        <span>{ errors.address?.zipCode?.message }</span>
+                        <input type="text" placeholder="00000.000" {...register("zipCode")} />
+                        <span>{ errors.zipCode?.message }</span>
                         <div className="containerEstate_StyledForm">
                             <div>
                                 <label htmlFor="state">Estado</label>
-                                <input type="text" placeholder="Digitar Estado" {...register("address.state")} />
-                                <span>{ errors.address?.state?.message }</span>
+                                <input type="text" placeholder="Digitar Estado" {...register("state")} />
+                                <span>{ errors.state?.message }</span>
                             </div>
                             <div>
                                 <label htmlFor="city">Cidade</label>
-                                <input type="text"  placeholder="Digitar Cidade" {...register("address.city")} />
-                                <span>{ errors.address?.city?.message }</span>
+                                <input type="text"  placeholder="Digitar Cidade" {...register("city")} />
+                                <span>{ errors.city?.message }</span>
                             </div>
                         </div>
                         <label htmlFor="street">Rua</label>
-                        <input type="text" placeholder="Digitar Rua" {...register("address.street")} />
-                        <span>{ errors.address?.street?.message }</span>
+                        <input type="text" placeholder="Digitar Rua" {...register("street")} />
+                        <span>{ errors.street?.message }</span>
                         <div className="containerNumber_StyledForm">
                             <div>
                                 <label htmlFor="number">Número</label>
-                                <input type="number"  placeholder="Digitar número" {...register("address.number")} />
-                                <span>{ errors.address?.number?.message }</span>
+                                <input type="number"  placeholder="Digitar número" {...register("number")} />
+                                <span>{ errors.number?.message }</span>
                             </div>
                             <div>
                                 <label htmlFor="complement">Complemento</label>
-                                <input  type="text" placeholder="Ex: apart 307" {...register("address.complement")} />
-                                <span>{ errors.address?.complement?.message }</span>
+                                <input  type="text" placeholder="Ex: apart 307" {...register("complement")} />
+                                <span>{ errors.complement?.message }</span>
                             </div>
                         </div>
                         <h5 className="subtitle_StyledForm">Tipo de conta</h5>
@@ -164,7 +165,7 @@ export const Register = () => {
 
                     </div>
                         
-                <button className="buttonRegister" type="submit" onClick={() => statusCode201 ? navigate("/login") : navigate("/register")} >Cadastrar</button>
+                <button className="buttonRegister" type="submit"  >Cadastrar</button>
                 
                 
              </StyledForm>

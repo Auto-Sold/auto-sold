@@ -109,7 +109,7 @@ const {  retrieveUserSeller, modalDeleteUserOpen, setModalDeleteUserOpen, objUse
            
             {<EditModal id={vehicleID} />}
             
-            {modalDeleteUserOpen && <ModalDeleteUser titleHeader="Excluir Usuário" paragraphBold="Tem certeza que deseja remover sua conta?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." id={vehicleID} />}
+            
            
             
           </Content>

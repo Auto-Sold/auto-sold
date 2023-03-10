@@ -12,7 +12,7 @@ import { userContext } from "../../contexts/userContext";
 const NavBar = () => {
     const token = window.localStorage.getItem("@TOKEN" as string)
     const [displayUl, setDisplayUl] = useState<string>("none")
-    const {objUser, setObjUser} = useContext(userContext)
+    const {objUser, setObjUser, setModalUpdateUser, close} = useContext(userContext)
     const nav= useNavigate()
     if (token){
         return (<NavBarStyle display={displayUl} >
@@ -39,7 +39,10 @@ const NavBar = () => {
                         localStorage.clear()
                         nav("/login")
                         }}>Logout</button>
-                    <button onClick={()=>console.log("editar perfil")}>Editar Perfil</button>
+                    <button onClick={() => {
+                        setModalUpdateUser(true)
+                        close()
+                    }}>Editar Perfil</button>
                 </ul>
 
             </div>

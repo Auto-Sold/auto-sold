@@ -13,14 +13,14 @@ export interface IUserAuth {
     setObjUser: React.Dispatch<React.SetStateAction<IOnSubmitFunction>>
     sellerData: IUser
     retrieveUserSeller: (id: string) => void
-    registerUser: (data: IOnSubmitFunction) => Promise<number>
+    registerUser: (data: IOnSubmitFunction) => void
     login: (data: object) => void
     modalDeleteUserOpen: boolean
     setModalDeleteUserOpen: Dispatch<SetStateAction<boolean>>
     modalUpdateUser: boolean
     setModalUpdateUser: Dispatch<SetStateAction<boolean>>
-    deleteUserId: (id: string) => Promise<number>
-    updateUser: (data: IOnSubmitFunction, id: string) => Promise<number>
+    deleteUserId: (id: string) => void
+    updateUser: (data: IOnSubmitFunction, id: string) => void
     open: () => void
     close: () => void
     
@@ -47,8 +47,14 @@ export const UserProvider = ({ children }: IUserProps) => {
     const token = window.localStorage.getItem("@TOKEN" as string)
     const userId = window.localStorage.getItem("@ID" as string)
     const navigate = useNavigate()
-    const close = () => setModalDeleteUserOpen(false)
-    const open = () => setModalDeleteUserOpen(true)
+    const close = () => {
+        setModalDeleteUserOpen(false)
+       
+    }
+    const open = () => {
+        setModalDeleteUserOpen(true)
+        
+    }
 
 
     const retrieveUserSeller = async (userId: string | undefined) =>{
@@ -119,19 +125,23 @@ export const UserProvider = ({ children }: IUserProps) => {
 
     async function registerUser(data: IOnSubmitFunction) {
         let statusCode = 0 
-        console.log(data)
-         
-
+        
         await API.post("/users", data).then((res) => statusCode = res.status).catch((err) => console.log(err))
         
-        return statusCode
+        if (statusCode === 201) {
+            navigate("/login")
+        }
     } 
     
     const deleteUserId = async (id: string) => {
         let statusCode = 0 
-        const deleteUser = await API.delete(`/users/:${id}`).then((res)=> statusCode = res.status)
+        await API.delete(`/users/${id}`).then((res)=> statusCode = res.status  )
         
-        return statusCode
+        if (statusCode === 204) {
+            window.localStorage.clear()
+            setModalUpdateUser(false)
+            navigate("/register")
+        }
     }
 
     async function updateUser(data: IOnSubmitFunction , id: string) {
@@ -139,7 +149,10 @@ export const UserProvider = ({ children }: IUserProps) => {
 
         await API.patch(`/users/${id}`, data).then((res) => statusCode = res.status)
         
-        return statusCode
+        if (statusCode === 200) {
+          setModalUpdateUser(false)
+        }
+        
     }
 
     
