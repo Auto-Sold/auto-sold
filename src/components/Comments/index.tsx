@@ -84,14 +84,21 @@ const CommentList = () => {
     return result
     }
 
-    console.log(comments)
-    
+    if (token){
+
       return (
         <DivComment>
         <h3>Comentários</h3>
         <CreateComment/>
-        {
-        
+        {      
+        handleComment()}
+      </DivComment> 
+        )
+      }
+      return (
+        <DivComment>
+        <h3>Comentários</h3>
+        {      
         handleComment()}
       </DivComment> 
         )

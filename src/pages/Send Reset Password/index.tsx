@@ -13,11 +13,10 @@ import { API } from "../../api";
 import {  useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import {Register} from "../Register"
-export interface ISendResetPass {
-    
-    email: string;
-    
-  }
+import { ISendResetPass } from "../../interface";
+
+
+
 export const SendResetPassword = () => {
 
     const { setObjUser, objUser, login, sendResetPassword  } = useContext(userContext)

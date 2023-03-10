@@ -1,7 +1,6 @@
 import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { API } from "../api";
-import { IAdressUser, IUser } from "../interface";
-import { ISendResetPass } from "../pages/SendResetPassword";
+import { IAdressUser, ISendResetPass, IUser } from "../interface";
 import { IResetPassword } from "../pages/Reset Password";
 import {  useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";

@@ -70,3 +70,7 @@ export interface IFormComment {
     //interface de campos do Formulário
    text: string
 }
+
+export interface ISendResetPass {
+    email: string;
+  }
