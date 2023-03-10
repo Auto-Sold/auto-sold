@@ -13,12 +13,13 @@ import { StyledButtonCancel, StyledDeletdAd } from "../../components/Modals/Styl
 import Leilao from "../../components/Leilao"
 import { userContext } from "../../contexts/userContext"
 import { EditPerfil } from "../../components/Modals/ModalEditPerfil"
+import { ModalDeleteUser } from "../../components/Modals/ModalDeleteUser"
 
 
 function ProductDash() {
     
-    const { modalDeleteAdOpen, setModalDeleteAdOpen, close, open, announceModal, setAnnounceModal, vehicles } = useContext(AnnounceContext)
-    const { objUser,  modalUpdateUser, setModalUpdateUser } = useContext(userContext)  
+    const { modalDeleteAdOpen, setModalDeleteAdOpen,  open, announceModal, setAnnounceModal, vehicles } = useContext(AnnounceContext)
+    const { objUser,  modalUpdateUser, setModalUpdateUser, modalDeleteUserOpen, close } = useContext(userContext)  
 
     return (
         <Main>
@@ -51,8 +52,8 @@ function ProductDash() {
                     <li className="card">Moto 3</li>
                 </ul> */}
             </section>
-            {modalUpdateUser&&<EditPerfil/>}
-            <button onClick={()=>setModalUpdateUser(true)}>abrir editForm</button>
+            {modalUpdateUser && <EditPerfil />}
+        
             <Footer />
         </Main>
 

@@ -20,15 +20,14 @@ export interface IOnSubmitFunction{
         telephone: string,
         dateBirth: string,
         bio: string,
-        address?: {
-            zipCode: string,
-            state: string,
-            city: string,
-            street: string,
-            number: number,
-            complement: string,
-        }
-        typeCount:string,
+        zipCode: string,
+        state: string,
+        city: string,
+        street: string,
+        number: number,
+        complement: string,
+        typeCount: string,
+        isSeller: boolean,
         password: string,
         passwordConfirmation:string
         
@@ -40,7 +39,8 @@ export interface IOnSubmitFunction{
 
 export const EditPerfil = () => {
     const [typeCount, setTypeCount] = useState<string>("")
-    const { setModalUpdateUser, updateUser, objUser, modalDeleteUserOpen, setModalDeleteUserOpen } = useContext(userContext)
+    const { setModalUpdateUser, updateUser, objUser, modalDeleteUserOpen, setModalDeleteUserOpen, open, close } = useContext(userContext)
+    
     const navigate = useNavigate();
 
     const formSchema = yup.object().shape({
@@ -50,19 +50,17 @@ export const EditPerfil = () => {
         dateBirth: yup.string().required("Data de aniversário necessária"),
         cpf: yup.string().required("Cpf necessária"),
         bio: yup.string().required("Bio necessária"),
-        address: yup.object().shape({
-            complement: yup.string().required("Complement necessária"),
-            zipCode: yup.string().required("Cep necessária"), 
-            number: yup.number().required("Numero necessária"),
-            city: yup.string().required("Cidade necessária"),
-            state: yup.string().required("Estado necessária"),
-            street: yup.string().required("Rua necessária"),
-        }),
+        complement: yup.string().required("Complement necessária"),
+        zipCode: yup.string().required("Cep necessária"), 
+        number: yup.number().required("Numero necessária"),
+        city: yup.string().required("Cidade necessária"),
+        state: yup.string().required("Estado necessária"),
+        street: yup.string().required("Rua necessária"),
         password: yup.string().required('Password is required'),
         passwordConfirmation: yup.string().required().oneOf([yup.ref('password')], 'Passwords must match'),
     })
            
-        
+    
 
     const { register, handleSubmit, formState: { errors } } = useForm<IOnSubmitFunction>({
         resolver: yupResolver(formSchema), defaultValues: {
@@ -72,34 +70,34 @@ export const EditPerfil = () => {
             telephone: objUser.telephone,
             dateBirth: objUser.dateBirth,
             bio: objUser.bio,
-            address: {
-                zipCode: objUser.address?.zipCode,
-                state: objUser.address?.state,
-                city: objUser.address?.city,
-                street: objUser.address?.street,
-                number: objUser.address?.number,
-                complement: objUser.address?.complement,
-            },
-            typeCount:objUser.typeCount,
+            zipCode: objUser.zipCode,
+            state: objUser.state,
+            city: objUser.city,
+            street: objUser.street,
+            number: objUser.number,
+            complement: objUser.complement,
+            typeCount: objUser.typeCount,
+            isSeller:objUser.isSeller,
             password: objUser.password,
             passwordConfirmation:objUser.passwordConfirmation
-    }})
-    const onSubmit = async (data: IOnSubmitFunction) => {
-        const idUser= window.localStorage.getItem("@ID")
+        }
+    })
+    const idUser = window.localStorage.getItem("@ID")
+    
+    const onSubmit = (data: IOnSubmitFunction) => {
+        
 
         data['typeCount'] = typeCount
         const objUser = { ...data }      
         
-        const statusCode = await updateUser( objUser, idUser! )
+         updateUser( objUser, idUser! )
         
-        if (statusCode === 201) {
-            navigate("/dashboard")
-        }
+
     }
     
     return (
         <BackDrop setState={setModalUpdateUser}>  
-            <StyledMainUser>
+            <StyledMainUser onClick={(e) => e.stopPropagation()}>
                 <StyledFormUpdateUser onSubmit={handleSubmit(onSubmit)}
                     as={motion.form}
                     initial={{ opacity: 0 }}
@@ -139,33 +137,33 @@ export const EditPerfil = () => {
                         <h5 className="subtitle_StyledForm">Informações de endereço</h5>
                         <div>
                             <label htmlFor="cep">Cep</label>
-                            <input type="text" placeholder="00000.000" {...register("address.zipCode")} />
-                            <span>{ errors.address?.zipCode?.message }</span>
+                            <input type="text" placeholder="00000.000" {...register("zipCode")} />
+                            <span>{ errors.zipCode?.message }</span>
                             <div className="containerEstate_StyledForm">
                                 <div>
                                     <label htmlFor="state">Estado</label>
-                                    <input type="text" placeholder="Digitar Estado" {...register("address.state")} />
-                                    <span>{ errors.address?.state?.message }</span>
+                                    <input type="text" placeholder="Digitar Estado" {...register("state")} />
+                                    <span>{ errors.state?.message }</span>
                                 </div>
                                 <div>
                                     <label htmlFor="city">Cidade</label>
-                                    <input type="text"  placeholder="Digitar Cidade" {...register("address.city")} />
-                                    <span>{ errors.address?.city?.message }</span>
+                                    <input type="text"  placeholder="Digitar Cidade" {...register("city")} />
+                                    <span>{ errors.city?.message }</span>
                                 </div>
                             </div>
                             <label htmlFor="street">Rua</label>
-                            <input type="text" placeholder="Digitar Rua" {...register("address.street")} />
-                            <span>{ errors.address?.street?.message }</span>
+                            <input type="text" placeholder="Digitar Rua" {...register("street")} />
+                            <span>{ errors.street?.message }</span>
                             <div className="containerNumber_StyledForm">
                                 <div>
                                     <label htmlFor="number">Número</label>
-                                    <input type="number"  placeholder="Digitar número" {...register("address.number")} />
-                                    <span>{ errors.address?.number?.message }</span>
+                                    <input type="number"  placeholder="Digitar número" {...register("number")} />
+                                    <span>{ errors.number?.message }</span>
                                 </div>
                                 <div>
                                     <label htmlFor="complement">Complemento</label>
-                                    <input  type="text" placeholder="Ex: apart 307" {...register("address.complement")} />
-                                    <span>{ errors.address?.complement?.message }</span>
+                                    <input  type="text" placeholder="Ex: apart 307" {...register("complement")} />
+                                    <span>{ errors.complement?.message }</span>
                                 </div>
                             </div>
                             <h5 className="subtitle_StyledForm">Tipo de conta</h5>
@@ -184,9 +182,9 @@ export const EditPerfil = () => {
 
                         </div>
                                 
-                    <button className="buttonRegister" type="submit" >Cadastrar</button>
-                    {modalDeleteUserOpen && <ModalDeleteUser titleHeader="Excluir usuário" paragraphBold="Tem certeza que deseja remover seu usuário?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." />}
-                    <button className="buttonDeleteUser" onClick={() => setModalDeleteUserOpen(true) }> Deletar minha conta </button>
+                    <button className="buttonRegister" type="submit" >Atualiza</button>
+                    {modalDeleteUserOpen && <ModalDeleteUser titleHeader="Exluir usuário" paragraphBold="Tem certeza que deseja remover este anúncio?" paragraphNormal="Essa ação não pode ser desfeita. Isso excluirá permanentemente sua conta e removerá seus dados de nossos servidores." id={objUser.id!} />}
+                    <button className="buttonDeleteUser" onClick={() => open()  }> Deletar minha conta </button>
                                 
                     </StyledFormUpdateUser>
                 </StyledMainUser>
