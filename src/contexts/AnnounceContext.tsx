@@ -24,14 +24,15 @@ export interface IAnnounceAuth {
     getAnnounces: () => void;
     getAnnouncesSeller:(id: string|undefined) => void;
     retrieveAnnounce: (id: string | undefined) => void;
-    getComments: (id: string) => void;
-    postComments: (id: string, data: IFormComment) => void;
+    getComments: (id: string | undefined) => void;
+    postComments: (id: string | undefined, data: IFormComment) => void;
     vehicles:  Vehicle[]
     comments: IComments[]
     uniqueVehicle: Vehicle
     modalDeleteAdOpen: boolean;
     setOpenEditModal: Dispatch<SetStateAction<boolean>>;
     openEditModal: boolean;
+    loadComment: boolean;
     setModalDeleteAdOpen: Dispatch<SetStateAction<boolean>>;
     
 
@@ -75,15 +76,15 @@ function AnnounceProvider({ children }: IAnnounceProps) {
     const close = () => setModalDeleteAdOpen(false)
     const open = () => setModalDeleteAdOpen(true)
     const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+    const [loadComment, setLoadComment] = useState<boolean>(true)
+
     const nav = useNavigate()
     //Para o retrive
     
     const handleVehiclesCars = (arr: IArrPayLoad) => {
         // Tratativa para receber só carros e ativos
-        console.log("HandleCar");
         
-        console.log(arr);
-        console.log(arr.vehicles);
+        
         
 
         
@@ -201,24 +202,25 @@ function AnnounceProvider({ children }: IAnnounceProps) {
         
         
         
-        async function getComments(id:string) {
+        async function getComments(id:string | undefined) {
             await API
                 .get(`/comments/${id}`)
                 .then((response) => {
                     setComments(response.data)
+                }).then(() => {
+                    setLoadComment(false)
                 })
                 .catch((error) => {
                     alert("Ocorreu um erro, tente novamente")
                 })
         }
         
-        async function postComments(id:string, data: IFormComment) {
+        async function postComments(id:string | undefined, data: IFormComment) {
             API.defaults.headers.common.Authorization = `Bearer ${token}`;
             await API
                 .post(`/comments/${id}`, data)
                 .then((response) => {
                     getComments(id)
-                    setComments(response.data)
                 })
                 .catch((error) => {
                     alert("Ocorreu um erro, tente novamente")
@@ -240,7 +242,7 @@ function AnnounceProvider({ children }: IAnnounceProps) {
             vehicles, uniqueVehicle, comments, handleVehiclesMotorcycles, 
             handleVehiclesCars, setModalDeleteAdOpen, 
             modalDeleteAdOpen, open, close,openEditModal,
-            setOpenEditModal }}>
+            setOpenEditModal, loadComment }}>
 
 
             {children}

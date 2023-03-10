@@ -9,8 +9,8 @@ import SellerDash from './pages/Seller';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { UserProvider } from './contexts/userContext';
-import { SendResetPassword } from './pages/SendResetPassword';
 import { ResetPassword } from './pages/Reset Password';
+import { SendResetPassword } from './pages/Send Reset Password';
 ProductDash
 function App() {
 

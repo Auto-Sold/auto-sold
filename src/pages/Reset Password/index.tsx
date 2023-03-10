@@ -67,7 +67,7 @@ export const ResetPassword = () => {
                     </StyledContainerInput>
 
                     <StyledContainerButton>
-                        <button className="buttonOpen" type="submit" >Muda Senha</button>
+                        <button className="buttonOpen" type="submit" >Mudar Senha</button>
                     </StyledContainerButton>                    
 
                 </StyledForm>
